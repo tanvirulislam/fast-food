@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "711924074598",
+    "project_id": "taza-khabar-8666d",
+    "storage_bucket": "taza-khabar-8666d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711924074598:android:676b2cd4f6a0f8338685a7",
+        "android_client_info": {
+          "package_name": "com.example.taza_khabar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711924074598-ebhpiggdld2tn1j3r9a2f1b4494uc5j6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taza_khabar",
+            "certificate_hash": "f99417b5c51e5a1df5adae0f2490ebc3076e31ca"
+          }
+        },
+        {
+          "client_id": "711924074598-8kvv6kh3mfcfqm0h0v0963sordkn19vn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711924074598-8kvv6kh3mfcfqm0h0v0963sordkn19vn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
