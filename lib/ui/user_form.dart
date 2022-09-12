@@ -46,7 +46,6 @@ class _UserFormState extends State<UserForm> {
     }
   }
 
-
   Future addUser() async {
     CollectionReference users =
         FirebaseFirestore.instance.collection('user-data');
@@ -109,54 +108,55 @@ class _UserFormState extends State<UserForm> {
                           _phoneController,
                         ),
                         SizedBox(height: 8),
-                        TextFormField(
-                          controller: _dobController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            hintText: 'Date of Birth',
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                _selectDate(context);
-                              },
-                              icon: Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        TextFormField(
-                          controller: _genderController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            hintText: 'choose your gender',
-                            prefix: DropdownButton(
-                              hint: Text('gender'),
-                              items: gender.map((val) {
-                                return DropdownMenuItem<String>(
-                                  value: val,
-                                  child: Text(val),
-                                  onTap: () {
-                                    setState(() {
-                                      _genderController.text = val;
-                                    });
-                                  },
-                                );
-                              }).toList(),
-                              onChanged: (_) {},
-                            ),
-                          ),
-                        ),
+                        // TextFormField(
+                        //   controller: _dobController,
+                        //   readOnly: true,
+                        //   decoration: InputDecoration(
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.amber),
+                        //     ),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.blue),
+                        //     ),
+                        //     hintText: 'Date of Birth',
+                        //     suffixIcon: IconButton(
+                        //       onPressed: () {
+                        //         _selectDate(context);
+                        //       },
+                        //       icon: Icon(Icons.calendar_today),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 8),
+                        // TextFormField(
+                        //   controller: _genderController,
+                        //   readOnly: true,
+                        //   decoration: InputDecoration(
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.amber),
+                        //     ),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderSide: BorderSide(color: Colors.blue),
+                        //     ),
+                        //     hintText: 'choose your gender',
+                        //     prefix: DropdownButton(
+                        //       hint: Text('gender'),
+                        //       items: gender.map((val) {
+                        //         return DropdownMenuItem<String>(
+                        //           value: val,
+                        //           child: Text(val),
+                        //           onTap: () {
+                        //             setState(() {
+                        //               _genderController.text = val;
+                        //             });
+                        //           },
+                        //         );
+                        //       }).toList(),
+                        //       onChanged: (_) {},
+                        //     ),
+                        //   ),
+                        // ),
+
                         SizedBox(height: 8),
                         customeTextField(
                           "Enter your age",

@@ -38,7 +38,7 @@ class _ProfileState extends State<Profile> {
   final storage = const FlutterSecureStorage();
 
   setDataToTextField(data) {
-    return Column(
+    return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
@@ -95,29 +95,10 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 18),
         customButton('Update', () {
           updateInfo();
         }),
-     
-        SizedBox(
-          height: 100,
-        ),
-        TextButton.icon(
-          style: TextButton.styleFrom(primary: Colors.black),
-          onPressed: () async {
-            await authClass.logout();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SplashScreen()),
-            );
-          },
-          icon: Icon(Icons.logout),
-          label: Text(
-            'Logout',
-            textScaleFactor: 2,
-          ),
-        ),
       ],
     );
   }
@@ -138,6 +119,13 @@ class _ProfileState extends State<Profile> {
               return setDataToTextField(data);
             },
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await authClass.logout();
+          },
+          child: Icon(Icons.logout_outlined),
+          backgroundColor: Colors.lightBlue,
         ),
       ),
     );

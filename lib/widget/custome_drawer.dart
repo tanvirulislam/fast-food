@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
@@ -38,8 +39,8 @@ Widget drawerCustom(context) {
           ),
         ),
         InkWell(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home())),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BottomNavController())),
             child: ListTile(
                 leading: Icon(Icons.home, color: Colors.lightBlue),
                 title: Text('Home'))),

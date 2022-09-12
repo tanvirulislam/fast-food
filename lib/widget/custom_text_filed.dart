@@ -9,10 +9,10 @@ Widget customeTextField(hintText, validator, controller) {
     decoration: InputDecoration(
       hintText: hintText,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.amber),
+        borderSide: BorderSide(color: Colors.lightBlue),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue),
+        borderSide: BorderSide(color: Colors.black),
       ),
     ),
     keyboardType: TextInputType.name,

@@ -3,9 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:taza_khabar/const/app_colors.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
-import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/regi_screen.dart';
 import 'package:taza_khabar/ui/user_form.dart';
 import 'package:taza_khabar/widget/custom_button.dart';
@@ -57,149 +55,151 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey,
-        body: Container(
-          child: Form(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(fontSize: 34,
-                          // color: Colors.lightBlue,
-                          shadows: [
-                            Shadow(
-                              color: Colors.grey,
-                              blurRadius: 5,
-                              offset: Offset(2, 2),
-                            )
-                          ]),
-                    ),
+        backgroundColor: Colors.black,
+        body: Form(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .1,
+                ),
+                Container(
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Sign In',
+                    style:
+                        TextStyle(fontSize: 34, color: Colors.white, shadows: [
+                      Shadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        offset: Offset(2, 2),
+                      )
+                    ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: TextFormField(
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'please enter email';
-                          } else if (!val.contains('@')) {
-                            return 'please enter valid email';
-                          }
-                          return null;
-                        },
-                        controller: _emailController,
-                        style: TextStyle(
-                          color: Colors.black,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: TextFormField(
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'please enter email';
+                        } else if (!val.contains('@')) {
+                          return 'please enter valid email';
+                        }
+                        return null;
+                      },
+                      controller: _emailController,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        filled: true,
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.orange),
                         ),
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.orange),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.lightBlue),
-                          ),
-                          suffixIcon: Icon(Icons.email),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.lightBlue),
                         ),
+                        suffixIcon: Icon(Icons.email),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: TextFormField(
-                        controller: _passController,
-                        obscureText: true,
-                        style: TextStyle(
-                          color: Colors.black,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: TextFormField(
+                      controller: _passController,
+                      obscureText: true,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.orange),
                         ),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.orange),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.lightBlue),
+                        ),
+                        suffixIcon: Icon(Icons.lock),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                // customButton('Submit', () {
+                //   signIn();
+                // }),
+                ElevatedButton(
+                    onPressed: () => signIn(), child: Text('Submit')),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'OR',
+                    textScaleFactor: 2,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    await _authClass.handleSignIn(context);
+                  },
+                  child: SizedBox(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      color: Colors.transparent,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image.asset('assets/google.png'),
+                          Text(
+                            'Continue with google',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.lightBlue),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account? ",
+                        style: TextStyle(color: Colors.white)),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => RegiScreen(),
                           ),
-                          suffixIcon: Icon(Icons.lock),
-                        ),
-                      ),
+                        );
+                      },
+                      child: Text('Sign Up'),
+                      style: TextButton.styleFrom(primary: Colors.white),
                     ),
-                  ),
-                  SizedBox(height: 8,),
-                  customButton('Submit', () {
-                    signIn();
-                  }),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      'OR',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await _authClass.handleSignIn(context);
-                    },
-                    child: SizedBox(
-                      height: 60,
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image.asset('assets/google.png'),
-                            Text(
-                              'Continue with google',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white
-                               
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account? "),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => RegiScreen(),
-                            ),
-                          );
-                        },
-                        child: Text('Sign Up'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

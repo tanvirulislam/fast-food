@@ -16,20 +16,23 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                'Your cart items ',
-                style: TextStyle(shadows: [
-                  Shadow(
-                    color: Colors.grey,
-                    offset: Offset(2, 2),
-                    blurRadius: 6,
-                  )
-                ]),
-                textScaleFactor: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Your cart items ',
+                  style: TextStyle(shadows: [
+                    Shadow(
+                      color: Colors.grey,
+                      offset: Offset(2, 2),
+                      blurRadius: 6,
+                    )
+                  ]),
+                  textScaleFactor: 2,
+                ),
               ),
             ),
             StreamBuilder(
