@@ -12,12 +12,13 @@ class ProdcutProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection('products').get();
 
     for (var element in querySnapshot.docs) {
-      print(element.data());
+      // print(element.data());
       ProductModel productModel = ProductModel(
         productName: element.get('product-name'),
         productImage: element.get('product-img'),
         productPrice: element.get('product-price'),
         productDescription: element.get('product-dsrp'),
+        productId: element.get('productId'),
       );
       newList.add(productModel);
       search.add(productModel);

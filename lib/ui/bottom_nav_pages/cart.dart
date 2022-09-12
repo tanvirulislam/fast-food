@@ -67,6 +67,7 @@ class _CartState extends State<Cart> {
                             child: ListTile(
                               leading: Text(_doc['name']),
                               title: Text("TK ${_doc['price']}"),
+                              subtitle: Text("Quantity: ${_doc['cartQty']}"),
                               trailing: GestureDetector(
                                 child: CircleAvatar(
                                   child: Icon(Icons.remove),

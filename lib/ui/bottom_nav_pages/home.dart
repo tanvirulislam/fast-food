@@ -22,8 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   ProdcutProvider? prodcutProvider;
 
-  // final TextEditingController _searchController = TextEditingController();
-
   List<String> carouselImage = [];
   fatchCarouselImage() async {
     QuerySnapshot qn =
@@ -37,6 +35,7 @@ class _HomeState extends State<Home> {
     return qn.docs;
   }
 
+  bool isBoolCart = false;
   @override
   void initState() {
     fatchCarouselImage();
@@ -168,19 +167,19 @@ class _HomeState extends State<Home> {
                             name: prodcutProvider!
                                 .getProductList[index].productName,
                             price: prodcutProvider!
-                                .getProductList[index].productPrice
-                                .toString(),
+                                .getProductList[index].productPrice,
                             image: prodcutProvider!
                                 .getProductList[index].productImage,
                             productDescription: prodcutProvider!
                                 .getProductList[index].productDescription,
+                            productId: prodcutProvider!
+                                .getProductList[index].productId,
                           ),
                         )),
                     child: Card(
                       elevation: 5,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Image.network(
                             prodcutProvider!
@@ -204,8 +203,14 @@ class _HomeState extends State<Home> {
                                           .toString(),
                                 ),
                                 IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.shopping_cart_outlined))
+                                    onPressed: () {
+                                      setState(() {
+                                        // isBoolCart = !isBoolCart;
+                                      });
+                                    },
+                                    icon: isBoolCart == false
+                                        ? Icon(Icons.shopping_cart_outlined)
+                                        : Icon(Icons.shopping_cart))
                               ],
                             ),
                           ),

@@ -2,29 +2,36 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taza_khabar/provuder/cart_provider.dart';
 
 class ProductOverview extends StatefulWidget {
   String name;
-  String price;
+  int price;
   List image;
   String productDescription;
-  ProductOverview({
-    Key? key,
-    required this.name,
-    required this.price,
-    required this.image,
-    required this.productDescription,
-  }) : super(key: key);
+  String productId;
+  ProductOverview(
+      {Key? key,
+      required this.name,
+      required this.price,
+      required this.image,
+      required this.productDescription,
+      required this.productId})
+      : super(key: key);
 
   @override
   State<ProductOverview> createState() => _ProductOverviewState();
 }
 
 class _ProductOverviewState extends State<ProductOverview> {
+  CartProvider? cartProvider;
+
   bool isBoolFavorite = false;
   bool isBoolCart = false;
   @override
   Widget build(BuildContext context) {
+    cartProvider = Provider.of(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey.shade200,
@@ -101,6 +108,13 @@ class _ProductOverviewState extends State<ProductOverview> {
                           setState(() {
                             isBoolCart = !isBoolCart;
                           });
+                          cartProvider!.addToCart(
+                            cartId: widget.productId,
+                            cartImage: widget.image[0],
+                            cartName: widget.name,
+                            cartPrice: widget.price,
+                            cartQty: 1,
+                          );
                         },
                         icon: isBoolCart == true
                             ? Icon(Icons.shopping_cart)

@@ -24,6 +24,13 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    searchItem(query);
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<ProductModel> searchItems = searchItem(query);
     return SafeArea(
@@ -39,6 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
               SizedBox(
                 height: 60,
                 child: TextFormField(
+                  autofocus: true,
                   onChanged: (value) {
                     setState(() {
                       query = value;
