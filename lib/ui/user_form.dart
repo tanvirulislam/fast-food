@@ -91,22 +91,15 @@ class _UserFormState extends State<UserForm> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        customeTextField(
-                          "Enter your name",
-                          (val) {
-                            if (val == null || val.isEmpty) {
-                              return 'please enter name';
-                            }
-                            return null;
-                          },
-                          _nameController,
-                        ),
+                        customeTextField("Enter your name", (val) {
+                          if (val == null || val.isEmpty) {
+                            return 'please enter name';
+                          }
+                          return null;
+                        }, _nameController, TextInputType.name),
                         SizedBox(height: 8),
-                        customeTextField(
-                          "Enter your phone number",
-                          (val) {},
-                          _phoneController,
-                        ),
+                        customeTextField("Enter your phone number", (val) {},
+                            _phoneController, TextInputType.phone),
                         SizedBox(height: 8),
                         // TextFormField(
                         //   controller: _dobController,
@@ -158,11 +151,8 @@ class _UserFormState extends State<UserForm> {
                         // ),
 
                         SizedBox(height: 8),
-                        customeTextField(
-                          "Enter your age",
-                          (val) {},
-                          _ageController,
-                        ),
+                        customeTextField("Enter your age", (val) {},
+                            _ageController, TextInputType.number),
                         SizedBox(height: 8),
                         customButton(
                           'continue',

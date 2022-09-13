@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-Widget customeTextField(hintText, validator, controller) {
+Widget customeTextField(hintText, validator, controller, keyboardType) {
   return TextFormField(
     validator: validator,
     controller: controller,
@@ -15,6 +15,6 @@ Widget customeTextField(hintText, validator, controller) {
         borderSide: BorderSide(color: Colors.black),
       ),
     ),
-    keyboardType: TextInputType.name,
+    keyboardType: keyboardType,
   );
 }

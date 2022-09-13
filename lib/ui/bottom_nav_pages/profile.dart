@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
+import 'package:taza_khabar/ui/login_screen.dart';
 import 'package:taza_khabar/ui/splash_screen.dart';
 import 'package:taza_khabar/widget/custom_button.dart';
 
@@ -35,7 +36,6 @@ class _ProfileState extends State<Profile> {
   }
 
   AuthClass authClass = AuthClass();
-  final storage = const FlutterSecureStorage();
 
   setDataToTextField(data) {
     return ListView(
@@ -123,6 +123,11 @@ class _ProfileState extends State<Profile> {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             await authClass.logout();
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ));
           },
           child: Icon(Icons.logout_outlined),
           backgroundColor: Colors.lightBlue,

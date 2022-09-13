@@ -5,10 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
-// import 'package:taza_khabar/ui/search_page.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
 
@@ -60,7 +59,7 @@ class _HomeState extends State<Home> {
             IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => Cart()));
+                    context, MaterialPageRoute(builder: (_) => CartScreen()));
               },
               icon: Icon(
                 Icons.shopping_cart_outlined,
@@ -185,7 +184,7 @@ class _HomeState extends State<Home> {
                             prodcutProvider!
                                 .getProductList[index].productImage[0],
                             width: screenSize.width,
-                            height: 120,
+                            height: 140,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(height: 5),
@@ -202,15 +201,16 @@ class _HomeState extends State<Home> {
                                           .getProductList[index].productPrice
                                           .toString(),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        // isBoolCart = !isBoolCart;
-                                      });
-                                    },
-                                    icon: isBoolCart == false
-                                        ? Icon(Icons.shopping_cart_outlined)
-                                        : Icon(Icons.shopping_cart))
+                                // IconButton(
+                                //   onPressed: () {
+                                //     setState(() {
+                                //       // isBoolCart = !isBoolCart;
+                                //     });
+                                //   },
+                                //   icon: isBoolCart == false
+                                //       ? Icon(Icons.shopping_cart_outlined)
+                                //       : Icon(Icons.shopping_cart),
+                                // )
                               ],
                             ),
                           ),

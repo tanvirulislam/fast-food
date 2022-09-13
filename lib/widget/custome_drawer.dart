@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
 
 Widget drawerCustom(context) {
@@ -48,7 +47,7 @@ Widget drawerCustom(context) {
             onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Cart(),
+                    builder: (context) => CartScreen(),
                   ),
                 ),
             child: ListTile(
