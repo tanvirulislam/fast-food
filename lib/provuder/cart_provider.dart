@@ -90,4 +90,15 @@ class CartProvider with ChangeNotifier {
   List<CartModel> get getCartDataList {
     return cartDataList;
   }
+
+  // get total price
+  getTotalPrice() {
+    double total = 0;
+    for (var element in cartDataList) {
+      print(element.cartPrice);
+      total += element.cartPrice * element.cartQty;
+      print('total price ------ ${total}');
+    }
+    return total;
+  }
 }

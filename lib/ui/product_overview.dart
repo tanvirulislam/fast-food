@@ -34,10 +34,10 @@ class _ProductOverviewState extends State<ProductOverview> {
   CartProvider? cartProvider;
   WishListProvider? wishlistProvider;
 
-  bool isBoolFavorite = false;
+  bool isBoolWishlist = false;
   bool isBoolCart = false;
   int count = 1;
-  getAddAndQty() {
+  getCartIsAddAndQty() {
     FirebaseFirestore.instance
         .collection("reviewCart")
         .doc(FirebaseAuth.instance.currentUser!.email)
@@ -46,7 +46,7 @@ class _ProductOverviewState extends State<ProductOverview> {
         .get()
         .then(
           (value) => {
-            // print(value.data()),
+            print(value.data()),
             if (mounted)
               {
                 if (value.exists)
@@ -61,10 +61,35 @@ class _ProductOverviewState extends State<ProductOverview> {
         );
   }
 
+  getWishlistIsAddAndQty() {
+    FirebaseFirestore.instance
+        .collection("reviewWishList")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("item")
+        .doc(widget.productId)
+        .get()
+        .then(
+          (value) => {
+            print(value.data()),
+            if (mounted)
+              {
+                if (value.exists)
+                  {
+                    setState(() {
+                      isBoolWishlist = value.get("isAdd");
+                      count = value.get('quantity');
+                    })
+                  }
+              }
+          },
+        );
+  }
+
   @override
   void initState() {
     super.initState();
-    getAddAndQty();
+    getCartIsAddAndQty();
+    getWishlistIsAddAndQty();
   }
 
   @override
@@ -152,10 +177,11 @@ class _ProductOverviewState extends State<ProductOverview> {
                           ],
                         ),
                       ),
+                      Text('TK ${widget.price * count}'),
                       ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
-                            isBoolFavorite = !isBoolFavorite;
+                            isBoolWishlist = !isBoolWishlist;
                           });
                           wishlistProvider!.addToWishlist(
                             wishListId: widget.productId,
@@ -165,10 +191,10 @@ class _ProductOverviewState extends State<ProductOverview> {
                             wishListQty: count,
                           );
                         },
-                        icon: isBoolFavorite == false
+                        icon: isBoolWishlist == false
                             ? Icon(Icons.favorite_outline)
                             : Icon(Icons.favorite),
-                        label: isBoolFavorite == false
+                        label: isBoolWishlist == false
                             ? Text('Add to favorite')
                             : Text('Item Added'),
                         style: ElevatedButton.styleFrom(

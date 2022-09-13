@@ -18,8 +18,10 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // cartProvider = Provider.of<CartProvider>(context, listen: false);
+    CartProvider cartProvider =
+        Provider.of<CartProvider>(context, listen: false);
     // cartProvider!.getCartItem();
+    cartProvider.getTotalPrice();
   }
 
   @override
@@ -63,9 +65,11 @@ class _CartScreenState extends State<CartScreen> {
                                     width: 100,
                                     fit: BoxFit.cover,
                                   ),
-                                  Text(data.cartName),
+                                  Text(data.cartName,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
                                   Text('Quantity ' + data.cartQty.toString()),
-                                  Text('TK ' + data.cartPrice.toString()),
+                                  Text('TK ${data.cartPrice * data.cartQty}'),
                                   IconButton(
                                     icon: Icon(Icons.delete),
                                     onPressed: () async {
@@ -87,7 +91,8 @@ class _CartScreenState extends State<CartScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total Amount: TK 180'),
+              Text('Total Amount: TK ' +
+                  cartProvider!.getTotalPrice().toString()),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Checkout'),
