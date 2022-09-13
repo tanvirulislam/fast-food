@@ -6,8 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/provuder/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 class ProductOverview extends StatefulWidget {
   String name;
@@ -30,13 +32,14 @@ class ProductOverview extends StatefulWidget {
 
 class _ProductOverviewState extends State<ProductOverview> {
   CartProvider? cartProvider;
+  WishListProvider? wishlistProvider;
 
   bool isBoolFavorite = false;
   bool isBoolCart = false;
   int count = 1;
   getAddAndQty() {
     FirebaseFirestore.instance
-        .collection("users-cart-item")
+        .collection("reviewCart")
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection("item")
         .doc(widget.productId)
@@ -66,7 +69,9 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget build(BuildContext context) {
-    cartProvider = Provider.of(context);
+    cartProvider = Provider.of<CartProvider>(context);
+    wishlistProvider = Provider.of<WishListProvider>(context);
+
     Size screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -91,7 +96,7 @@ class _ProductOverviewState extends State<ProductOverview> {
             IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => Favourite()));
+                    context, MaterialPageRoute(builder: (_) => WishList()));
               },
               icon: Icon(
                 Icons.favorite_outline,
@@ -152,6 +157,13 @@ class _ProductOverviewState extends State<ProductOverview> {
                           setState(() {
                             isBoolFavorite = !isBoolFavorite;
                           });
+                          wishlistProvider!.addToWishlist(
+                            wishListId: widget.productId,
+                            wishListImage: widget.image,
+                            wishListName: widget.name,
+                            wishListPrice: widget.price,
+                            wishListQty: count,
+                          );
                         },
                         icon: isBoolFavorite == false
                             ? Icon(Icons.favorite_outline)
@@ -172,39 +184,43 @@ class _ProductOverviewState extends State<ProductOverview> {
                         child: Row(
                           children: [
                             Text('Quantity: ', textScaleFactor: 1.2),
-                            TextButton(
-                                onPressed: () {
-                                  if (count > 1) {
-                                    setState(() {
-                                      count--;
-                                    });
-                                    cartProvider!.updateCart(
-                                      cartId: widget.productId,
-                                      cartImage: widget.image[0],
-                                      cartName: widget.name,
-                                      cartPrice: widget.price,
-                                      cartQty: count,
-                                    );
-                                  }
-                                },
-                                child: Text('-', textScaleFactor: 1.7)),
+                            isBoolCart == true
+                                ? TextButton(
+                                    onPressed: () {
+                                      if (count > 1) {
+                                        setState(() {
+                                          count--;
+                                        });
+                                        cartProvider!.updateCart(
+                                          cartId: widget.productId,
+                                          cartImage: widget.image,
+                                          cartName: widget.name,
+                                          cartPrice: widget.price,
+                                          cartQty: count,
+                                        );
+                                      }
+                                    },
+                                    child: Text('-', textScaleFactor: 1.7))
+                                : Container(),
                             Text(count.toString()),
-                            TextButton(
-                                onPressed: () {
-                                  if (count < 10) {
-                                    setState(() {
-                                      count++;
-                                    });
-                                    cartProvider!.updateCart(
-                                      cartId: widget.productId,
-                                      cartImage: widget.image,
-                                      cartName: widget.name,
-                                      cartPrice: widget.price,
-                                      cartQty: count,
-                                    );
-                                  }
-                                },
-                                child: Text('+', textScaleFactor: 1.5)),
+                            isBoolCart == true
+                                ? TextButton(
+                                    onPressed: () {
+                                      if (count < 10) {
+                                        setState(() {
+                                          count++;
+                                        });
+                                        cartProvider!.updateCart(
+                                          cartId: widget.productId,
+                                          cartImage: widget.image,
+                                          cartName: widget.name,
+                                          cartPrice: widget.price,
+                                          cartQty: count,
+                                        );
+                                      }
+                                    },
+                                    child: Text('+', textScaleFactor: 1.5))
+                                : Container(),
                           ],
                         ),
                       ),

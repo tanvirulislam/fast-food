@@ -5,6 +5,7 @@ import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({Key? key}) : super(key: key);
@@ -18,7 +19,8 @@ class _BottomNavControllerState extends State<BottomNavController> {
     Home(),
     // Cart(),
     CartScreen(),
-    Favourite(),
+    // Favourite(),
+    WishList(),
     Profile(),
   ];
   // ignore: non_constant_identifier_names

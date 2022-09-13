@@ -18,15 +18,14 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cartProvider = Provider.of<CartProvider>(context, listen: false);
-    cartProvider!.getCartItem();
+    // cartProvider = Provider.of<CartProvider>(context, listen: false);
+    // cartProvider!.getCartItem();
   }
 
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
     cartProvider!.getCartItem();
-    Size screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(

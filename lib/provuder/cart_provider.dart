@@ -65,7 +65,6 @@ class CartProvider with ChangeNotifier {
   List<CartModel> cartDataList = [];
   getCartItem() async {
     List<CartModel> newList = [];
-
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('reviewCart')
         .doc(FirebaseAuth.instance.currentUser!.email)
@@ -91,7 +90,4 @@ class CartProvider with ChangeNotifier {
   List<CartModel> get getCartDataList {
     return cartDataList;
   }
-
-// delete item-----
-
 }
