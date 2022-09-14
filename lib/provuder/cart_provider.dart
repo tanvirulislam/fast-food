@@ -95,9 +95,9 @@ class CartProvider with ChangeNotifier {
   getTotalPrice() {
     double total = 0;
     for (var element in cartDataList) {
-      print(element.cartPrice);
+      // print(element.cartPrice);
       total += element.cartPrice * element.cartQty;
-      print('total price ------ ${total}');
+      // print('total price ------ ${total}');
     }
     return total;
   }

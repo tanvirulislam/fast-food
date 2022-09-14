@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/ui/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -94,7 +95,14 @@ class _CartScreenState extends State<CartScreen> {
               Text('Total Amount: TK ' +
                   cartProvider!.getTotalPrice().toString()),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddDeliveryAddress(),
+                    ),
+                  );
+                },
                 child: Text('Checkout'),
                 // style: ElevatedButton.styleFrom(primary: Colors.white),
               )

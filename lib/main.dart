@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/provuder/checkout_provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
 import 'package:taza_khabar/provuder/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
@@ -54,7 +55,10 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<WishListProvider>(
           create: (context) => WishListProvider(),
-        )
+        ),
+        ChangeNotifierProvider<CheckoutProvider>(
+          create: (context) => CheckoutProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
