@@ -34,7 +34,7 @@ class CheckoutProvider with ChangeNotifier {
         .get();
 
     if (qn.exists) {
-      print(qn.data());
+      // print(qn.data());
       CheckoutModel deliveryAddressModel = CheckoutModel(
         firstName: qn.get('firstName'),
         lastName: qn.get('lastName'),

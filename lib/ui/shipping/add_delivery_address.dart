@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/checkout_provider.dart';
-import 'package:taza_khabar/ui/delivery_details.dart';
+import 'package:taza_khabar/ui/shipping/delivery_details.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
   const AddDeliveryAddress({Key? key}) : super(key: key);
@@ -42,42 +42,42 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 TextFormField(
                   controller: checkoutProvider!.lastName,
                   decoration: InputDecoration(labelText: 'Last Name'),
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return 'please enter last name';
-                    }
-                    return null;
-                  },
+                  // validator: (val) {
+                  //   if (val == null || val.isEmpty) {
+                  //     return 'please enter last name';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 TextFormField(
                   controller: checkoutProvider!.mobile,
                   decoration: InputDecoration(labelText: 'Mobile No'),
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return 'please enter mobile no';
-                    }
-                    return null;
-                  },
+                  // validator: (val) {
+                  //   if (val == null || val.isEmpty) {
+                  //     return 'please enter mobile no';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 TextFormField(
                   controller: checkoutProvider!.city,
                   decoration: InputDecoration(labelText: 'City'),
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return 'please enter city';
-                    }
-                    return null;
-                  },
+                  // validator: (val) {
+                  //   if (val == null || val.isEmpty) {
+                  //     return 'please enter city';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 TextFormField(
                   controller: checkoutProvider!.area,
                   decoration: InputDecoration(labelText: 'Area'),
-                  validator: (val) {
-                    if (val == null || val.isEmpty) {
-                      return 'please enter area';
-                    }
-                    return null;
-                  },
+                  // validator: (val) {
+                  //   if (val == null || val.isEmpty) {
+                  //     return 'please enter area';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 SizedBox(
                   height: 10,

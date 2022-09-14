@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
-import 'package:taza_khabar/ui/add_delivery_address.dart';
+import 'package:taza_khabar/ui/shipping/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -35,6 +35,9 @@ class _CartScreenState extends State<CartScreen> {
         appBar: AppBar(
           title: Text('Your cart items'),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () async {
+          cartProvider!.deleteAllCart();
+        }),
         body: cartProvider!.getCartDataList.isEmpty
             ? Center(
                 child: Text(

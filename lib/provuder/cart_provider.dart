@@ -50,13 +50,24 @@ class CartProvider with ChangeNotifier {
     });
   }
 
-  // delete cart-----
+  // delete single cart-----
   deleteCart(productId) {
     FirebaseFirestore.instance
         .collection('reviewCart')
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection('item')
         .doc(productId)
+        .delete();
+    notifyListeners();
+  }
+
+  // delete all cart
+  deleteAllCart() {
+    FirebaseFirestore.instance
+        .collection('reviewCart')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('item')
+        .doc()
         .delete();
     notifyListeners();
   }
