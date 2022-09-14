@@ -154,9 +154,8 @@ class _UserFormState extends State<UserForm> {
                         customeTextField("Enter your age", (val) {},
                             _ageController, TextInputType.number),
                         SizedBox(height: 8),
-                        customButton(
-                          'continue',
-                          () {
+                        ElevatedButton.icon(
+                          onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               setState(() {
                                 name = _nameController.text;
@@ -174,7 +173,15 @@ class _UserFormState extends State<UserForm> {
                               );
                             }
                           },
+                          icon: Icon(Icons.arrow_right_alt_outlined),
+                          label: Text('Continue'),
                         ),
+                        // customButton(
+                        //   'continue',
+                        //   () {
+
+                        //   },
+                        // ),
                       ],
                     ),
                   ),

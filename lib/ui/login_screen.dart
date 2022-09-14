@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white.withOpacity(.2),
         body: Form(
           child: SingleChildScrollView(
             child: Column(
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     await _authClass.handleSignIn(context);
                   },
                   child: SizedBox(
-                    height: 60,
+                    height: 65,
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shape: RoundedRectangleBorder(

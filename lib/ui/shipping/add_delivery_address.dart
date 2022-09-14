@@ -15,6 +15,17 @@ class AddDeliveryAddress extends StatefulWidget {
 class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   CheckoutProvider? checkoutProvider;
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    checkoutProvider!.firstName.clear();
+    checkoutProvider!.lastName.clear();
+    checkoutProvider!.mobile.clear();
+    checkoutProvider!.city.clear();
+    checkoutProvider!.area.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     checkoutProvider = Provider.of(context);
@@ -94,12 +105,12 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
           child: ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Address added'),
-                    backgroundColor: Colors.lightBlue,
-                  ),
-                );
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   SnackBar(
+                //     content: Text('Address added'),
+                //     backgroundColor: Colors.lightBlue,
+                //   ),
+                // );
                 checkoutProvider!.addDeliveryAddress();
                 Navigator.push(
                     context,

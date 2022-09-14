@@ -21,23 +21,24 @@ class _CartScreenState extends State<CartScreen> {
     super.initState();
     CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
-    // cartProvider!.getCartItem();
+    cartProvider.getCartItem();
     cartProvider.getTotalPrice();
   }
 
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
-    cartProvider!.getCartItem();
+    // cartProvider!.getCartItem();
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text('Your cart items'),
+          actions: [
+            Center(child: Text('Pull down to refrash')),
+            SizedBox(width: 4)
+          ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () async {
-          cartProvider!.deleteAllCart();
-        }),
         body: cartProvider!.getCartDataList.isEmpty
             ? Center(
                 child: Text(
@@ -53,39 +54,44 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
               ))
-            : ListView(
-                children: cartProvider!.getCartDataList
-                    .map((data) => Column(
-                          children: [
-                            Card(
-                              elevation: 3,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.network(
-                                    data.cartImage[0],
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Text(data.cartName,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text('Quantity ' + data.cartQty.toString()),
-                                  Text('TK ${data.cartPrice * data.cartQty}'),
-                                  IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () async {
-                                      cartProvider!.deleteCart(data.cartId);
-                                    },
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ))
-                    .toList(),
+            : RefreshIndicator(
+                onRefresh: () async {
+                  cartProvider!.getCartItem();
+                },
+                child: ListView(
+                  children: cartProvider!.getCartDataList
+                      .map((data) => Column(
+                            children: [
+                              Card(
+                                elevation: 3,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.network(
+                                      data.cartImage[0],
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Text(data.cartName,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Text('Quantity ' + data.cartQty.toString()),
+                                    Text('TK ${data.cartPrice * data.cartQty}'),
+                                    IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () async {
+                                        cartProvider!.deleteCart(data.cartId);
+                                      },
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ))
+                      .toList(),
+                ),
               ),
         bottomNavigationBar: Container(
           margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
