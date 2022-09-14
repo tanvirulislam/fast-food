@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,9 +56,9 @@ class _UserFormState extends State<UserForm> {
         .set({
           'name': name,
           'phone': phone,
-          'gender': userGender,
+          // 'gender': userGender,
           'age': age,
-          'date-of-birth': dob,
+          // 'date-of-birth': dob,
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -165,11 +165,13 @@ class _UserFormState extends State<UserForm> {
                                 dob = _dobController.text;
                                 addUser();
                               });
-                              Navigator.push(
+
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => BottomNavController(),
-                                ),
+                                    builder: (context) =>
+                                        BottomNavController()),
+                                (Route<dynamic> route) => false,
                               );
                             }
                           },
@@ -179,7 +181,6 @@ class _UserFormState extends State<UserForm> {
                         // customButton(
                         //   'continue',
                         //   () {
-
                         //   },
                         // ),
                       ],
