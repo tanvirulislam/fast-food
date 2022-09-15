@@ -102,6 +102,7 @@ class _ProductOverviewState extends State<ProductOverview> {
         // backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           title: Text('Product Details'),
+          backgroundColor: Theme.of(context).primaryColor,
           actions: [
             IconButton(
               onPressed: () {
@@ -166,7 +167,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                         textScaleFactor: 1.5,
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
-                          color: Colors.lightBlue,
+                          // color: Colors.lightBlue,
                           shadows: [
                             Shadow(
                               color: Colors.grey,
@@ -191,13 +192,23 @@ class _ProductOverviewState extends State<ProductOverview> {
                           );
                         },
                         icon: isBoolWishlist == false
-                            ? Icon(Icons.favorite_outline)
-                            : Icon(Icons.favorite),
+                            ? Icon(Icons.favorite_outline,
+                                color: Theme.of(context).hintColor)
+                            : Icon(Icons.favorite,
+                                color: Theme.of(context).hintColor),
                         label: isBoolWishlist == false
-                            ? Text('Add to favorite')
-                            : Text('Item Added'),
+                            ? Text(
+                                'Add to favorite',
+                                style: TextStyle(
+                                    color: Theme.of(context).hintColor),
+                              )
+                            : Text(
+                                'Item Added',
+                                style: TextStyle(
+                                    color: Theme.of(context).hintColor),
+                              ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          primary: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
@@ -205,49 +216,47 @@ class _ProductOverviewState extends State<ProductOverview> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Text('Quantity: ', textScaleFactor: 1.2),
-                            isBoolCart == true
-                                ? TextButton(
-                                    onPressed: () {
-                                      if (count > 1) {
-                                        setState(() {
-                                          count--;
-                                        });
-                                        cartProvider!.updateCart(
-                                          cartId: widget.productId,
-                                          cartImage: widget.image,
-                                          cartName: widget.name,
-                                          cartPrice: widget.price,
-                                          cartQty: count,
-                                        );
-                                      }
-                                    },
-                                    child: Text('-', textScaleFactor: 1.7))
-                                : Container(),
-                            Text(count.toString()),
-                            isBoolCart == true
-                                ? TextButton(
-                                    onPressed: () {
-                                      if (count < 10) {
-                                        setState(() {
-                                          count++;
-                                        });
-                                        cartProvider!.updateCart(
-                                          cartId: widget.productId,
-                                          cartImage: widget.image,
-                                          cartName: widget.name,
-                                          cartPrice: widget.price,
-                                          cartQty: count,
-                                        );
-                                      }
-                                    },
-                                    child: Text('+', textScaleFactor: 1.5))
-                                : Container(),
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Text('Quantity: ', textScaleFactor: 1.2),
+                          isBoolCart == true
+                              ? TextButton(
+                                  onPressed: () {
+                                    if (count > 1) {
+                                      setState(() {
+                                        count--;
+                                      });
+                                      cartProvider!.updateCart(
+                                        cartId: widget.productId,
+                                        cartImage: widget.image,
+                                        cartName: widget.name,
+                                        cartPrice: widget.price,
+                                        cartQty: count,
+                                      );
+                                    }
+                                  },
+                                  child: Text('-', textScaleFactor: 1.7))
+                              : Container(),
+                          Text(count.toString()),
+                          isBoolCart == true
+                              ? TextButton(
+                                  onPressed: () {
+                                    if (count < 10) {
+                                      setState(() {
+                                        count++;
+                                      });
+                                      cartProvider!.updateCart(
+                                        cartId: widget.productId,
+                                        cartImage: widget.image,
+                                        cartName: widget.name,
+                                        cartPrice: widget.price,
+                                        cartQty: count,
+                                      );
+                                    }
+                                  },
+                                  child: Text('+', textScaleFactor: 1.5))
+                              : Container(),
+                        ],
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
@@ -272,13 +281,23 @@ class _ProductOverviewState extends State<ProductOverview> {
                           }
                         },
                         icon: isBoolCart == true
-                            ? Icon(Icons.shopping_cart)
-                            : Icon(Icons.shopping_cart_outlined),
+                            ? Icon(Icons.shopping_cart,
+                                color: Theme.of(context).hintColor)
+                            : Icon(Icons.shopping_cart_outlined,
+                                color: Theme.of(context).hintColor),
                         label: isBoolCart == true
-                            ? Text('Item added')
-                            : Text('Add to cart'),
+                            ? Text(
+                                'Item added',
+                                style: TextStyle(
+                                    color: Theme.of(context).hintColor),
+                              )
+                            : Text(
+                                'Add to cart',
+                                style: TextStyle(
+                                    color: Theme.of(context).hintColor),
+                              ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          primary: Theme.of(context).primaryColor,
                         ),
                       )
                     ],

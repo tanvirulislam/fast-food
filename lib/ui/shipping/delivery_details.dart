@@ -13,15 +13,15 @@ class DeliveryDetails extends StatefulWidget {
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
-  // CheckoutProvider? checkoutProvider;
-  var deliveryAddress;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     CheckoutProvider checkoutProvider = Provider.of(context, listen: false);
     checkoutProvider.getDeliveryAddress();
   }
+
+  bool cash = false;
+  bool bkash = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Delivery Details'),
         ),
         body: Padding(
@@ -68,7 +69,41 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                           ),
                         ))
                     .toList(),
-              )
+              ),
+              Divider(color: Colors.grey),
+              SizedBox(height: 20),
+              Text('Payment By'),
+              ListTile(
+                title: Text('Cash on delivery'),
+                leading: Checkbox(
+                  activeColor: Colors.amber,
+                  checkColor: Colors.blue,
+                  side: BorderSide(color: Colors.lightBlue),
+                  value: cash,
+                  onChanged: (value) {
+                    setState(() {
+                      cash = value!;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: Text('Bkash'),
+                leading: Checkbox(
+                  activeColor: Colors.amber,
+                  checkColor: Colors.blue,
+                  side: BorderSide(color: Colors.lightBlue),
+                  value: bkash,
+                  onChanged: (value) {
+                    setState(() {
+                      bkash = value!;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
@@ -76,7 +111,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           width: double.infinity,
           height: 48,
-          color: Colors.grey[200],
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -91,7 +125,12 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                     ),
                   ));
             },
-            child: Text('Payment'),
+            child: Text(
+              'Continue',
+              style: TextStyle(color: Theme.of(context).hintColor),
+            ),
+            style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).primaryColor),
           ),
         ),
         floatingActionButton: TextButton.icon(

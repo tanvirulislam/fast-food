@@ -32,6 +32,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Add delivery address'),
         ),
         body: Padding(
@@ -102,25 +103,24 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           width: double.infinity,
           height: 48,
-          color: Colors.grey[200],
           child: ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   SnackBar(
-                //     content: Text('Address added'),
-                //     backgroundColor: Colors.lightBlue,
-                //   ),
-                // );
                 checkoutProvider!.addDeliveryAddress();
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DeliveryDetails(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DeliveryDetails(),
+                  ),
+                );
               }
             },
-            child: Text('Add address'),
+            child: Text(
+              'Add address',
+              style: TextStyle(color: Theme.of(context).hintColor),
+            ),
+            style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).primaryColor),
           ),
         ),
       ),

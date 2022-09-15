@@ -53,6 +53,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Payment summary'),
         ),
         body: Padding(
@@ -138,30 +139,37 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
             subtitle: Text(
                 'TK ${discountPrice == 0 ? subtotalPrice + 20 : discountPrice + 20}'),
             trailing: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BottomNavController()),
-                    (Route<dynamic> route) => false,
-                  );
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text(
-                          'You have successfully ordered your item.'),
-                      content: Text(
-                          'Your order id : ${randomNumber().toInt().toString()}'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                child: Text('Place order')),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BottomNavController()),
+                  (Route<dynamic> route) => false,
+                );
+                cartProvidersss.deleteAllCart();
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title:
+                        const Text('You have successfully ordered your item.'),
+                    content: Text(
+                        'Your order id : ${randomNumber().toInt().toString()}'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text(
+                'Place order',
+                style: TextStyle(color: Theme.of(context).hintColor),
+              ),
+              style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).primaryColor),
+            ),
           ),
         ),
       ),

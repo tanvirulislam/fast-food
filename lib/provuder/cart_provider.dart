@@ -61,17 +61,17 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // delete all cart
-  deleteAllCart() {
-    cartDataList.clear();
-    FirebaseFirestore.instance
+  deleteAllCart() async {
+    var collection = await FirebaseFirestore.instance
         .collection('reviewCart')
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection('item')
-        .doc()
-        .delete();
-    notifyListeners();
+        .get();
+    for (var doc in collection.docs) {
+      doc.reference.delete();
+    }
   }
+  // delete all cart
 
   // show cart items
   List<CartModel> cartDataList = [];
