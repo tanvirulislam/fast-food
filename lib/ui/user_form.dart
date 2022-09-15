@@ -160,8 +160,12 @@ class _UserFormState extends State<UserForm> {
                         // ),
 
                         SizedBox(height: 8),
-                        customeTextField("Enter your age", (val) {},
-                            _ageController, TextInputType.number),
+                        // customeTextField(
+                        //   "Enter your age",
+                        //   (val) {},
+                        //   _ageController,
+                        //   TextInputType.number,
+                        // ),
                         SizedBox(height: 8),
                         ElevatedButton.icon(
                           onPressed: () {
@@ -184,14 +188,19 @@ class _UserFormState extends State<UserForm> {
                               );
                             }
                           },
-                          icon: Icon(Icons.arrow_right_alt_outlined),
-                          label: Text('Continue'),
+                          icon: Icon(
+                            Icons.arrow_right_alt_outlined,
+                            color: Theme.of(context).hintColor,
+                          ),
+                          label: Text(
+                            'Continue',
+                            style:
+                                TextStyle(color: Theme.of(context).hintColor),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor,
+                          ),
                         ),
-                        // customButton(
-                        //   'continue',
-                        //   () {
-                        //   },
-                        // ),
                       ],
                     ),
                   ),

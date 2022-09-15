@@ -26,6 +26,7 @@ class _NewProfileState extends State<NewProfile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text('Profile '),
           elevation: 0,
         ),
@@ -36,24 +37,25 @@ class _NewProfileState extends State<NewProfile> {
               height: 150,
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Colors.white,
-                    Colors.lightBlue,
-                  ],
-                ),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                // gradient: LinearGradient(
+                //   begin: Alignment.bottomCenter,
+                //   end: Alignment.topCenter,
+                //   colors: [
+                //     Colors.white,
+                //     Theme.of(context).primaryColor,
+                //   ],
+                // ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(52),
                   bottomRight: Radius.circular(52),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).hintColor,
                     spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 5),
+                    blurRadius: 8,
+                    offset: const Offset(0, 0),
                   ),
                 ],
               ),
@@ -63,7 +65,7 @@ class _NewProfileState extends State<NewProfile> {
                     height: 90,
                     width: 90,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -74,7 +76,17 @@ class _NewProfileState extends State<NewProfile> {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Text(userData.first.userName, textScaleFactor: 1.3)
+                  Text(
+                    userData.first.userName,
+                    textScaleFactor: 1.3,
+                    style: TextStyle(shadows: [
+                      Shadow(
+                        color: Colors.grey,
+                        blurRadius: 3,
+                        offset: Offset(1, 1),
+                      )
+                    ]),
+                  )
                 ],
               ),
             ),
@@ -83,7 +95,7 @@ class _NewProfileState extends State<NewProfile> {
                   .map((e) => Column(
                         children: [
                           ListTile(
-                            leading: Icon(Icons.home),
+                            leading: Icon(Icons.location_on),
                             title: e.address.isNotEmpty
                                 ? Text(e.address)
                                 : Text('No data'),
@@ -98,11 +110,6 @@ class _NewProfileState extends State<NewProfile> {
                                 ? Text('No data')
                                 : Text(e.phone),
                           ),
-                          ListTile(
-                            leading: Icon(Icons.people),
-                            title:
-                                e.age.isEmpty ? Text('No data') : Text(e.age),
-                          ),
                         ],
                       ))
                   .toList(),
@@ -110,6 +117,7 @@ class _NewProfileState extends State<NewProfile> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
             _authClass.logout();
             Navigator.pushReplacement(
@@ -118,7 +126,7 @@ class _NewProfileState extends State<NewProfile> {
                   builder: (context) => LoginScreen(),
                 ));
           },
-          child: Icon(Icons.logout),
+          child: Icon(Icons.logout, color: Theme.of(context).hintColor),
         ),
       ),
     );

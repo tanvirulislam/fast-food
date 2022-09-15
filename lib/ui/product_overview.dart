@@ -99,7 +99,7 @@ class _ProductOverviewState extends State<ProductOverview> {
     Size screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        // backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           title: Text('Product Details'),
           actions: [

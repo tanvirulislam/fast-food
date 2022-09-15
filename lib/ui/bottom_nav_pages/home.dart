@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/new_profile.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
@@ -52,34 +51,26 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Fast food',
-            style: TextStyle(color: Colors.white),
-          ),
+          backgroundColor: Theme.of(context).primaryColor,
+          title: Text('Fast food'),
           actions: [
             IconButton(
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => CartScreen()));
               },
-              icon: Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-              ),
+              icon: Icon(Icons.shopping_cart_outlined),
             ),
             IconButton(
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => WishList()));
               },
-              icon: Icon(
-                Icons.favorite_outline,
-                color: Colors.white,
-              ),
+              icon: Icon(Icons.favorite_outline),
             ),
             SizedBox(width: 8)
           ],
-          backgroundColor: Colors.lightBlue,
+          // backgroundColor: Colors.lightBlue,
         ),
         drawer: drawerCustom(context),
         // drawer: DrawerSide(),

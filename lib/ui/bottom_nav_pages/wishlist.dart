@@ -31,6 +31,7 @@ class _WishList extends State<WishList> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Your wishlist items'),
         ),
         body: wishlistProvider!.getWishlistData.isEmpty

@@ -131,8 +131,8 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
           ),
         ),
         bottomNavigationBar: Card(
-          color: Colors.grey[200],
-          elevation: 2,
+          // color: Colors.grey[200],
+          elevation: 7,
           child: ListTile(
             title: Text('Total Amount'),
             subtitle: Text(

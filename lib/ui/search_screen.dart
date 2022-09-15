@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
     List<ProductModel> searchItems = searchItem(query);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        // backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           title: Text('Search your products'),
         ),
@@ -52,16 +52,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   decoration: InputDecoration(
-                      hintText: 'Input search item',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
-                      ),
-                      suffixIcon: Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.white),
+                    hintText: 'Input search item',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.lightBlue),
+                    ),
+                    suffixIcon: Icon(Icons.search),
+                    filled: true,
+                    // fillColor: Colors.white,
+                  ),
                 ),
               ),
               SizedBox(height: 10),

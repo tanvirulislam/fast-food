@@ -33,6 +33,7 @@ class _CartScreenState extends State<CartScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Your cart items'),
           actions: [
             Center(child: Text('Pull down to refrash')),
@@ -55,6 +56,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ))
             : RefreshIndicator(
+                color: Theme.of(context).primaryColor,
                 onRefresh: () async {
                   cartProvider!.getCartItem();
                 },
@@ -94,28 +96,41 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
         bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
           height: 55,
           width: double.infinity,
-          decoration: BoxDecoration(color: Colors.grey.shade200),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Total Amount: TK ' +
-                  cartProvider!.getTotalPrice().toString()),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddDeliveryAddress(),
-                    ),
-                  );
-                },
-                child: Text('Checkout'),
-                // style: ElevatedButton.styleFrom(primary: Colors.white),
-              )
-            ],
+          child: Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Total Amount: TK ' +
+                      cartProvider!.getTotalPrice().toString()),
+                  cartProvider!.getCartDataList.isNotEmpty
+                      ? ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddDeliveryAddress(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Checkout',
+                            style:
+                                TextStyle(color: Theme.of(context).hintColor),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColor,
+                          ),
+                        )
+                      : Container()
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -7,19 +7,32 @@ import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
 import 'package:taza_khabar/provuder/checkout_provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
+import 'package:taza_khabar/provuder/theme_provider.dart';
 import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/provuder/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38",
+        projectId: "taza-khabar-8666d",
+        messagingSenderId: "711924074598",
+        appId: "1:711924074598:android:676b2cd4f6a0f8338685a7",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -67,9 +80,9 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Fast Food',
-        theme: ThemeData(
-          primarySwatch: Colors.lightBlue,
-        ),
+        themeMode: ThemeMode.system,
+        theme: Mythemes.lightTheme,
+        darkTheme: Mythemes.darkTheme,
         home: currentPage,
       ),
     );

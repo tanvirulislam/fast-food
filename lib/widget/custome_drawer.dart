@@ -13,7 +13,7 @@ Widget drawerCustom(context) {
   userProvider.getUserData();
   return Container(
     width: MediaQuery.of(context).size.width / 1.3,
-    color: Colors.grey[200],
+    color: Theme.of(context).scaffoldBackgroundColor,
     child: ListView(
       children: [
         DrawerHeader(

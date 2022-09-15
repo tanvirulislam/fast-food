@@ -38,31 +38,35 @@ class _BottomNavControllerState extends State<BottomNavController> {
               bottom_index_num = val;
             });
           },
-          selectedItemColor: Colors.lightBlue,
-          selectedLabelStyle: TextStyle(color: Colors.amber),
-          unselectedItemColor: Colors.black,
-          unselectedLabelStyle: TextStyle(color: Colors.black),
+          selectedIconTheme: IconThemeData(
+            color: Theme.of(context).primaryColor,
+            size: 28,
+          ),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          unselectedItemColor: Theme.of(context).hintColor,
           // ignore: prefer_const_literals_to_create_immutables
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.white.withOpacity(.4),
+              // backgroundColor: Colors.white.withOpacity(.4),
+              backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: 'Cart',
-              backgroundColor: Colors.white.withOpacity(.4),
+              backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: 'Favorite',
-              backgroundColor: Colors.white.withOpacity(.4),
+              backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
-              backgroundColor: Colors.white.withOpacity(.4),
+              backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
           ],
         ),

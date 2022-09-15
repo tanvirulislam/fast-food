@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white.withOpacity(.2),
+        // backgroundColor: Colors.white.withOpacity(.2),
         body: Form(
           child: SingleChildScrollView(
             child: Column(
@@ -70,8 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   child: Text(
                     'Sign In',
-                    style:
-                        TextStyle(fontSize: 34, color: Colors.white, shadows: [
+                    style: TextStyle(fontSize: 34, shadows: [
                       Shadow(
                         color: Colors.grey,
                         blurRadius: 5,
@@ -94,12 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller: _emailController,
                       style: TextStyle(
-                        color: Colors.black,
-                      ),
+                          // color: Colors.black,
+                          ),
                       decoration: InputDecoration(
                         labelText: 'Email',
                         filled: true,
-                        fillColor: Colors.white,
+                        // fillColor: Colors.white,
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.orange),
                         ),
@@ -118,12 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _passController,
                       obscureText: true,
                       style: TextStyle(
-                        color: Colors.black,
-                      ),
+                          // color: Colors.black,
+                          ),
                       decoration: InputDecoration(
                         labelText: 'Password',
                         filled: true,
-                        fillColor: Colors.white,
+                        // fillColor: Colors.white,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8)),
                         focusedBorder: OutlineInputBorder(
@@ -138,17 +137,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 8),
-                // customButton('Submit', () {
-                //   signIn();
-                // }),
                 ElevatedButton(
-                    onPressed: () => signIn(), child: Text('Submit')),
+                  onPressed: () => signIn(),
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(color: Theme.of(context).hintColor),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).primaryColor,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     'OR',
                     textScaleFactor: 2,
-                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 InkWell(
@@ -170,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Image.asset('assets/google.png'),
                           Text(
                             'Continue with google',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 16),
                           ),
                         ],
                       ),
@@ -181,8 +184,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account? ",
-                        style: TextStyle(color: Colors.white)),
+                    Text(
+                      "Don't have an account? ",
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -193,7 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       },
                       child: Text('Sign Up'),
-                      style: TextButton.styleFrom(primary: Colors.white),
+                      style: TextButton.styleFrom(
+                          primary: Theme.of(context).hintColor),
                     ),
                   ],
                 ),
