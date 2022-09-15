@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
 import 'package:taza_khabar/provuder/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 class ProductOverview extends StatefulWidget {

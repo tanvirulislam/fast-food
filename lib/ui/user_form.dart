@@ -17,7 +17,7 @@ class UserForm extends StatefulWidget {
 
 class _UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
-  var name;
+  var address;
   var phone;
   var userGender;
   var age;
@@ -48,13 +48,13 @@ class _UserFormState extends State<UserForm> {
 
   Future addUser() async {
     CollectionReference users =
-        FirebaseFirestore.instance.collection('user-data');
+        FirebaseFirestore.instance.collection('userData');
     FirebaseAuth _auth = FirebaseAuth.instance;
     var currentuser = _auth.currentUser;
     return users
-        .doc(currentuser!.email)
+        .doc(currentuser!.uid)
         .set({
-          'name': name,
+          'address': address,
           'phone': phone,
           // 'gender': userGender,
           'age': age,
@@ -91,15 +91,24 @@ class _UserFormState extends State<UserForm> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        customeTextField("Enter your name", (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'please enter name';
-                          }
-                          return null;
-                        }, _nameController, TextInputType.name),
+                        customeTextField(
+                          "Enter your address",
+                          (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'please enter address';
+                            }
+                            return null;
+                          },
+                          _nameController,
+                          TextInputType.name,
+                        ),
                         SizedBox(height: 8),
-                        customeTextField("Enter your phone number", (val) {},
-                            _phoneController, TextInputType.phone),
+                        customeTextField(
+                          "Enter your phone number",
+                          (val) {},
+                          _phoneController,
+                          TextInputType.phone,
+                        ),
                         SizedBox(height: 8),
                         // TextFormField(
                         //   controller: _dobController,
@@ -158,7 +167,7 @@ class _UserFormState extends State<UserForm> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               setState(() {
-                                name = _nameController.text;
+                                address = _nameController.text;
                                 phone = _phoneController.text;
                                 userGender = _genderController.text;
                                 age = _ageController.text;

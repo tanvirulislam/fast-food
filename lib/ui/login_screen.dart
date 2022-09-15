@@ -3,7 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
+import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/ui/regi_screen.dart';
 import 'package:taza_khabar/ui/user_form.dart';
 import 'package:taza_khabar/widget/custom_button.dart';
@@ -135,9 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
+                SizedBox(height: 8),
                 // customButton('Submit', () {
                 //   signIn();
                 // }),
@@ -177,9 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

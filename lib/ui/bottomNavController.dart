@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/new_profile.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 class BottomNavController extends StatefulWidget {
@@ -21,7 +20,8 @@ class _BottomNavControllerState extends State<BottomNavController> {
     CartScreen(),
     // Favourite(),
     WishList(),
-    Profile(),
+    // Profile(),
+    NewProfile()
   ];
   // ignore: non_constant_identifier_names
   int bottom_index_num = 0;

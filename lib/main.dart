@@ -7,6 +7,7 @@ import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
 import 'package:taza_khabar/provuder/checkout_provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
+import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/provuder/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
@@ -58,6 +59,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<CheckoutProvider>(
           create: (context) => CheckoutProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
         ),
       ],
       child: MaterialApp(

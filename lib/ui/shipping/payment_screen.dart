@@ -124,7 +124,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
               ),
               ListTile(
                 title: Text('Compen discount'),
-                subtitle: Text('Discounts will apply only to above 300 TK'),
+                subtitle: Text('Discounts will apply only to above TK 300'),
                 trailing: Text('10%'),
               ),
             ],
@@ -151,7 +151,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                       title: const Text(
                           'You have successfully ordered your item.'),
                       content: Text(
-                          'Your order id: ${randomNumber().toInt().toString()}'),
+                          'Your order id : ${randomNumber().toInt().toString()}'),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () => Navigator.pop(context, 'OK'),

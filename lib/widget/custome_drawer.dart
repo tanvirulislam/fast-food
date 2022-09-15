@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/new_profile.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 Widget drawerCustom(context) {
+  UserProvider userProvider = Provider.of(context, listen: false);
+  userProvider.getUserData();
   return Container(
     width: MediaQuery.of(context).size.width / 1.3,
     color: Colors.grey[200],
@@ -14,28 +18,30 @@ Widget drawerCustom(context) {
       children: [
         DrawerHeader(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 40,
-                child: Image.asset('assets/slider2.jpg'),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: userProvider.currentUserData
+                  .map((e) => Column(
+                        children: [
+                          Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(e.userImage),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(e.userName)
+                        ],
+                      ))
+                  .toList()
+              // [
+
+              // ],
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text('Welcome guest'),
-              //     SizedBox(
-              //       height: 10,
-              //     ),
-              //     ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text('Logout'),
-              //     )
-              //   ],
-              // )
-            ],
-          ),
         ),
         InkWell(
             onTap: () => Navigator.push(context,
@@ -55,8 +61,8 @@ Widget drawerCustom(context) {
                 title: Text('Cart'))),
         InkWell(
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Profile()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewProfile()));
             },
             child: ListTile(
                 leading: Icon(Icons.person, color: Colors.lightBlue),
@@ -66,7 +72,7 @@ Widget drawerCustom(context) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Favourite(),
+                  builder: (context) => WishList(),
                 ));
           },
           child: ListTile(

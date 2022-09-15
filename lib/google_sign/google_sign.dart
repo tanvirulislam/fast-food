@@ -1,16 +1,16 @@
+// ignore_for_file: prefer_const_constructors, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/ui/user_form.dart';
 
 class AuthClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+      scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly']);
   FirebaseAuth auth = FirebaseAuth.instance;
   final storage = const FlutterSecureStorage();
 
@@ -24,14 +24,26 @@ class AuthClass {
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken,
         );
+        User? user = (await auth.signInWithCredential(credential)).user;
+        print("signed in " + user!.email.toString());
+        UserProvider userProvider = Provider.of(context, listen: false);
+        userProvider.addUserData(
+          currentUser: user,
+          userEmail: user.email.toString(),
+          userImage: user.photoURL.toString(),
+          userName: user.displayName.toString(),
+        );
 
         try {
           UserCredential userCredential =
               await auth.signInWithCredential(credential);
           storeToken(userCredential);
+
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => UserForm()));
-        } catch (e) {}
+        } catch (e) {
+          print(e);
+        }
       } else {}
     } catch (error) {
       print(error);

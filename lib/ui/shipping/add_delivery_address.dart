@@ -62,6 +62,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 ),
                 TextFormField(
                   controller: checkoutProvider!.mobile,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(labelText: 'Mobile No'),
                   // validator: (val) {
                   //   if (val == null || val.isEmpty) {

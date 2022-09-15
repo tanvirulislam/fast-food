@@ -4,9 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/new_profile.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/favourite.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
             IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => Favourite()));
+                    context, MaterialPageRoute(builder: (_) => WishList()));
               },
               icon: Icon(
                 Icons.favorite_outline,
@@ -81,6 +82,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.lightBlue,
         ),
         drawer: drawerCustom(context),
+        // drawer: DrawerSide(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
