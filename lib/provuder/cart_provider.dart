@@ -14,7 +14,7 @@ class CartProvider with ChangeNotifier {
   }) {
     FirebaseFirestore.instance
         .collection('reviewCart')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .doc(cartId)
         .set({
@@ -37,7 +37,7 @@ class CartProvider with ChangeNotifier {
   }) {
     FirebaseFirestore.instance
         .collection('reviewCart')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .doc(cartId)
         .update({
@@ -54,7 +54,7 @@ class CartProvider with ChangeNotifier {
   deleteCart(productId) {
     FirebaseFirestore.instance
         .collection('reviewCart')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .doc(productId)
         .delete();
@@ -64,7 +64,7 @@ class CartProvider with ChangeNotifier {
   deleteAllCart() async {
     var collection = await FirebaseFirestore.instance
         .collection('reviewCart')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .get();
     for (var doc in collection.docs) {
@@ -79,7 +79,7 @@ class CartProvider with ChangeNotifier {
     List<CartModel> newList = [];
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('reviewCart')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .orderBy('name', descending: false)
         .get();

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/checkout_provider.dart';
+import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/ui/shipping/delivery_details.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
@@ -14,6 +15,7 @@ class AddDeliveryAddress extends StatefulWidget {
 
 class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   CheckoutProvider? checkoutProvider;
+  UserProvider? userProvider;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -25,10 +27,12 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
     checkoutProvider!.area.clear();
   }
 
+  var userId;
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     checkoutProvider = Provider.of(context);
+    // var userId = userProvider!.currentData.first;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -106,7 +110,9 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
           child: ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                checkoutProvider!.addDeliveryAddress();
+                checkoutProvider!.addDeliveryAddress(
+                    // currentUser: ,
+                    );
                 Navigator.push(
                   context,
                   MaterialPageRoute(

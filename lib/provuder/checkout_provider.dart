@@ -9,17 +9,22 @@ class CheckoutProvider with ChangeNotifier {
   TextEditingController mobile = TextEditingController();
   TextEditingController city = TextEditingController();
   TextEditingController area = TextEditingController();
+  TextEditingController uId = TextEditingController();
 
-  void addDeliveryAddress() async {
+  void addDeliveryAddress(
+      // {required User currentUser}
+      ) async {
     await FirebaseFirestore.instance
-        .collection('addDeliveryAddress')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('shipping')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({
       'firstName': firstName.text,
       'lastName': lastName.text,
       'mobile': mobile.text,
       'city': city.text,
       'area': city.text,
+      'shippingId': FirebaseAuth.instance.currentUser!.uid,
+      // 'shippingId' : FirebaseAuth.instance.
     });
     // notifyListeners();
   }
@@ -29,8 +34,8 @@ class CheckoutProvider with ChangeNotifier {
     List<CheckoutModel> newList = [];
 
     DocumentSnapshot qn = await FirebaseFirestore.instance
-        .collection('addDeliveryAddress')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('shipping')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
     if (qn.exists) {
