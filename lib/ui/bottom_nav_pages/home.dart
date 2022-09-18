@@ -9,6 +9,7 @@ import 'package:taza_khabar/provider/product_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 import 'package:taza_khabar/ui/category_product.dart';
+import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
@@ -151,7 +152,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
               SizedBox(
-                height: 190,
+                height: 175,
                 child: ListView.builder(
                   itemCount: categoryProvider!.getCategoryList.length,
                   shrinkWrap: true,
@@ -170,43 +171,47 @@ class _HomeState extends State<Home> {
                               width: 160,
                               fit: BoxFit.cover,
                             ),
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  categoryProvider!
-                                      .getCategoryList[index].categoryName,
+                            SizedBox(
+                              width: 160,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      categoryProvider!
+                                          .getCategoryList[index].categoryName,
+                                    ),
+                                    // SizedBox(width: 22),
+                                    InkWell(
+                                      onTap: () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => CategoryProduct(
+                                        //       name: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryName,
+                                        //       image: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryImage,
+                                        //       id: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryId,
+                                        //     ),
+                                        //   ),
+                                        // );
+                                      },
+                                      child: Text(
+                                        'view',
+                                        // style: TextStyle(
+                                        //     color: Theme.of(context).primaryColor),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isBool = !isBool;
-                                      print(isBool);
-                                    });
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => CategoryProduct(
-                                            name: categoryProvider!
-                                                .getCategoryList[index]
-                                                .categoryName,
-                                            image: categoryProvider!
-                                                .getCategoryList[index]
-                                                .categoryImage,
-                                            id: categoryProvider!
-                                                .getCategoryList[index]
-                                                .categoryId,
-                                          ),
-                                        ));
-                                  },
-                                  child: isBool == true
-                                      ? Text('See more')
-                                      : Text('data'),
-                                  style: TextButton.styleFrom(
-                                    primary: Theme.of(context).primaryColor,
-                                  ),
-                                )
-                              ],
+                              ),
                             )
                           ],
                         ),
@@ -238,64 +243,68 @@ class _HomeState extends State<Home> {
                 ),
                 itemCount: prodcutProvider!.getProductList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductOverview(
-                            name: prodcutProvider!
-                                .getProductList[index].productName,
-                            price: prodcutProvider!
-                                .getProductList[index].productPrice,
-                            image: prodcutProvider!
-                                .getProductList[index].productImage,
-                            productDescription: prodcutProvider!
-                                .getProductList[index].productDescription,
-                            productId: prodcutProvider!
-                                .getProductList[index].productId,
-                          ),
-                        )),
-                    child: Card(
-                      elevation: 5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(
+                  return Card(
+                    elevation: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductOverview(
+                                  name: prodcutProvider!
+                                      .getProductList[index].productName,
+                                  price: prodcutProvider!
+                                      .getProductList[index].productPrice,
+                                  image: prodcutProvider!
+                                      .getProductList[index].productImage,
+                                  productDescription: prodcutProvider!
+                                      .getProductList[index].productDescription,
+                                  productId: prodcutProvider!
+                                      .getProductList[index].productId,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Image.network(
                             prodcutProvider!
                                 .getProductList[index].productImage[0],
                             width: screenSize.width,
                             height: 140,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 5),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(prodcutProvider!
-                                    .getProductList[index].productName),
-                                Text(
-                                  'TK ' +
-                                      prodcutProvider!
-                                          .getProductList[index].productPrice
-                                          .toString(),
-                                ),
-                                // IconButton(
-                                //   onPressed: () {
-                                //     setState(() {
-                                //       // isBoolCart = !isBoolCart;
-                                //     });
-                                //   },
-                                //   icon: isBoolCart == false
-                                //       ? Icon(Icons.shopping_cart_outlined)
-                                //       : Icon(Icons.shopping_cart),
-                                // )
-                              ],
-                            ),
+                        ),
+                        SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(prodcutProvider!
+                                  .getProductList[index].productName),
+                              Text(
+                                'TK ' +
+                                    prodcutProvider!
+                                        .getProductList[index].productPrice
+                                        .toString(),
+                              ),
+                              Count(
+                                cartId: prodcutProvider!
+                                    .getProductList[index].productId,
+                                cartName: prodcutProvider!
+                                    .getProductList[index].productName,
+                                cartImage: prodcutProvider!
+                                    .getProductList[index].productImage,
+                                cartPrice: prodcutProvider!
+                                    .getProductList[index].productPrice,
+                                cartQty: 1,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   );
                 },

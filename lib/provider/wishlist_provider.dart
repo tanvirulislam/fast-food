@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:taza_khabar/models/product_model.dart';
 import 'package:taza_khabar/models/wishlist_model.dart';
 
 class WishListProvider with ChangeNotifier {
@@ -14,7 +13,7 @@ class WishListProvider with ChangeNotifier {
   }) {
     FirebaseFirestore.instance
         .collection('reviewWishList')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .doc(wishListId)
         .set({
@@ -33,7 +32,7 @@ class WishListProvider with ChangeNotifier {
     List<WishlistModel> newList = [];
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('reviewWishList')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .get();
 

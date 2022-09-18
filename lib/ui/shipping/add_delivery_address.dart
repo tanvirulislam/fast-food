@@ -110,9 +110,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
           child: ElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                checkoutProvider!.addDeliveryAddress(
-                    // currentUser: ,
-                    );
+                checkoutProvider!.addDeliveryAddress();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
