@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/user_form.dart';
 
 class RegiScreen extends StatefulWidget {
@@ -25,11 +26,12 @@ class _RegiScreenState extends State<RegiScreen> {
       );
       var userCredential = credential.user;
       if (userCredential!.uid.isNotEmpty) {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (_) => UserForm(),
+            builder: (_) => BottomNavController(),
           ),
+          (Route<dynamic> route) => false,
         );
       } else {
         Fluttertoast.showToast(msg: 'Something is wrong');

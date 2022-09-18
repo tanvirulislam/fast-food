@@ -8,7 +8,6 @@ import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/product_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
-import 'package:taza_khabar/ui/category_product.dart';
 import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';

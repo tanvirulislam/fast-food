@@ -39,11 +39,12 @@ class AuthClass {
               await auth.signInWithCredential(credential);
           storeToken(userCredential);
 
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => BottomNavController(),
             ),
+            (Route<dynamic> route) => false,
           );
         } catch (e) {
           print(e);
