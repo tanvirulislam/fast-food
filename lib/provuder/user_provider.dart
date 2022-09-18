@@ -31,7 +31,7 @@ class UserProvider with ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     if (value.exists) {
-      print(value.data());
+      // print(value.data());
       UserModel userModel = UserModel(
         userEmail: value.get("userEmail"),
         userImage: value.get("userImage"),

@@ -39,14 +39,13 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
 
   @override
   Widget build(BuildContext context) {
-    CartProvider cartProvidersss = Provider.of<CartProvider>(context);
+    CartProvider cartProviders = Provider.of<CartProvider>(context);
 
     double discount = 10;
-    double subtotalPrice = cartProvidersss.getTotalPrice();
-
+    double subtotalPrice = cartProviders.getTotalPrice();
     double discountPrice = 0;
     if (subtotalPrice > 300) {
-      double savings = subtotalPrice * (10 / 100);
+      double savings = subtotalPrice * (discount / 100);
       discountPrice = subtotalPrice - savings;
     }
 
@@ -98,8 +97,8 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
               ),
               ExpansionTile(
                 title: Text(
-                    'Total order items  ${cartProvidersss.getCartDataList.length}'),
-                children: cartProvidersss.getCartDataList
+                    'Total order items  ${cartProviders.getCartDataList.length}'),
+                children: cartProviders.getCartDataList
                     .map((e) => ListTile(
                           leading: Image.network(
                             e.cartImage[0],
@@ -117,7 +116,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
               ListTile(
                 title: Text('Subtottal'),
                 trailing:
-                    Text('TK ${cartProvidersss.getTotalPrice().toString()}'),
+                    Text('TK ${cartProviders.getTotalPrice().toString()}'),
               ),
               ListTile(
                 title: Text('Shipping charge'),
@@ -146,7 +145,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                       builder: (context) => BottomNavController()),
                   (Route<dynamic> route) => false,
                 );
-                cartProvidersss.deleteAllCart();
+                cartProviders.deleteAllCart();
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(

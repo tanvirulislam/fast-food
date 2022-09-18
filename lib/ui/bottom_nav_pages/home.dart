@@ -4,9 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taza_khabar/provuder/category_provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
+import 'package:taza_khabar/ui/category_product.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
@@ -20,6 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ProdcutProvider? prodcutProvider;
+  CategoryProvider? categoryProvider;
 
   List<String> carouselImage = [];
   fatchCarouselImage() async {
@@ -39,13 +42,18 @@ class _HomeState extends State<Home> {
   void initState() {
     fatchCarouselImage();
     super.initState();
-    ProdcutProvider prodcutProvider = Provider.of(context, listen: false);
-    prodcutProvider.fatchProductData();
+    prodcutProvider = Provider.of(context, listen: false);
+    prodcutProvider!.fatchProductData();
+    categoryProvider = Provider.of(context, listen: false);
+    categoryProvider!.fatchCategoryData();
   }
+
+  bool isBool = false;
 
   @override
   Widget build(BuildContext context) {
     prodcutProvider = Provider.of(context);
+    categoryProvider = Provider.of(context);
     Size screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
@@ -73,7 +81,6 @@ class _HomeState extends State<Home> {
           // backgroundColor: Colors.lightBlue,
         ),
         drawer: drawerCustom(context),
-        // drawer: DrawerSide(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
@@ -126,6 +133,86 @@ class _HomeState extends State<Home> {
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: true,
                   ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  Text(
+                    'Food Category',
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_right),
+                    label: Text('View all'),
+                    style: TextButton.styleFrom(primary: Colors.black),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 190,
+                child: ListView.builder(
+                  itemCount: categoryProvider!.getCategoryList.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 3,
+                        child: Column(
+                          children: [
+                            Image.network(
+                              categoryProvider!
+                                  .getCategoryList[index].categoryImage,
+                              height: 130,
+                              width: 160,
+                              fit: BoxFit.cover,
+                            ),
+                            Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  categoryProvider!
+                                      .getCategoryList[index].categoryName,
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isBool = !isBool;
+                                      print(isBool);
+                                    });
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CategoryProduct(
+                                            name: categoryProvider!
+                                                .getCategoryList[index]
+                                                .categoryName,
+                                            image: categoryProvider!
+                                                .getCategoryList[index]
+                                                .categoryImage,
+                                            id: categoryProvider!
+                                                .getCategoryList[index]
+                                                .categoryId,
+                                          ),
+                                        ));
+                                  },
+                                  child: isBool == true
+                                      ? Text('See more')
+                                      : Text('data'),
+                                  style: TextButton.styleFrom(
+                                    primary: Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               Row(

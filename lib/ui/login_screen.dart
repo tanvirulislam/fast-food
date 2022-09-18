@@ -3,12 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
-import 'package:taza_khabar/provuder/user_provider.dart';
+import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/regi_screen.dart';
-import 'package:taza_khabar/ui/user_form.dart';
-import 'package:taza_khabar/widget/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -29,12 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passController.text,
       );
       var authCredential = userCredential.user;
-      print(authCredential!.uid);
-      if (authCredential.uid.isNotEmpty) {
+      // print(authCredential!.uid);
+      if (authCredential!.uid.isNotEmpty) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => UserForm(),
+            builder: (_) => BottomNavController(),
           ),
         );
       } else {
@@ -42,10 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        // print('No user found for that email.');
         Fluttertoast.showToast(msg: 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        // print('Wrong password provided for that user.');
         Fluttertoast.showToast(msg: 'Wrong password provided for that user.');
       }
     }
@@ -57,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // backgroundColor: Colors.white.withOpacity(.2),
         body: Form(
           child: SingleChildScrollView(
             child: Column(
@@ -92,13 +88,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                       controller: _emailController,
-                      style: TextStyle(
-                          // color: Colors.black,
-                          ),
+                      style: TextStyle(),
                       decoration: InputDecoration(
                         labelText: 'Email',
                         filled: true,
-                        // fillColor: Colors.white,
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.orange),
                         ),
@@ -116,13 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextFormField(
                       controller: _passController,
                       obscureText: true,
-                      style: TextStyle(
-                          // color: Colors.black,
-                          ),
+                      style: TextStyle(),
                       decoration: InputDecoration(
                         labelText: 'Password',
                         filled: true,
-                        // fillColor: Colors.white,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8)),
                         focusedBorder: OutlineInputBorder(

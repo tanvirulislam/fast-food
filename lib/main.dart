@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/provuder/category_provider.dart';
 import 'package:taza_khabar/provuder/checkout_provider.dart';
 import 'package:taza_khabar/provuder/product_provider.dart';
 import 'package:taza_khabar/provuder/theme_provider.dart';
@@ -76,6 +77,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserProvider(),
         ),
+        ChangeNotifierProvider<CategoryProvider>(
+          create: (context) => CategoryProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

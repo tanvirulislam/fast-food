@@ -62,36 +62,38 @@ class _CartScreenState extends State<CartScreen> {
                 },
                 child: ListView(
                   children: cartProvider!.getCartDataList
-                      .map((data) => Column(
-                            children: [
-                              Card(
-                                elevation: 3,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Image.network(
-                                      data.cartImage[0],
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Text(data.cartName,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    Text('Quantity ' + data.cartQty.toString()),
-                                    Text('TK ${data.cartPrice * data.cartQty}'),
-                                    IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () async {
-                                        cartProvider!.deleteCart(data.cartId);
-                                      },
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ))
+                      .map(
+                        (data) => Column(
+                          children: [
+                            Card(
+                              elevation: 3,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.network(
+                                    data.cartImage[0],
+                                    height: 100,
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Text(data.cartName,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text('Quantity ' + data.cartQty.toString()),
+                                  Text('TK ${data.cartPrice * data.cartQty}'),
+                                  IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () async {
+                                      cartProvider!.deleteCart(data.cartId);
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                       .toList(),
                 ),
               ),

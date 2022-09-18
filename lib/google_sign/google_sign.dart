@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/user_provider.dart';
-import 'package:taza_khabar/ui/user_form.dart';
+import 'package:taza_khabar/ui/bottomNavController.dart';
 
 class AuthClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -40,7 +40,11 @@ class AuthClass {
           storeToken(userCredential);
 
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => UserForm()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => BottomNavController(),
+            ),
+          );
         } catch (e) {
           print(e);
         }

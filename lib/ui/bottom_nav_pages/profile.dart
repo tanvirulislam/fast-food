@@ -34,7 +34,7 @@ class _NewProfileState extends State<NewProfile> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 150,
+              height: 160,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
@@ -62,23 +62,32 @@ class _NewProfileState extends State<NewProfile> {
               child: Column(
                 children: [
                   Container(
-                    height: 90,
-                    width: 90,
+                    height: 91,
+                    width: 91,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          userData.first.userImage,
+                      border: Border.all(),
+                    ),
+                    child: Container(
+                      height: 90,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            userData.first.userImage,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    userData.first.userName,
-                    textScaleFactor: 1.3,
+                    userData.first.userEmail,
+                    textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(
                         color: Colors.grey,
@@ -86,34 +95,32 @@ class _NewProfileState extends State<NewProfile> {
                         offset: Offset(1, 1),
                       )
                     ]),
-                  )
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    userData.first.userName,
+                    textScaleFactor: 1.2,
+                    style: TextStyle(shadows: [
+                      Shadow(
+                        color: Colors.grey,
+                        blurRadius: 3,
+                        offset: Offset(1, 1),
+                      )
+                    ]),
+                  ),
                 ],
               ),
             ),
-            Column(
-              children: userProvider.currentData2
-                  .map((e) => Column(
-                        children: [
-                          ListTile(
-                            leading: Icon(Icons.location_on),
-                            title: e.address.isNotEmpty
-                                ? Text(e.address)
-                                : Text('No data'),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.email),
-                            title: Text(userData.first.userEmail),
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.phone),
-                            title: e.phone.isEmpty
-                                ? Text('No data')
-                                : Text(e.phone),
-                          ),
-                        ],
-                      ))
-                  .toList(),
-            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('My Order'),
+                ],
+              ),
+            )
           ],
         ),
         floatingActionButton: FloatingActionButton(

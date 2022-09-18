@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:taza_khabar/provuder/user_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/new_profile.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
 Widget drawerCustom(context) {

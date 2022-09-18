@@ -11,9 +11,7 @@ class CheckoutProvider with ChangeNotifier {
   TextEditingController area = TextEditingController();
   TextEditingController uId = TextEditingController();
 
-  void addDeliveryAddress(
-      // {required User currentUser}
-      ) async {
+  void addDeliveryAddress() async {
     await FirebaseFirestore.instance
         .collection('shipping')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -24,9 +22,7 @@ class CheckoutProvider with ChangeNotifier {
       'city': city.text,
       'area': city.text,
       'shippingId': FirebaseAuth.instance.currentUser!.uid,
-      // 'shippingId' : FirebaseAuth.instance.
     });
-    // notifyListeners();
   }
 
   List<CheckoutModel> deliveryAddressData = [];
