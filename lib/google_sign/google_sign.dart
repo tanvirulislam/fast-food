@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/provuder/user_provider.dart';
+import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 
 class AuthClass {

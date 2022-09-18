@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/ui/shipping/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/provuder/cart_provider.dart';
-import 'package:taza_khabar/provuder/wishlist_provider.dart';
+import 'package:taza_khabar/provider/cart_provider.dart';
+import 'package:taza_khabar/provider/wishlist_provider.dart';
 
 class WishList extends StatefulWidget {
   const WishList({Key? key}) : super(key: key);

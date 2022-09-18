@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/provuder/cart_provider.dart';
+import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 
 class PaymentScreeen extends StatefulWidget {

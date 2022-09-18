@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
-import 'package:taza_khabar/provuder/user_provider.dart';
+import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
 
 class NewProfile extends StatefulWidget {

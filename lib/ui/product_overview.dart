@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taza_khabar/provuder/cart_provider.dart';
-import 'package:taza_khabar/provuder/wishlist_provider.dart';
+import 'package:taza_khabar/provider/cart_provider.dart';
+import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
 
