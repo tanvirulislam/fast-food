@@ -47,7 +47,7 @@ Widget drawerCustom(context) {
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => BottomNavController())),
             child: ListTile(
-                leading: Icon(Icons.home, color: Colors.lightBlue),
+                leading: Icon(Icons.home, color: Theme.of(context).hintColor),
                 title: Text('Home'))),
         InkWell(
             onTap: () => Navigator.push(
@@ -57,7 +57,8 @@ Widget drawerCustom(context) {
                   ),
                 ),
             child: ListTile(
-                leading: Icon(Icons.shopping_cart, color: Colors.lightBlue),
+                leading: Icon(Icons.shopping_cart,
+                    color: Theme.of(context).hintColor),
                 title: Text('Cart'))),
         InkWell(
             onTap: () {
@@ -65,7 +66,7 @@ Widget drawerCustom(context) {
                   MaterialPageRoute(builder: (context) => NewProfile()));
             },
             child: ListTile(
-                leading: Icon(Icons.person, color: Colors.lightBlue),
+                leading: Icon(Icons.person, color: Theme.of(context).hintColor),
                 title: Text('Profile'))),
         InkWell(
           onTap: () {
@@ -76,12 +77,13 @@ Widget drawerCustom(context) {
                 ));
           },
           child: ListTile(
-            leading: Icon(Icons.favorite, color: Colors.lightBlue),
+            leading: Icon(Icons.favorite, color: Theme.of(context).hintColor),
             title: Text('WishList'),
           ),
         ),
         ListTile(
-            leading: Icon(Icons.star_outlined, color: Colors.lightBlue),
+            leading:
+                Icon(Icons.star_outlined, color: Theme.of(context).hintColor),
             title: Text('Rating')),
         SizedBox(
           height: 12,

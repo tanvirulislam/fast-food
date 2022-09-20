@@ -15,5 +15,6 @@ class Mythemes {
     iconTheme: IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
     buttonTheme: ButtonThemeData(buttonColor: Colors.blue),
+    primaryColor: Color.fromARGB(255, 64, 228, 228),
   );
 }

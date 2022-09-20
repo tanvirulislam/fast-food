@@ -59,7 +59,7 @@ class WishListProvider with ChangeNotifier {
   deleteItem(productId) {
     FirebaseFirestore.instance
         .collection('reviewWishList')
-        .doc(FirebaseAuth.instance.currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
         .doc(productId)
         .delete();

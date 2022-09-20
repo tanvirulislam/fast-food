@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:taza_khabar/models/category_model.dart';
 
@@ -12,7 +11,7 @@ class CategoryProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection('categories').get();
 
     for (var element in querySnapshot.docs) {
-      // print(element.data());
+      // print('Category------${element.data()}');
       CategoryModel categoryModel = CategoryModel(
         categoryId: element.get('categoryId'),
         categoryName: element.get('categoryName'),
@@ -30,24 +29,24 @@ class CategoryProvider with ChangeNotifier {
   }
 
   List<CategoryModel> getCategoryProductList = [];
-  fatchCategoryProductData(categoryId) async {
+  fatchCategoryProductData() async {
     List<CategoryModel> newList = [];
     QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection('reviewCart')
-        .doc(categoryId)
+        .collection('categories')
+        .doc()
+        // .where(categoryId, isEqualTo: 'sn1')
         .collection('sn1')
-        .orderBy('name', descending: false)
         .get();
 
     for (var element in snapshot.docs) {
-      print(element.data());
-      CategoryModel categoryModel = CategoryModel(
-        categoryId: element.get('categoryId'),
-        categoryName: element.get('categoryName'),
-        categoryImage: '',
-      );
+      print('Category product-----------${element.data()}');
+      // CategoryModel categoryModel = CategoryModel(
+      //   categoryId: element.get('categoryId'),
+      //   categoryName: element.get('categoryName'),
+      //   categoryImage: '',
+      // );
 
-      newList.add(categoryModel);
+      // newList.add(categoryModel);
     }
     getCategoryProductList = newList;
     notifyListeners();

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
+// import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
 
@@ -15,6 +16,11 @@ class NewProfile extends StatefulWidget {
 
 class _NewProfileState extends State<NewProfile> {
   final AuthClass _authClass = AuthClass();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +44,6 @@ class _NewProfileState extends State<NewProfile> {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
-                // gradient: LinearGradient(
-                //   begin: Alignment.bottomCenter,
-                //   end: Alignment.topCenter,
-                //   colors: [
-                //     Colors.white,
-                //     Theme.of(context).primaryColor,
-                //   ],
-                // ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(52),
                   bottomRight: Radius.circular(52),
@@ -120,7 +118,7 @@ class _NewProfileState extends State<NewProfile> {
                   Text('My Order'),
                 ],
               ),
-            )
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
