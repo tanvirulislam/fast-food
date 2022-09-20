@@ -6,7 +6,7 @@ import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
 
 Widget drawerCustom(context) {
   UserProvider userProvider = Provider.of(context, listen: false);

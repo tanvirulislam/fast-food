@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({Key? key}) : super(key: key);

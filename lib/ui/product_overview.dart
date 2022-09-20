@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist.dart';
+import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
 
 class ProductOverview extends StatefulWidget {
   String name;

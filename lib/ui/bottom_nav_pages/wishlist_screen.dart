@@ -26,7 +26,7 @@ class _WishList extends State<WishList> {
   @override
   Widget build(BuildContext context) {
     wishlistProvider = Provider.of<WishListProvider>(context);
-    // wishlistProvider!.showWishlist();
+    wishlistProvider!.showWishlist();
     cartProvider = Provider.of<CartProvider>(context);
     return SafeArea(
       child: RefreshIndicator(

@@ -28,7 +28,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
-    // cartProvider!.getCartItem();
+    cartProvider!.getCartItem();
 
     return SafeArea(
       child: Scaffold(
@@ -66,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                         (data) => Column(
                           children: [
                             Card(
-                              elevation: 3,
+                              elevation: 2,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -102,7 +102,7 @@ class _CartScreenState extends State<CartScreen> {
           height: 55,
           width: double.infinity,
           child: Card(
-            elevation: 5,
+            elevation: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
