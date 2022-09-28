@@ -10,6 +10,7 @@ import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
 
+// ignore: must_be_immutable
 class ProductOverview extends StatefulWidget {
   String name;
   int price;

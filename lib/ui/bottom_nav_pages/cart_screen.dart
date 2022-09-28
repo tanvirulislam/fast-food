@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
+import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/shipping/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
     cartProvider!.getCartItem();
+    int cartQty = cartProvider!.getCartDataList.length;
 
     return SafeArea(
       child: Scaffold(
@@ -80,7 +82,25 @@ class _CartScreenState extends State<CartScreen> {
                                   Text(data.cartName,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  Text('Quantity ' + data.cartQty.toString()),
+                                  Column(
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            cartQty++;
+                                            Count(
+                                              cartId: data.cartId,
+                                              cartName: data.cartName,
+                                              cartImage: data.cartImage,
+                                              cartPrice: data.cartPrice,
+                                              cartQty: data.cartQty,
+                                            );
+                                          },
+                                          child: Text('+')),
+                                      Text(
+                                        'Quantity ' + data.cartQty.toString(),
+                                      ),
+                                    ],
+                                  ),
                                   Text('TK ${data.cartPrice * data.cartQty}'),
                                   IconButton(
                                     icon: Icon(Icons.delete),
