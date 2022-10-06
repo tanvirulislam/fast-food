@@ -49,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final AuthClass _authClass = AuthClass();
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Center(
                     child: TextFormField(
                       controller: _passController,
-                      obscureText: true,
+                      obscureText: isVisible ? false : true,
                       style: TextStyle(),
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -121,7 +122,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.lightBlue),
                         ),
-                        suffixIcon: Icon(Icons.lock),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isVisible = !isVisible;
+                              print(isVisible);
+                            });
+                          },
+                          child: isVisible
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility),
+                        ),
                       ),
                     ),
                   ),
@@ -145,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () async {
-                    await _authClass.handleSignIn(context);
+                  onTap: () {
+                    _authClass.handleSignIn(context);
                   },
                   child: SizedBox(
                     height: 65,

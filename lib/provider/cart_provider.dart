@@ -85,7 +85,7 @@ class CartProvider with ChangeNotifier {
         .get();
 
     for (var element in snapshot.docs) {
-      // print(element.data());
+      print(element.data());
       CartModel cartModel = CartModel(
         cartId: element.get('cartId'),
         cartImage: element.get('image'),

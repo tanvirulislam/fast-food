@@ -12,12 +12,15 @@ class AuthClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
       scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly']);
   FirebaseAuth auth = FirebaseAuth.instance;
-  final storage = const FlutterSecureStorage();
+  final storage = FlutterSecureStorage();
 
   Future<void> handleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
       if (googleSignInAccount != null) {
+        // print('handleSignIn----------------');
+
         GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
         AuthCredential credential = GoogleAuthProvider.credential(
@@ -25,7 +28,7 @@ class AuthClass {
           accessToken: googleSignInAuthentication.accessToken,
         );
         User? user = (await auth.signInWithCredential(credential)).user;
-        print("signed in " + user!.email.toString());
+        print("signed in----------- " + user!.email.toString());
         UserProvider userProvider = Provider.of(context, listen: false);
         userProvider.addUserData(
           currentUser: user,
@@ -38,7 +41,7 @@ class AuthClass {
           UserCredential userCredential =
               await auth.signInWithCredential(credential);
           storeToken(userCredential);
-
+          print(userCredential);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -49,7 +52,9 @@ class AuthClass {
         } catch (e) {
           print(e);
         }
-      } else {}
+      } else {
+        print('Sign in with googleSignInAccount-----------');
+      }
     } catch (error) {
       print(error);
     }
@@ -71,6 +76,8 @@ class AuthClass {
       await _googleSignIn.signOut();
       await auth.signOut();
       await storage.delete(key: 'token');
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

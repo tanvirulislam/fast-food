@@ -341,19 +341,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            onPressed: () async {
-              _cartProvider.getCartItem();
-              _wishList.showWishlist();
-              prodcutProvider!.fatchProductData();
-              categoryProvider!.fatchCategoryData();
-            },
-            child: Icon(
-              Icons.refresh,
-              color: Theme.of(context).hintColor,
-            ),
-          ),
         ),
       ),
     );

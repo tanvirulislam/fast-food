@@ -38,19 +38,21 @@ class _CountState extends State<Count> {
         .collection("item")
         .doc(widget.cartId)
         .get()
-        .then((value) => {
-              // print(value.data()),
-              if (mounted)
-                {
-                  if (value.exists)
-                    {
-                      setState(() {
-                        isBool = value.get("isAdd");
-                        count = value.get('cartQty');
-                      })
-                    }
-                }
-            });
+        .then(
+          (value) => {
+            // print(value.data()),
+            if (mounted)
+              {
+                if (value.exists)
+                  {
+                    setState(() {
+                      isBool = value.get("isAdd");
+                      count = value.get('cartQty');
+                    })
+                  }
+              }
+          },
+        );
   }
 
   @override
@@ -68,30 +70,34 @@ class _CountState extends State<Count> {
           : InkWell(
               child: Icon(Icons.shopping_cart_outlined),
               onTap: () {
-                setState(() {
-                  isBool = true;
-                  // print(isBool);
-                  if (isBool = true) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(milliseconds: 500),
-                        // backgroundColor: Colors.lightBlue,
-                        backgroundColor: Theme.of(context).primaryColor,
-                        content: Text(
-                          'Item added',
-                          style: TextStyle(color: Theme.of(context).hintColor),
+                setState(
+                  () {
+                    isBool = true;
+                    // print(isBool);
+                    if (isBool = true) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(milliseconds: 500),
+                          // backgroundColor: Colors.lightBlue,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          content: Text(
+                            'Item added',
+                            style:
+                                TextStyle(color: Theme.of(context).hintColor),
+                          ),
                         ),
-                      ),
+                      );
+                    }
+                    _cartProvider!.addToCart(
+                      cartId: widget.cartId,
+                      cartImage: widget.cartImage,
+                      cartName: widget.cartName,
+                      cartPrice: widget.cartPrice,
+                      cartQty: widget.cartQty,
                     );
-                  }
-                  _cartProvider!.addToCart(
-                    cartId: widget.cartId,
-                    cartImage: widget.cartImage,
-                    cartName: widget.cartName,
-                    cartPrice: widget.cartPrice,
-                    cartQty: widget.cartQty,
-                  );
-                });
+                    _cartProvider!.getCartItem();
+                  },
+                );
               },
             ),
     );

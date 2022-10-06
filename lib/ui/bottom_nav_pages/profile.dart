@@ -25,7 +25,7 @@ class _NewProfileState extends State<NewProfile> {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of(context, listen: false);
-    var userData = userProvider.currentData;
+    // var userData = userProvider.currentData;
     userProvider.getUserDataFirestore();
     // var userData2 = userProvider.currentData2;
 
@@ -76,7 +76,7 @@ class _NewProfileState extends State<NewProfile> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            userData.first.userImage,
+                            'userData.first.userImage',
                           ),
                         ),
                       ),
@@ -84,7 +84,7 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    userData.first.userEmail,
+                    'userData.first.userEmail',
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(
@@ -96,7 +96,7 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    userData.first.userName,
+                    'userData.first.userName',
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(

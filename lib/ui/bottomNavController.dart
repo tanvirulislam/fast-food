@@ -14,15 +14,7 @@ class BottomNavController extends StatefulWidget {
 }
 
 class _BottomNavControllerState extends State<BottomNavController> {
-  final _pages = [
-    Home(),
-    // Cart(),
-    CartScreen(),
-    // Favourite(),
-    WishList(),
-    // Profile(),
-    NewProfile()
-  ];
+  final _pages = [Home(), CartScreen(), WishList(), NewProfile()];
   // ignore: non_constant_identifier_names
   int bottom_index_num = 0;
 
@@ -39,7 +31,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
             });
           },
           selectedIconTheme: IconThemeData(
-            color: Theme.of(context).primaryColor,
+            color: Color.fromARGB(255, 64, 228, 228),
             size: 28,
           ),
           showSelectedLabels: false,

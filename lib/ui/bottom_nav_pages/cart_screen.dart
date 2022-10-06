@@ -29,7 +29,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
-    cartProvider!.getCartItem();
     int cartQty = cartProvider!.getCartDataList.length;
 
     return SafeArea(
@@ -82,30 +81,17 @@ class _CartScreenState extends State<CartScreen> {
                                   Text(data.cartName,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  Column(
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {
-                                            cartQty++;
-                                            Count(
-                                              cartId: data.cartId,
-                                              cartName: data.cartName,
-                                              cartImage: data.cartImage,
-                                              cartPrice: data.cartPrice,
-                                              cartQty: data.cartQty,
-                                            );
-                                          },
-                                          child: Text('+')),
-                                      Text(
-                                        'Quantity ' + data.cartQty.toString(),
-                                      ),
-                                    ],
+                                  Text(
+                                    'Quantity ' + data.cartQty.toString(),
                                   ),
                                   Text('TK ${data.cartPrice * data.cartQty}'),
                                   IconButton(
                                     icon: Icon(Icons.delete),
                                     onPressed: () async {
                                       cartProvider!.deleteCart(data.cartId);
+                                      setState(() {
+                                        cartProvider!.getCartItem();
+                                      });
                                     },
                                   )
                                 ],
