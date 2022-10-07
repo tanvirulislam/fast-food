@@ -6,6 +6,7 @@ import 'package:taza_khabar/google_sign/google_sign.dart';
 // import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
+import 'package:taza_khabar/widget/custom_text_filed.dart';
 
 class NewProfile extends StatefulWidget {
   const NewProfile({Key? key}) : super(key: key);
@@ -20,13 +21,19 @@ class _NewProfileState extends State<NewProfile> {
   @override
   void initState() {
     super.initState();
+    UserProvider userProvider = Provider.of(context, listen: false);
+    userProvider.getUserDataFirestore();
   }
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
+  var key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of(context, listen: false);
-    // var userData = userProvider.currentData;
-    userProvider.getUserDataFirestore();
+    var userData = userProvider.currentData;
     // var userData2 = userProvider.currentData2;
 
     return SafeArea(
@@ -50,10 +57,9 @@ class _NewProfileState extends State<NewProfile> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Theme.of(context).hintColor,
+                    color: Colors.cyan,
                     spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: const Offset(0, 0),
+                    blurRadius: 1,
                   ),
                 ],
               ),
@@ -76,7 +82,7 @@ class _NewProfileState extends State<NewProfile> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            'userData.first.userImage',
+                            userData.first.userImage,
                           ),
                         ),
                       ),
@@ -84,7 +90,7 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'userData.first.userEmail',
+                    userData.first.userEmail,
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(
@@ -96,7 +102,7 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'userData.first.userName',
+                    userData.first.userName,
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(
@@ -112,11 +118,78 @@ class _NewProfileState extends State<NewProfile> {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('My Order'),
-                ],
+              child: Form(
+                key: key,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    customeTextField(
+                      'Product name',
+                      (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'enter name';
+                        }
+                        return null;
+                      },
+                      nameController,
+                      TextInputType.name,
+                    ),
+                    customeTextField(
+                      'Product price',
+                      (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'enter price';
+                        }
+                        return null;
+                      },
+                      priceController,
+                      TextInputType.number,
+                    ),
+                    customeTextField(
+                      'Product quantity',
+                      (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'enter quantity';
+                        }
+                        return null;
+                      },
+                      quantityController,
+                      TextInputType.number,
+                    ),
+                    Row(
+                      children: [
+                        Text('Select image'),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Icon(
+                              Icons.image,
+                              size: 40,
+                              color: Colors.cyan,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (key.currentState!.validate()) {}
+                        },
+                        child: Text('submit'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.cyan,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 12,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

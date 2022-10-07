@@ -14,7 +14,10 @@ class Mythemes {
     colorScheme: ColorScheme.light(),
     iconTheme: IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
-    buttonTheme: ButtonThemeData(buttonColor: Colors.blue),
+    // buttonTheme: ButtonThemeData(buttonColor: Colors.cyan),
+    // buttonTheme: ButtonThemeData(
+    //   buttonColor: Colors.cyan,
+    // ),
     primaryColor: Color.fromARGB(255, 64, 228, 228),
   );
 }

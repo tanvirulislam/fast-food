@@ -87,8 +87,8 @@ class _MyAppState extends State<MyApp> {
         themeMode: ThemeMode.system,
         theme: Mythemes.lightTheme,
         darkTheme: Mythemes.darkTheme,
-        // home: currentPage,
-        home: BottomNavController(),
+        home: currentPage,
+        // home: BottomNavController(),
       ),
     );
   }

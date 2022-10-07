@@ -3,18 +3,21 @@
 import 'package:flutter/material.dart';
 
 Widget customeTextField(hintText, validator, controller, keyboardType) {
-  return TextFormField(
-    validator: validator,
-    controller: controller,
-    decoration: InputDecoration(
-      hintText: hintText,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.lightBlue),
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: TextFormField(
+      validator: validator,
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.lightBlue),
+        ),
       ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black),
-      ),
+      keyboardType: keyboardType,
     ),
-    keyboardType: keyboardType,
   );
 }

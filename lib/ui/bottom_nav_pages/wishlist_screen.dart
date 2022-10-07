@@ -26,7 +26,6 @@ class _WishList extends State<WishList> {
   @override
   Widget build(BuildContext context) {
     wishlistProvider = Provider.of<WishListProvider>(context);
-    wishlistProvider!.showWishlist();
     cartProvider = Provider.of<CartProvider>(context);
     return SafeArea(
       child: RefreshIndicator(
@@ -84,11 +83,17 @@ class _WishList extends State<WishList> {
                                           onPressed: () async {
                                             wishlistProvider!
                                                 .deleteItem(data.wishListId);
+                                            setState(() {
+                                              wishlistProvider!.showWishlist();
+                                            });
                                           },
                                         ),
                                         IconButton(
                                           icon: Icon(Icons.shopping_cart),
                                           onPressed: () async {
+                                            setState(() {
+                                              wishlistProvider!.showWishlist();
+                                            });
                                             cartProvider!.addToCart(
                                               cartId: data.wishListId,
                                               cartImage: data.wishListImage,
