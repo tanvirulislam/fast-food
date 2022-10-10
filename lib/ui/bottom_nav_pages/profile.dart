@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
-// import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/login_screen.dart';
-import 'package:taza_khabar/widget/custom_text_filed.dart';
 
 class NewProfile extends StatefulWidget {
   const NewProfile({Key? key}) : super(key: key);
@@ -25,22 +23,34 @@ class _NewProfileState extends State<NewProfile> {
     userProvider.getUserDataFirestore();
   }
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
-  TextEditingController imageController = TextEditingController();
-  var key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of(context, listen: false);
     var userData = userProvider.currentData;
-    // var userData2 = userProvider.currentData2;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: Text('Profile '),
+          title: Text(
+            'Profile ',
+            style: TextStyle(color: Colors.cyan),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _authClass.logout();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.cyan,
+                ))
+          ],
           elevation: 0,
         ),
         body: ListView(
@@ -116,95 +126,7 @@ class _NewProfileState extends State<NewProfile> {
               ),
             ),
             SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: key,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    customeTextField(
-                      'Product name',
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'enter name';
-                        }
-                        return null;
-                      },
-                      nameController,
-                      TextInputType.name,
-                    ),
-                    customeTextField(
-                      'Product price',
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'enter price';
-                        }
-                        return null;
-                      },
-                      priceController,
-                      TextInputType.number,
-                    ),
-                    customeTextField(
-                      'Product quantity',
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'enter quantity';
-                        }
-                        return null;
-                      },
-                      quantityController,
-                      TextInputType.number,
-                    ),
-                    Row(
-                      children: [
-                        Text('Select image'),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Icon(
-                              Icons.image,
-                              size: 40,
-                              color: Colors.cyan,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (key.currentState!.validate()) {}
-                        },
-                        child: Text('submit'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.cyan,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 12,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
-          onPressed: () {
-            _authClass.logout();
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ));
-          },
-          child: Icon(Icons.logout, color: Theme.of(context).hintColor),
         ),
       ),
     );

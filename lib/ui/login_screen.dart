@@ -182,13 +182,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           side: BorderSide(color: Colors.cyan),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        color: Colors.grey.shade200,
+                        color: Colors.transparent,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Image.asset('assets/google.png'),
                             Text(
-                              'Continue with google',
+                              'Sign In with google',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.cyan,

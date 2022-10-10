@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
+import 'package:taza_khabar/ui/add_products.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
@@ -37,11 +38,7 @@ Widget drawerCustom(context) {
                           Text(e.userName)
                         ],
                       ))
-                  .toList()
-              // [
-
-              // ],
-              ),
+                  .toList()),
         ),
         InkWell(
             onTap: () => Navigator.push(context,
@@ -85,6 +82,19 @@ Widget drawerCustom(context) {
             leading:
                 Icon(Icons.star_outlined, color: Theme.of(context).hintColor),
             title: Text('Rating')),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddProducts(),
+                ));
+          },
+          child: ListTile(
+              leading:
+                  Icon(Icons.food_bank, color: Theme.of(context).hintColor),
+              title: Text('Add Products')),
+        ),
         SizedBox(
           height: 12,
         ),

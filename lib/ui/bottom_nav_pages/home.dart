@@ -26,8 +26,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   ProdcutProvider? prodcutProvider;
   CategoryProvider? categoryProvider;
-  CartProvider? _cartProvider;
-  WishListProvider? _wishList;
 
   List<String> carouselImage = [];
   fatchCarouselImage() async {
@@ -67,6 +65,7 @@ class _HomeState extends State<Home> {
     Size screenSize = MediaQuery.of(context).size;
     CartProvider _cartProvider = Provider.of(context);
     WishListProvider _wishList = Provider.of(context);
+
     return SafeArea(
       child: RefreshIndicator(
         onRefresh: () async {

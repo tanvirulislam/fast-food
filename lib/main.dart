@@ -17,18 +17,19 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: FirebaseOptions(
-        apiKey: "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38",
-        projectId: "taza-khabar-8666d",
-        messagingSenderId: "711924074598",
-        appId: "1:711924074598:android:676b2cd4f6a0f8338685a7",
-      ),
-    );
-  } else {
-    await Firebase.initializeApp();
-  }
+  await Firebase.initializeApp();
+  // if (kIsWeb) {
+  //   await Firebase.initializeApp(
+  //     options: FirebaseOptions(
+  //       apiKey: "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38",
+  //       projectId: "taza-khabar-8666d",
+  //       messagingSenderId: "711924074598",
+  //       appId: "1:711924074598:android:676b2cd4f6a0f8338685a7",
+  //     ),
+  //   );
+  // } else {
+  //   await Firebase.initializeApp();
+  // }
   runApp(MyApp());
 }
 
