@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         themeMode: ThemeMode.system,
         theme: Mythemes.lightTheme,
         darkTheme: Mythemes.darkTheme,
-        home: TestScreen(),
+        home: currentPage,
       ),
     );
   }

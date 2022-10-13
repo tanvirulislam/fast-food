@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
+import 'dart:math' as math;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,7 +10,18 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 5),
+    vsync: this,
+  )..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   // final TextEditingController _emailController = TextEditingController();
   // final TextEditingController _passController = TextEditingController();
   // signIn() async {
@@ -169,7 +178,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.asset('assets/google.png'),
+                      AnimatedBuilder(
+                        animation: _controller,
+                        builder: (BuildContext context, Widget? child) {
+                          return Transform.rotate(
+                            angle: _controller.value * 2.0 * math.pi,
+                            child: child,
+                          );
+                        },
+                        child: Image.asset('assets/google.png'),
+                      ),
                       Text(
                         'Sign In with google',
                         style: TextStyle(

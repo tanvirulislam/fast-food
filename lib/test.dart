@@ -12,7 +12,7 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 10),
+    duration: const Duration(seconds: 5),
     vsync: this,
   )..repeat();
 
