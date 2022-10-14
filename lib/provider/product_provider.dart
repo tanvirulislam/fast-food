@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/models/product_model.dart';
@@ -12,7 +14,7 @@ class ProdcutProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection('products').get();
 
     for (var element in querySnapshot.docs) {
-      // print(element.data());
+      print(element.data());
       ProductModel productModel = ProductModel(
         productName: element.get('product-name'),
         productImage: element.get('product-img'),

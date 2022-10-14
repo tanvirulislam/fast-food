@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/models/product_model.dart';
+import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/product_provider.dart';
+import 'package:taza_khabar/ui/count.dart';
+import 'package:taza_khabar/ui/product_overview.dart';
 
 // ignore: must_be_immutable
 class SearchScreen extends StatefulWidget {
@@ -31,11 +34,14 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     ProdcutProvider _prodcutProvider = Provider.of(context, listen: false);
     _prodcutProvider.getSearchProductList;
+    CartProvider _cartProvider = Provider.of(context, listen: false);
+    _cartProvider.getCartItem();
   }
 
   @override
   Widget build(BuildContext context) {
     List<ProductModel> searchItems = searchItem(query);
+
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -74,47 +80,68 @@ class _SearchScreenState extends State<SearchScreen> {
                 searchItems.isNotEmpty
                     ? Column(
                         children: searchItems
-                            .map((data) => Column(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Card(
-                                      elevation: 3,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Image.network(
+                            .map(
+                              (data) => Column(
+                                children: [
+                                  Card(
+                                    elevation: 3,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductOverview(
+                                                  name: data.productName,
+                                                  price: data.productPrice,
+                                                  image: data.productImage,
+                                                  productDescription:
+                                                      data.productDescription,
+                                                  productId: data.productId,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Image.network(
                                             data.productImage[0],
                                             height: 100,
                                             width: 100,
                                             fit: BoxFit.cover,
                                           ),
-                                          Text(data.productName),
-                                          Text('1 Piece'),
-                                          Text('TK ' +
-                                              data.productPrice.toString()),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              IconButton(
-                                                icon: Icon(
-                                                    Icons.favorite_outline),
-                                                onPressed: () {},
-                                              ),
-                                              IconButton(
-                                                icon: Icon(Icons
-                                                    .shopping_cart_outlined),
-                                                onPressed: () {},
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ))
+                                        ),
+                                        Text(data.productName),
+                                        Text('1 Piece'),
+                                        Text('TK ' +
+                                            data.productPrice.toString()),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            IconButton(
+                                              icon:
+                                                  Icon(Icons.favorite_outline),
+                                              onPressed: () {},
+                                            ),
+                                            Count(
+                                              cartId: data.productId,
+                                              cartName: data.productName,
+                                              cartImage: data.productImage,
+                                              cartPrice: data.productPrice,
+                                              cartQty: 1,
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
                             .toList(),
                       )
                     : Center(

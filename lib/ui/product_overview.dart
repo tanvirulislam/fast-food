@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,26 +107,34 @@ class _ProductOverviewState extends State<ProductOverview> {
             title: Text('Product Details'),
             backgroundColor: Theme.of(context).primaryColor,
             actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => CartScreen(),
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
+              Badge(
+                position: BadgePosition(top: 1, end: 1),
+                animationType: BadgeAnimationType.scale,
+                badgeColor: Theme.of(context).scaffoldBackgroundColor,
+                badgeContent: Text(
+                  cartProvider!.getCartDataList.length.toString(),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => CartScreen()));
+                  },
+                  icon: Icon(Icons.shopping_cart_outlined),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => WishList()));
-                },
-                icon: Icon(
-                  Icons.favorite_outline,
+              Badge(
+                position: BadgePosition(top: 1, end: 1),
+                animationType: BadgeAnimationType.scale,
+                badgeColor: Theme.of(context).scaffoldBackgroundColor,
+                badgeContent: Text(
+                  wishlistProvider!.getWishlistData.length.toString(),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => WishList()));
+                  },
+                  icon: Icon(Icons.favorite_outline),
                 ),
               ),
               SizedBox(width: 8)
@@ -181,7 +190,8 @@ class _ProductOverviewState extends State<ProductOverview> {
                         ElevatedButton.icon(
                           onPressed: () {
                             setState(() {
-                              isBoolWishlist = !isBoolWishlist;
+                              isBoolWishlist = true;
+                              wishlistProvider!.showWishlist();
                             });
                             wishlistProvider!.addToWishlist(
                               wishListId: widget.productId,
@@ -261,13 +271,14 @@ class _ProductOverviewState extends State<ProductOverview> {
                         ElevatedButton.icon(
                           onPressed: () {
                             setState(() {
-                              isBoolCart = !isBoolCart;
+                              isBoolCart = true;
+                              cartProvider!.getCartItem();
                             });
                             if (isBoolCart == true) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   duration: Duration(milliseconds: 500),
-                                  backgroundColor: Colors.lightBlue,
+                                  backgroundColor: Colors.cyan,
                                   content: Text('Item Added'),
                                 ),
                               );
