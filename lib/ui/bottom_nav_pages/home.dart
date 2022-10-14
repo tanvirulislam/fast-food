@@ -75,13 +75,11 @@ class _HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
             title: Text('Fast food'),
             actions: [
               Badge(
                 position: BadgePosition(top: 1, end: 1),
                 animationType: BadgeAnimationType.scale,
-                badgeColor: Theme.of(context).scaffoldBackgroundColor,
                 badgeContent: Text(
                   _cartProvider.getCartDataList.length.toString(),
                 ),
@@ -96,7 +94,6 @@ class _HomeState extends State<Home> {
               Badge(
                 position: BadgePosition(top: 1, end: 1),
                 animationType: BadgeAnimationType.scale,
-                badgeColor: Theme.of(context).scaffoldBackgroundColor,
                 badgeContent: Text(
                   _wishList.getWishlistData.length.toString(),
                 ),

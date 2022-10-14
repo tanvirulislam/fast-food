@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
-import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/shipping/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: false);
@@ -29,12 +28,11 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
-    int cartQty = cartProvider!.getCartDataList.length;
+    // int cartQty = cartProvider!.getCartDataList.length;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Your cart items'),
           actions: [
             Center(child: Text('Pull down to refrash')),
@@ -72,15 +70,30 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.network(
-                                    data.cartImage[0],
+                                  // Image.network(
+                                  //   data.cartImage[0],
+                                  //   height: 100,
+                                  //   width: 100,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                  CachedNetworkImage(
+                                    imageUrl: data.cartImage[0],
                                     height: 100,
                                     width: 100,
                                     fit: BoxFit.cover,
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        CircularProgressIndicator(
+                                            value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
                                   ),
-                                  Text(data.cartName,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    data.cartName,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   Text(
                                     'Quantity ' + data.cartQty.toString(),
                                   ),
@@ -126,14 +139,7 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             );
                           },
-                          child: Text(
-                            'Checkout',
-                            style:
-                                TextStyle(color: Theme.of(context).hintColor),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor,
-                          ),
+                          child: Text('Checkout'),
                         )
                       : Container()
                 ],

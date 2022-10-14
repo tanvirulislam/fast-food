@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
@@ -17,7 +18,6 @@ class _WishList extends State<WishList> {
   CartProvider? cartProvider;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WishListProvider wishlistProvider = Provider.of(context, listen: false);
     wishlistProvider.showWishlist();
@@ -34,7 +34,6 @@ class _WishList extends State<WishList> {
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
             title: Text('Your wishlist items'),
             actions: [
               Center(child: Text('Pull down to refrash')),
@@ -66,13 +65,30 @@ class _WishList extends State<WishList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Image.network(
-                                      data.wishListImage[0],
+                                    CachedNetworkImage(
+                                      imageUrl: data.wishListImage[0],
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.cover,
+                                      progressIndicatorBuilder: (context, url,
+                                              downloadProgress) =>
+                                          CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
                                     ),
-                                    Text(data.wishListName),
+                                    // Image.network(
+                                    //   data.wishListImage[0],
+                                    //   height: 100,
+                                    //   width: 100,
+                                    //   fit: BoxFit.cover,
+                                    // ),
+                                    Text(
+                                      data.wishListName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     Text('Quantity ' +
                                         data.wishListQty.toString()),
                                     Text('TK ' + data.wishListPrice.toString()),

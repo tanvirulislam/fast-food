@@ -31,34 +31,33 @@ class _BottomNavControllerState extends State<BottomNavController> {
             });
           },
           selectedIconTheme: IconThemeData(
-            color: Color.fromARGB(255, 64, 228, 228),
+            // color: Color.fromARGB(255, 64, 228, 228),
             size: 28,
           ),
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          unselectedItemColor: Theme.of(context).hintColor,
+
+          // unselectedItemColor: Theme.of(context).hintColor,
           // ignore: prefer_const_literals_to_create_immutables
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
               // backgroundColor: Colors.white.withOpacity(.4),
-              backgroundColor: Theme.of(context).bottomAppBarColor,
+              // backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: 'Cart',
-              backgroundColor: Theme.of(context).bottomAppBarColor,
+              // backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: 'Favorite',
-              backgroundColor: Theme.of(context).bottomAppBarColor,
+              // backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
-              backgroundColor: Theme.of(context).bottomAppBarColor,
+              // backgroundColor: Theme.of(context).bottomAppBarColor,
             ),
           ],
         ),

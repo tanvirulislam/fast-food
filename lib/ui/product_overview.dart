@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:badges/badges.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,12 +106,10 @@ class _ProductOverviewState extends State<ProductOverview> {
         child: Scaffold(
           appBar: AppBar(
             title: Text('Product Details'),
-            backgroundColor: Theme.of(context).primaryColor,
             actions: [
               Badge(
                 position: BadgePosition(top: 1, end: 1),
                 animationType: BadgeAnimationType.scale,
-                badgeColor: Theme.of(context).scaffoldBackgroundColor,
                 badgeContent: Text(
                   cartProvider!.getCartDataList.length.toString(),
                 ),
@@ -125,7 +124,6 @@ class _ProductOverviewState extends State<ProductOverview> {
               Badge(
                 position: BadgePosition(top: 1, end: 1),
                 animationType: BadgeAnimationType.scale,
-                badgeColor: Theme.of(context).scaffoldBackgroundColor,
                 badgeContent: Text(
                   wishlistProvider!.getWishlistData.length.toString(),
                 ),
@@ -143,23 +141,38 @@ class _ProductOverviewState extends State<ProductOverview> {
           body: ListView(
             children: [
               CarouselSlider(
-                  items: widget.image
-                      .map((e) => Column(
-                            children: [
-                              Image.network(
-                                e,
-                                height: 200,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              )
-                            ],
-                          ))
-                      .toList(),
-                  options: CarouselOptions(
-                    viewportFraction: 1,
-                    height: 200,
-                    autoPlay: true,
-                  )),
+                items: widget.image
+                    .map(
+                      (e) => Column(
+                        children: [
+                          CachedNetworkImage(
+                            height: 200,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            imageUrl: e,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                          // Image.network(
+                          //   e,
+                          //   height: 200,
+                          //   fit: BoxFit.cover,
+                          //   width: double.infinity,
+                          // )
+                        ],
+                      ),
+                    )
+                    .toList(),
+                options: CarouselOptions(
+                  viewportFraction: 1,
+                  height: 200,
+                  autoPlay: true,
+                ),
+              ),
               SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -202,24 +215,11 @@ class _ProductOverviewState extends State<ProductOverview> {
                             );
                           },
                           icon: isBoolWishlist == false
-                              ? Icon(Icons.favorite_outline,
-                                  color: Theme.of(context).hintColor)
-                              : Icon(Icons.favorite,
-                                  color: Theme.of(context).hintColor),
+                              ? Icon(Icons.favorite_outline)
+                              : Icon(Icons.favorite),
                           label: isBoolWishlist == false
-                              ? Text(
-                                  'Add to favorite',
-                                  style: TextStyle(
-                                      color: Theme.of(context).hintColor),
-                                )
-                              : Text(
-                                  'Item Added',
-                                  style: TextStyle(
-                                      color: Theme.of(context).hintColor),
-                                ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor,
-                          ),
+                              ? Text('Add to favorite')
+                              : Text('Item Added'),
                         ),
                       ],
                     ),
@@ -292,24 +292,14 @@ class _ProductOverviewState extends State<ProductOverview> {
                             }
                           },
                           icon: isBoolCart == true
-                              ? Icon(Icons.shopping_cart,
-                                  color: Theme.of(context).hintColor)
-                              : Icon(Icons.shopping_cart_outlined,
-                                  color: Theme.of(context).hintColor),
+                              ? Icon(Icons.shopping_cart)
+                              : Icon(Icons.shopping_cart_outlined),
                           label: isBoolCart == true
                               ? Text(
                                   'Item added',
-                                  style: TextStyle(
-                                      color: Theme.of(context).hintColor),
+                                  style: TextStyle(),
                                 )
-                              : Text(
-                                  'Add to cart',
-                                  style: TextStyle(
-                                      color: Theme.of(context).hintColor),
-                                ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor,
-                          ),
+                              : Text('Add to cart'),
                         )
                       ],
                     )
