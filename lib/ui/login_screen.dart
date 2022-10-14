@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    // Size screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
@@ -152,12 +152,13 @@ class _LoginScreenState extends State<LoginScreen>
             Text(
               'Fast Food',
               style: TextStyle(
+                color: Colors.cyan,
                 fontSize: 34,
                 shadows: [
                   Shadow(
-                    color: Colors.grey,
+                    color: Colors.black.withOpacity(.4),
                     blurRadius: 4,
-                    offset: Offset(2, 2),
+                    offset: Offset(3, 2),
                   ),
                 ],
               ),
@@ -189,10 +190,10 @@ class _LoginScreenState extends State<LoginScreen>
                         child: Image.asset('assets/google.png'),
                       ),
                       Text(
-                        'Sign In with google',
+                        'Sign In with Google',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.cyan,
+                          // color: Colors.cyan,
                         ),
                       ),
                     ],
