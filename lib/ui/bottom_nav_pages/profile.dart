@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
@@ -90,11 +91,13 @@ class _NewProfileState extends State<NewProfile> {
                         color: Theme.of(context).scaffoldBackgroundColor,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                            userData.first.userImage,
-                          ),
-                        ),
+                            fit: BoxFit.cover,
+                            image: CachedNetworkImageProvider(
+                                userData.first.userImage)
+                            // NetworkImage(
+                            //   userData.first.userImage,
+                            // ),
+                            ),
                       ),
                     ),
                   ),

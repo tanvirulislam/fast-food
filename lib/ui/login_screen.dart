@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'dart:math' as math;
@@ -163,7 +164,15 @@ class _LoginScreenState extends State<LoginScreen>
                 ],
               ),
             ),
-            Image.asset('assets/icon.png'),
+            CachedNetworkImage(
+              imageUrl:
+                  "https://firebasestorage.googleapis.com/v0/b/taza-khabar-8666d.appspot.com/o/icon.png?alt=media&token=bc34adeb-fac0-462a-af03-282d66a69c69",
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+
+            // Image.asset('assets/icon.png'),
             InkWell(
               onTap: () {
                 _authClass.handleSignIn(context);

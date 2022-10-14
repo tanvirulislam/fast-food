@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -142,11 +143,17 @@ class _HomeState extends State<Home> {
                   child: CarouselSlider(
                     items: carouselImage
                         .map(
-                          (item) => Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(item),
-                                    fit: BoxFit.fitWidth)),
+                          (item) => CachedNetworkImage(
+                            imageUrl: item,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) => Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         )
                         .toList(),
@@ -192,13 +199,24 @@ class _HomeState extends State<Home> {
                           elevation: 3,
                           child: Column(
                             children: [
-                              Image.network(
-                                categoryProvider!
+                              CachedNetworkImage(
+                                imageUrl: categoryProvider!
                                     .getCategoryList[index].categoryImage,
                                 height: 130,
                                 width: 160,
                                 fit: BoxFit.cover,
+                                placeholder: (context, url) =>
+                                    Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
                               ),
+                              // Image.network(
+                              //   categoryProvider!
+                              //       .getCategoryList[index].categoryImage,
+                              //   height: 130,
+                              //   width: 160,
+                              //   fit: BoxFit.cover,
+                              // ),
                               SizedBox(
                                 width: 160,
                                 child: Padding(
@@ -296,12 +314,19 @@ class _HomeState extends State<Home> {
                                 ),
                               );
                             },
-                            child: Image.network(
-                              prodcutProvider!
+                            child: CachedNetworkImage(
+                              imageUrl: prodcutProvider!
                                   .getProductList[index].productImage[0],
                               width: screenSize.width,
                               height: 140,
                               fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Center(
+                                child: CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                           SizedBox(height: 5),

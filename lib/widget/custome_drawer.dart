@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
@@ -23,16 +24,25 @@ Widget drawerCustom(context) {
               children: userProvider.currentUserData
                   .map((e) => Column(
                         children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(e.userImage),
-                              ),
-                            ),
+                          // Container(
+                          //   height: 100,
+                          //   width: 100,
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     image: DecorationImage(
+                          //       fit: BoxFit.cover,
+                          //       image: NetworkImage(e.userImage),
+                          //     ),
+                          //   ),
+                          // ),
+                          CachedNetworkImage(
+                            imageUrl: e.userImage,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                           SizedBox(height: 4),
                           Text(e.userName)
