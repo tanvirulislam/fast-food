@@ -81,11 +81,11 @@ class CartProvider with ChangeNotifier {
         .collection('reviewCart')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
-        .orderBy('name', descending: false)
+        .orderBy('name')
         .get();
 
     for (var element in snapshot.docs) {
-      print(element.data());
+      // print(element.data());
       CartModel cartModel = CartModel(
         cartId: element.get('cartId'),
         cartImage: element.get('image'),

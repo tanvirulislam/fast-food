@@ -32,12 +32,15 @@ class _HomeState extends State<Home> {
   fatchCarouselImage() async {
     QuerySnapshot qn =
         await FirebaseFirestore.instance.collection('carousel-slider').get();
-    setState(() {
-      for (int i = 0; i < qn.docs.length; i++) {
-        carouselImage.add(qn.docs[i]['img-path']);
-        // print(qn.docs[i]['img-path']);
-      }
-    });
+    if (mounted) {
+      setState(() {
+        for (int i = 0; i < qn.docs.length; i++) {
+          carouselImage.add(qn.docs[i]['img-path']);
+          // print(qn.docs[i]['img-path']);
+        }
+      });
+    }
+
     return qn.docs;
   }
 
@@ -135,40 +138,49 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 10,
                 ),
-                AspectRatio(
-                  aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
-                  child: CarouselSlider(
-                    items: carouselImage
-                        .map(
-                          (item) => CachedNetworkImage(
-                            imageUrl: item,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Center(
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                carouselImage.isNotEmpty
+                    ? AspectRatio(
+                        aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+                        child: CarouselSlider(
+                          items: carouselImage
+                              .map(
+                                (item) => CachedNetworkImage(
+                                  imageUrl: item,
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          Center(
+                                    child: CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                              )
+                              .toList(),
+                          options: CarouselOptions(
+                            // height: 400,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 1,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enlargeCenterPage: true,
                           ),
-                        )
-                        .toList(),
-                    options: CarouselOptions(
-                      // height: 400,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 1,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                    ),
-                  ),
-                ),
+                        ),
+                      )
+                    : AspectRatio(
+                        aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -219,7 +231,6 @@ class _HomeState extends State<Home> {
                                         categoryProvider!.getCategoryList[index]
                                             .categoryName,
                                       ),
-                                      // SizedBox(width: 22),
                                       InkWell(
                                         onTap: () {
                                           // Navigator.push(

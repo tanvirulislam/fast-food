@@ -10,8 +10,10 @@ class ProdcutProvider with ChangeNotifier {
   fatchProductData() async {
     List<ProductModel> newList = [];
 
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('products').get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('products')
+        .orderBy('product-name')
+        .get();
 
     for (var element in querySnapshot.docs) {
       print(element.data());

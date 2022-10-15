@@ -34,6 +34,7 @@ class WishListProvider with ChangeNotifier {
         .collection('reviewWishList')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('item')
+        .orderBy('name')
         .get();
 
     for (var element in querySnapshot.docs) {
