@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
@@ -30,13 +30,6 @@ class _BottomNavControllerState extends State<BottomNavController> {
               bottom_index_num = val;
             });
           },
-          selectedIconTheme: IconThemeData(
-            // color: Color.fromARGB(255, 64, 228, 228),
-            size: 28,
-          ),
-
-          // unselectedItemColor: Theme.of(context).hintColor,
-          // ignore: prefer_const_literals_to_create_immutables
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

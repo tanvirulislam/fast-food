@@ -78,7 +78,6 @@ class _CountState extends State<Count> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           duration: Duration(milliseconds: 500),
-                          // backgroundColor: Colors.lightBlue,
                           backgroundColor: Theme.of(context).primaryColor,
                           content: Text(
                             'Item added',

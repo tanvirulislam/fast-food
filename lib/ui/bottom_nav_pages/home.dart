@@ -16,6 +16,7 @@ import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
 import 'package:badges/badges.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
