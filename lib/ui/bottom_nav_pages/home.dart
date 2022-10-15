@@ -16,7 +16,6 @@ import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
 import 'package:badges/badges.dart';
-import 'package:page_transition/page_transition.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -113,17 +112,17 @@ class _HomeState extends State<Home> {
             ],
           ),
           drawer: drawerCustom(context),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView(
-              children: [
-                InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SearchScreen(
-                            search: prodcutProvider!.getSearchProductList),
-                      )),
+          body: ListView(
+            children: [
+              InkWell(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(
+                          search: prodcutProvider!.getSearchProductList),
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.all(3),
                   child: Container(
                     height: 60,
                     width: double.infinity,
@@ -136,12 +135,15 @@ class _HomeState extends State<Home> {
                         border: Border.all(color: Colors.lightBlue)),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                carouselImage.isNotEmpty
-                    ? AspectRatio(
-                        aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              carouselImage.isNotEmpty
+                  ? AspectRatio(
+                      aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3),
                         child: CarouselSlider(
                           items: carouselImage
                               .map(
@@ -172,17 +174,20 @@ class _HomeState extends State<Home> {
                             autoPlayAnimationDuration:
                                 Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
+                            // enlargeCenterPage: true,
                           ),
                         ),
-                      )
-                    : AspectRatio(
-                        aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
                       ),
-                Row(
+                    )
+                  : AspectRatio(
+                      aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -196,75 +201,78 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 175,
-                  child: ListView.builder(
-                    itemCount: categoryProvider!.getCategoryList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {},
-                        child: Card(
-                          elevation: 3,
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl: categoryProvider!
-                                    .getCategoryList[index].categoryImage,
-                                height: 130,
-                                width: 160,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    Center(child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
-                              ),
-                              SizedBox(
-                                width: 160,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        categoryProvider!.getCategoryList[index]
-                                            .categoryName,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => CategoryProduct(
-                                          //       name: categoryProvider!
-                                          //           .getCategoryList[index]
-                                          //           .categoryName,
-                                          //       image: categoryProvider!
-                                          //           .getCategoryList[index]
-                                          //           .categoryImage,
-                                          //       id: categoryProvider!
-                                          //           .getCategoryList[index]
-                                          //           .categoryId,
-                                          //     ),
-                                          //   ),
-                                          // );
-                                        },
-                                        child: Text('view'),
-                                      )
-                                    ],
-                                  ),
+              ),
+              SizedBox(
+                height: 175,
+                child: ListView.builder(
+                  itemCount: categoryProvider!.getCategoryList.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 3,
+                        child: Column(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: categoryProvider!
+                                  .getCategoryList[index].categoryImage,
+                              height: 130,
+                              width: 160,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                            SizedBox(
+                              width: 160,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      categoryProvider!
+                                          .getCategoryList[index].categoryName,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => CategoryProduct(
+                                        //       name: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryName,
+                                        //       image: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryImage,
+                                        //       id: categoryProvider!
+                                        //           .getCategoryList[index]
+                                        //           .categoryId,
+                                        //     ),
+                                        //   ),
+                                        // );
+                                      },
+                                      child: Text('view'),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-                Row(
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -278,90 +286,89 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: screenSize.width < 400 ? 2 : 4,
-                  ),
-                  itemCount: prodcutProvider!.getProductList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      elevation: 5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProductOverview(
-                                    name: prodcutProvider!
-                                        .getProductList[index].productName,
-                                    price: prodcutProvider!
-                                        .getProductList[index].productPrice,
-                                    image: prodcutProvider!
-                                        .getProductList[index].productImage,
-                                    productDescription: prodcutProvider!
-                                        .getProductList[index]
-                                        .productDescription,
-                                    productId: prodcutProvider!
-                                        .getProductList[index].productId,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: CachedNetworkImage(
-                              imageUrl: prodcutProvider!
-                                  .getProductList[index].productImage[0],
-                              width: screenSize.width,
-                              height: 140,
-                              fit: BoxFit.cover,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) => Center(
-                                child: CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(prodcutProvider!
-                                    .getProductList[index].productName),
-                                Text(
-                                  'TK ' +
-                                      prodcutProvider!
-                                          .getProductList[index].productPrice
-                                          .toString(),
-                                ),
-                                Count(
-                                  cartId: prodcutProvider!
-                                      .getProductList[index].productId,
-                                  cartName: prodcutProvider!
-                                      .getProductList[index].productName,
-                                  cartImage: prodcutProvider!
-                                      .getProductList[index].productImage,
-                                  cartPrice: prodcutProvider!
-                                      .getProductList[index].productPrice,
-                                  cartQty: 1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+              ),
+              GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: screenSize.width < 400 ? 2 : 4,
                 ),
-              ],
-            ),
+                itemCount: prodcutProvider!.getProductList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    elevation: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductOverview(
+                                  name: prodcutProvider!
+                                      .getProductList[index].productName,
+                                  price: prodcutProvider!
+                                      .getProductList[index].productPrice,
+                                  image: prodcutProvider!
+                                      .getProductList[index].productImage,
+                                  productDescription: prodcutProvider!
+                                      .getProductList[index].productDescription,
+                                  productId: prodcutProvider!
+                                      .getProductList[index].productId,
+                                ),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: prodcutProvider!
+                                .getProductList[index].productImage[0],
+                            width: screenSize.width,
+                            height: 140,
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) => Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(prodcutProvider!
+                                  .getProductList[index].productName),
+                              Text(
+                                'TK ' +
+                                    prodcutProvider!
+                                        .getProductList[index].productPrice
+                                        .toString(),
+                              ),
+                              Count(
+                                cartId: prodcutProvider!
+                                    .getProductList[index].productId,
+                                cartName: prodcutProvider!
+                                    .getProductList[index].productName,
+                                cartImage: prodcutProvider!
+                                    .getProductList[index].productImage,
+                                cartPrice: prodcutProvider!
+                                    .getProductList[index].productPrice,
+                                cartQty: 1,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

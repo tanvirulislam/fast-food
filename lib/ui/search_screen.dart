@@ -46,11 +46,10 @@ class _SearchScreenState extends State<SearchScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
             title: Text('Search your products'),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(3.0),
             child: ListView(
               children: [
                 SizedBox(
@@ -85,6 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               (data) => Column(
                                 children: [
                                   Card(
+                                    margin: EdgeInsets.symmetric(vertical: 4),
                                     elevation: 3,
                                     child: Row(
                                       mainAxisAlignment:
