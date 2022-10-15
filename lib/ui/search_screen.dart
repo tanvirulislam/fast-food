@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/models/product_model.dart';
@@ -106,11 +107,19 @@ class _SearchScreenState extends State<SearchScreen> {
                                               ),
                                             );
                                           },
-                                          child: Image.network(
-                                            data.productImage[0],
+                                          child: CachedNetworkImage(
+                                            imageUrl: data.productImage[0],
                                             height: 100,
                                             width: 100,
                                             fit: BoxFit.cover,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
                                           ),
                                         ),
                                         Text(data.productName),

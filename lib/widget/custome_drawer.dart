@@ -110,15 +110,15 @@ Widget drawerCustom(context) {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Contact support'),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Contact us: 01756819542'),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Email us: tanvirul.cse.diu@gmail.com'),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Contact support'),
+              Divider(),
+              Text('Contact us: 01756819542'),
+              Text('Email us: tanvirul.cse.diu@gmail.com'),
+            ],
+          ),
         ),
       ],
     ),

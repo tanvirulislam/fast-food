@@ -207,13 +207,6 @@ class _HomeState extends State<Home> {
                                 errorWidget: (context, url, error) =>
                                     Icon(Icons.error),
                               ),
-                              // Image.network(
-                              //   categoryProvider!
-                              //       .getCategoryList[index].categoryImage,
-                              //   height: 130,
-                              //   width: 160,
-                              //   fit: BoxFit.cover,
-                              // ),
                               SizedBox(
                                 width: 160,
                                 child: Padding(
@@ -246,11 +239,7 @@ class _HomeState extends State<Home> {
                                           //   ),
                                           // );
                                         },
-                                        child: Text(
-                                          'view',
-                                          // style: TextStyle(
-                                          //     color: Theme.of(context).primaryColor),
-                                        ),
+                                        child: Text('view'),
                                       )
                                     ],
                                   ),

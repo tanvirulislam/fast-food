@@ -157,12 +157,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
                           ),
-                          // Image.network(
-                          //   e,
-                          //   height: 200,
-                          //   fit: BoxFit.cover,
-                          //   width: double.infinity,
-                          // )
                         ],
                       ),
                     )

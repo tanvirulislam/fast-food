@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PaymentScreeen extends StatefulWidget {
   String fName;
@@ -100,11 +101,17 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                     'Total order items  ${cartProviders.getCartDataList.length}'),
                 children: cartProviders.getCartDataList
                     .map((e) => ListTile(
-                          leading: Image.network(
-                            e.cartImage[0],
+                          leading: CachedNetworkImage(
+                            imageUrl: e.cartImage[0],
                             width: 70,
                             height: 70,
                             fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                           title: Text(e.cartName),
                           subtitle: Text('Quantity ${e.cartQty}'),
