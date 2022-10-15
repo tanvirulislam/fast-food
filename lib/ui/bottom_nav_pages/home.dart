@@ -32,14 +32,12 @@ class _HomeState extends State<Home> {
   fatchCarouselImage() async {
     QuerySnapshot qn =
         await FirebaseFirestore.instance.collection('carousel-slider').get();
-    if (mounted) {
-      setState(() {
-        for (int i = 0; i < qn.docs.length; i++) {
-          carouselImage.add(qn.docs[i]['img-path']);
-          // print(qn.docs[i]['img-path']);
-        }
-      });
-    }
+    setState(() {
+      for (int i = 0; i < qn.docs.length; i++) {
+        carouselImage.add(qn.docs[i]['img-path']);
+        // print(qn.docs[i]['img-path']);
+      }
+    });
 
     return qn.docs;
   }
@@ -78,13 +76,14 @@ class _HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Fast food'),
+            title: Text('Fast Food'),
             actions: [
               Badge(
                 position: BadgePosition(top: 1, end: 1),
                 animationType: BadgeAnimationType.scale,
                 badgeContent: Text(
                   _cartProvider.getCartDataList.length.toString(),
+                  style: TextStyle(color: Colors.white),
                 ),
                 child: IconButton(
                   onPressed: () {
@@ -99,6 +98,7 @@ class _HomeState extends State<Home> {
                 animationType: BadgeAnimationType.scale,
                 badgeContent: Text(
                   _wishList.getWishlistData.length.toString(),
+                  style: TextStyle(color: Colors.white),
                 ),
                 child: IconButton(
                   onPressed: () {

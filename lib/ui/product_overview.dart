@@ -112,6 +112,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 animationType: BadgeAnimationType.scale,
                 badgeContent: Text(
                   cartProvider!.getCartDataList.length.toString(),
+                  style: TextStyle(color: Colors.white),
                 ),
                 child: IconButton(
                   onPressed: () {
@@ -126,6 +127,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 animationType: BadgeAnimationType.scale,
                 badgeContent: Text(
                   wishlistProvider!.getWishlistData.length.toString(),
+                  style: TextStyle(color: Colors.white),
                 ),
                 child: IconButton(
                   onPressed: () {
@@ -151,9 +153,10 @@ class _ProductOverviewState extends State<ProductOverview> {
                             width: double.infinity,
                             imageUrl: e,
                             progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
+                                (context, url, downloadProgress) => Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
                           ),
