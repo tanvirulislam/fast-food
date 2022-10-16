@@ -2,10 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:taza_khabar/models/product_model.dart';
-import 'package:taza_khabar/provider/cart_provider.dart';
-import 'package:taza_khabar/provider/product_provider.dart';
 import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 
@@ -22,21 +19,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  String? search;
   String query = '';
   searchItem(String query) {
     List<ProductModel> searchFood = widget.search.where((element) {
       return element.productName.toLowerCase().contains(query);
     }).toList();
     return searchFood;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    ProdcutProvider _prodcutProvider = Provider.of(context, listen: false);
-    _prodcutProvider.getSearchProductList;
-    CartProvider _cartProvider = Provider.of(context, listen: false);
-    _cartProvider.getCartItem();
   }
 
   @override

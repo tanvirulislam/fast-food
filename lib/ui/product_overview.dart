@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -119,7 +119,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => CartScreen()));
                   },
-                  icon: Icon(Icons.shopping_cart_outlined),
+                  icon: Icon(Icons.shopping_cart),
                 ),
               ),
               Badge(
@@ -134,7 +134,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                     Navigator.push(
                         context, MaterialPageRoute(builder: (_) => WishList()));
                   },
-                  icon: Icon(Icons.favorite_outline),
+                  icon: Icon(Icons.favorite),
                 ),
               ),
               SizedBox(width: 8)
@@ -242,7 +242,8 @@ class _ProductOverviewState extends State<ProductOverview> {
                                         );
                                       }
                                     },
-                                    child: Text('-', textScaleFactor: 1.7))
+                                    child: Text('-', textScaleFactor: 1.7),
+                                  )
                                 : Container(),
                             Text(count.toString()),
                             isBoolCart == true
@@ -261,7 +262,8 @@ class _ProductOverviewState extends State<ProductOverview> {
                                         );
                                       }
                                     },
-                                    child: Text('+', textScaleFactor: 1.5))
+                                    child: Text('+', textScaleFactor: 1.5),
+                                  )
                                 : Container(),
                           ],
                         ),

@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -11,21 +11,39 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
+  fatchCategory() async {
+    await FirebaseFirestore.instance.collection('newCategory').get();
+  }
+
+  @override
+  void initState() {
+    fatchCategory();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [Text('data')],
+    return SafeArea(
+      child: Scaffold(
+        body: FutureBuilder(
+          future: fatchCategory(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              return Text("Something went wrong");
+            }
+
+            if (snapshot.hasData && !snapshot.data!.exists) {
+              return Text("Document does not exist");
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
+              return Center(child: Text(data['name']));
+            }
+            return Center(child: Text("loading"));
+          },
+        ),
       ),
     );
-  }
-}
-
-class New extends StatelessWidget {
-  const New({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

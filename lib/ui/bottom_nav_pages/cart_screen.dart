@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
+import 'package:taza_khabar/ui/product_overview.dart';
 import 'package:taza_khabar/ui/shipping/add_delivery_address.dart';
 
 class CartScreen extends StatefulWidget {
@@ -70,23 +71,33 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  // Image.network(
-                                  //   data.cartImage[0],
-                                  //   height: 100,
-                                  //   width: 100,
-                                  //   fit: BoxFit.cover,
-                                  // ),
-                                  CachedNetworkImage(
-                                    imageUrl: data.cartImage[0],
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                    progressIndicatorBuilder: (context, url,
-                                            downloadProgress) =>
-                                        CircularProgressIndicator(
-                                            value: downloadProgress.progress),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ProductOverview(
+                                            name: data.cartName,
+                                            price: data.cartPrice,
+                                            image: data.cartImage,
+                                            productDescription: '',
+                                            productId: data.cartId,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: CachedNetworkImage(
+                                      imageUrl: data.cartImage[0],
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                      progressIndicatorBuilder: (context, url,
+                                              downloadProgress) =>
+                                          CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    ),
                                   ),
                                   Text(
                                     data.cartName,

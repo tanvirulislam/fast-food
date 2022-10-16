@@ -7,7 +7,7 @@ class Mythemes {
     scaffoldBackgroundColor: Colors.black,
     colorScheme: ColorScheme.dark(primary: Colors.cyan),
     iconTheme: IconThemeData(color: Colors.white),
-    primaryColor: Color.fromARGB(255, 64, 228, 228),
+    primaryColor: Colors.cyan,
     brightness: Brightness.dark,
     highlightColor: Colors.white,
     backgroundColor: Colors.black54,

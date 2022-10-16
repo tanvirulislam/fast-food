@@ -23,26 +23,31 @@ Widget drawerCustom(context) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: userProvider.currentUserData
                   .map((e) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Container(
-                          //   height: 100,
-                          //   width: 100,
-                          //   decoration: BoxDecoration(
-                          //     shape: BoxShape.circle,
-                          //     image: DecorationImage(
-                          //       fit: BoxFit.cover,
-                          //       image: NetworkImage(e.userImage),
-                          //     ),
-                          //   ),
-                          // ),
-                          CachedNetworkImage(
-                            imageUrl: e.userImage,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                          Container(
+                            height: 91,
+                            width: 91,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            child: Container(
+                              height: 90,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image:
+                                      CachedNetworkImageProvider(e.userImage),
+                                ),
+                              ),
+                            ),
                           ),
                           SizedBox(height: 4),
                           Text(e.userName)

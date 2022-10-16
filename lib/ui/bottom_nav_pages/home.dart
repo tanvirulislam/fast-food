@@ -78,42 +78,59 @@ class _HomeState extends State<Home> {
           appBar: AppBar(
             title: Text('Fast Food'),
             actions: [
-              Badge(
-                position: BadgePosition(top: 1, end: 1),
-                animationType: BadgeAnimationType.scale,
-                badgeContent: Text(
-                  _cartProvider.getCartDataList.length.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => CartScreen()));
-                  },
-                  icon: Icon(Icons.shopping_cart_outlined),
-                ),
-              ),
-              Badge(
-                position: BadgePosition(top: 1, end: 1),
-                animationType: BadgeAnimationType.scale,
-                badgeContent: Text(
-                  _wishList.getWishlistData.length.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => WishList()));
-                  },
-                  icon: Icon(Icons.favorite_outline),
-                ),
-              ),
+              _cartProvider.getCartDataList.isNotEmpty
+                  ? Badge(
+                      position: BadgePosition(top: 1, end: 1),
+                      animationType: BadgeAnimationType.scale,
+                      badgeContent: Text(
+                        _cartProvider.getCartDataList.length.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => CartScreen()));
+                        },
+                        icon: Icon(Icons.shopping_cart),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => CartScreen()));
+                      },
+                      icon: Icon(Icons.shopping_cart),
+                    ),
+              _wishList.getWishlistData.isNotEmpty
+                  ? Badge(
+                      position: BadgePosition(top: 1, end: 1),
+                      animationType: BadgeAnimationType.scale,
+                      badgeContent: Text(
+                        _wishList.getWishlistData.length.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => WishList()));
+                        },
+                        icon: Icon(Icons.favorite),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => WishList()));
+                      },
+                      icon: Icon(Icons.favorite),
+                    ),
               SizedBox(width: 8),
             ],
           ),
           drawer: drawerCustom(context),
           body: ListView(
             children: [
+              SizedBox(height: 3),
               InkWell(
                 onTap: () => Navigator.push(
                     context,

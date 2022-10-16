@@ -93,11 +93,7 @@ class _NewProfileState extends State<NewProfile> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider(
-                                userData.first.userImage)
-                            // NetworkImage(
-                            //   userData.first.userImage,
-                            // ),
-                            ),
+                                userData.first.userImage)),
                       ),
                     ),
                   ),
