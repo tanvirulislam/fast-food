@@ -4,6 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -145,22 +146,12 @@ class _ProductOverviewState extends State<ProductOverview> {
               CarouselSlider(
                 items: widget.image
                     .map(
-                      (e) => Column(
-                        children: [
-                          CachedNetworkImage(
-                            height: 200,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            imageUrl: e,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Center(
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                          ),
-                        ],
+                      (e) => FancyShimmerImage(
+                        height: 200,
+                        width: double.infinity,
+                        errorWidget: Center(child: Text('Image not Found')),
+                        imageUrl: e,
+                        boxFit: BoxFit.cover,
                       ),
                     )
                     .toList(),

@@ -17,7 +17,7 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   void initState() {
-    fatchCategory();
+    // fatchCategory();
     super.initState();
   }
 
@@ -36,9 +36,12 @@ class _TestScreenState extends State<TestScreen> {
               return Text("Document does not exist");
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
-              return Center(child: Text(data['name']));
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Text(snapshot.data[index].name);
+                },
+              );
             }
             return Center(child: Text("loading"));
           },

@@ -39,4 +39,21 @@ class ProdcutProvider with ChangeNotifier {
   List<ProductModel> get getSearchProductList {
     return search;
   }
+
+  // fatch carousel image
+
+  List sliderImage = [];
+  fatchCarouselImage() async {
+    QuerySnapshot qn =
+        await FirebaseFirestore.instance.collection('carousel-slider').get();
+    for (int i = 0; i < qn.docs.length; i++) {
+      sliderImage.add(qn.docs[i]['img-path']);
+      // print(qn.docs[i]['img-path']);
+    }
+    notifyListeners();
+  }
+
+  get getSliderImage {
+    return sliderImage;
+  }
 }

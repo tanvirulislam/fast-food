@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
@@ -28,27 +29,13 @@ class _HomeState extends State<Home> {
   ProdcutProvider? prodcutProvider;
   CategoryProvider? categoryProvider;
 
-  List<String> carouselImage = [];
-  fatchCarouselImage() async {
-    QuerySnapshot qn =
-        await FirebaseFirestore.instance.collection('carousel-slider').get();
-    setState(() {
-      for (int i = 0; i < qn.docs.length; i++) {
-        carouselImage.add(qn.docs[i]['img-path']);
-        // print(qn.docs[i]['img-path']);
-      }
-    });
-
-    return qn.docs;
-  }
-
   bool isBoolCart = false;
   @override
   void initState() {
-    fatchCarouselImage();
     super.initState();
     prodcutProvider = Provider.of(context, listen: false);
     prodcutProvider!.fatchProductData();
+    prodcutProvider!.fatchCarouselImage();
     categoryProvider = Provider.of(context, listen: false);
     categoryProvider!.fatchCategoryData();
     categoryProvider!.fatchCategoryProductData();
@@ -133,11 +120,12 @@ class _HomeState extends State<Home> {
               SizedBox(height: 3),
               InkWell(
                 onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SearchScreen(
-                          search: prodcutProvider!.getSearchProductList),
-                    )),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SearchScreen(
+                        search: prodcutProvider!.getSearchProductList),
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(3),
                   child: Container(
@@ -156,52 +144,35 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 5,
               ),
-              carouselImage.isNotEmpty
-                  ? AspectRatio(
-                      aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3),
-                        child: CarouselSlider(
-                          items: carouselImage
-                              .map(
-                                (item) => CachedNetworkImage(
-                                  imageUrl: item,
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Center(
-                                    child: CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                ),
-                              )
-                              .toList(),
-                          options: CarouselOptions(
-                            // height: 400,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 1,
-                            initialPage: 0,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            // enlargeCenterPage: true,
-                          ),
-                        ),
-                      ),
-                    )
-                  : AspectRatio(
-                      aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
+              AspectRatio(
+                aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
+                  child: CarouselSlider(
+                    items: prodcutProvider!.getSliderImage.map<Widget>((item) {
+                      return FancyShimmerImage(
+                        width: double.infinity,
+                        errorWidget: Center(child: Text('Image not Found')),
+                        imageUrl: item,
+                        boxFit: BoxFit.fill,
+                      );
+                    }).toList(),
+                    options: CarouselOptions(
+                      // height: 400,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
                     ),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 3),
                 child: Row(
@@ -232,17 +203,26 @@ class _HomeState extends State<Home> {
                         elevation: 3,
                         child: Column(
                           children: [
-                            CachedNetworkImage(
-                              imageUrl: categoryProvider!
-                                  .getCategoryList[index].categoryImage,
+                            FancyShimmerImage(
                               height: 130,
                               width: 160,
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) =>
-                                  Center(child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                              boxFit: BoxFit.fill,
+                              errorWidget:
+                                  Center(child: Text('Image not Found')),
+                              imageUrl: categoryProvider!
+                                  .getCategoryList[index].categoryImage,
                             ),
+                            // CachedNetworkImage(
+                            //   imageUrl: categoryProvider!
+                            //       .getCategoryList[index].categoryImage,
+                            //   height: 130,
+                            //   width: 160,
+                            //   fit: BoxFit.cover,
+                            //   placeholder: (context, url) =>
+                            //       Center(child: CircularProgressIndicator()),
+                            //   errorWidget: (context, url, error) =>
+                            //       Icon(Icons.error),
+                            // ),
                             SizedBox(
                               width: 160,
                               child: Padding(
@@ -337,19 +317,13 @@ class _HomeState extends State<Home> {
                               ),
                             );
                           },
-                          child: CachedNetworkImage(
-                            imageUrl: prodcutProvider!
-                                .getProductList[index].productImage[0],
+                          child: FancyShimmerImage(
                             width: screenSize.width,
                             height: 140,
-                            fit: BoxFit.cover,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Center(
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                            errorWidget: Center(child: Text('Image not Found')),
+                            imageUrl: prodcutProvider!
+                                .getProductList[index].productImage[0],
+                            boxFit: BoxFit.fill,
                           ),
                         ),
                         SizedBox(height: 5),
