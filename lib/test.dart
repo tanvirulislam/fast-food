@@ -1,52 +1,99 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:line_icons/line_icons.dart';
+// import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
+// import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
+// import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
+// import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
+// import 'package:google_nav_bar/google_nav_bar.dart';
 
-class TestScreen extends StatefulWidget {
-  const TestScreen({Key? key}) : super(key: key);
+// class BottomNavController extends StatefulWidget {
+//   const BottomNavController({Key? key}) : super(key: key);
 
-  @override
-  State<TestScreen> createState() => _TestScreenState();
-}
+//   @override
+//   State<BottomNavController> createState() => _BottomNavControllerState();
+// }
 
-class _TestScreenState extends State<TestScreen> {
-  fatchCategory() async {
-    await FirebaseFirestore.instance.collection('newCategory').get();
-  }
+// class _BottomNavControllerState extends State<BottomNavController> {
+//   int _selectedIndex = 0;
+//   static final List _widgetOptions = [
+//     Home(),
+//     CartScreen(),
+//     WishList(),
+//     NewProfile(),
+//   ];
 
-  @override
-  void initState() {
-    // fatchCategory();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: FutureBuilder(
-          future: fatchCategory(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasError) {
-              return Text("Something went wrong");
-            }
-
-            if (snapshot.hasData && !snapshot.data!.exists) {
-              return Text("Document does not exist");
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Text(snapshot.data[index].name);
-                },
-              );
-            }
-            return Center(child: Text("loading"));
-          },
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return WillPopScope(
+//       onWillPop: () async {
+//         var exitApp = await showDialog(
+//           context: context,
+//           builder: (context) {
+//             return AlertDialog(
+//               title: Text('Want to Exit?'),
+//               actions: [
+//                 TextButton(
+//                   onPressed: () => Navigator.of(context).pop(false),
+//                   child: Text('No'),
+//                 ),
+//                 TextButton(
+//                   onPressed: () => Navigator.of(context).pop(true),
+//                   child: Text('Yes'),
+//                 ),
+//               ],
+//             );
+//           },
+//         );
+//         return exitApp ?? false;
+//       },
+//       child: SafeArea(
+//         child: Scaffold(
+//           body: _widgetOptions.elementAt(_selectedIndex),
+//           bottomNavigationBar: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 3),
+//             child: GNav(
+//                 selectedIndex: _selectedIndex,
+//                 onTabChange: (index) {
+//                   setState(() {
+//                     _selectedIndex = index;
+//                   });
+//                 },
+//                 rippleColor: Colors.cyan,
+//                 curve: Curves.easeOutExpo,
+//                 duration: Duration(milliseconds: 500),
+//                 gap: 8,
+//                 color: Colors.grey[800],
+//                 activeColor: Colors.cyan,
+//                 iconSize: 24,
+//                 tabBackgroundColor: Colors.grey.withOpacity(0.2),
+//                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//                 tabs: [
+//                   GButton(
+//                     icon: LineIcons.home,
+//                     text: 'Home',
+//                     margin: EdgeInsets.symmetric(vertical: 5),
+//                   ),
+//                   GButton(
+//                     icon: LineIcons.shoppingCart,
+//                     text: 'Cart',
+//                     margin: EdgeInsets.symmetric(vertical: 5),
+//                   ),
+//                   GButton(
+//                     icon: LineIcons.heart,
+//                     text: 'Favorite',
+//                     margin: EdgeInsets.symmetric(vertical: 5),
+//                   ),
+//                   GButton(
+//                     icon: LineIcons.user,
+//                     text: 'Profile',
+//                     margin: EdgeInsets.symmetric(vertical: 5),
+//                   )
+//                 ]),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

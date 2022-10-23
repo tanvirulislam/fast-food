@@ -7,6 +7,7 @@ import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
 import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 class BottomNavController extends StatefulWidget {
   const BottomNavController({Key? key}) : super(key: key);
@@ -29,46 +30,52 @@ class _BottomNavControllerState extends State<BottomNavController> {
     return SafeArea(
       child: Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 3),
-          child: GNav(
-              selectedIndex: _selectedIndex,
-              onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              rippleColor: Colors.cyan,
-              curve: Curves.easeOutExpo,
-              duration: Duration(milliseconds: 500),
-              gap: 8,
-              color: Colors.grey[800],
-              activeColor: Colors.cyan,
-              iconSize: 24,
-              tabBackgroundColor: Colors.grey.withOpacity(0.2),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              tabs: [
-                GButton(
-                  icon: LineIcons.home,
-                  text: 'Home',
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                ),
-                GButton(
-                  icon: LineIcons.shoppingCart,
-                  text: 'Cart',
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                ),
-                GButton(
-                  icon: LineIcons.heart,
-                  text: 'Favorite',
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                ),
-                GButton(
-                  icon: LineIcons.user,
-                  text: 'Profile',
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                )
-              ]),
+        bottomNavigationBar: DoubleBackToCloseApp(
+          snackBar: SnackBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            content: Text('Tap back again to leave'),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            child: GNav(
+                selectedIndex: _selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                rippleColor: Colors.cyan,
+                curve: Curves.easeOutExpo,
+                duration: Duration(milliseconds: 500),
+                gap: 8,
+                color: Colors.grey[800],
+                activeColor: Colors.cyan,
+                iconSize: 24,
+                tabBackgroundColor: Colors.grey.withOpacity(0.2),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                tabs: [
+                  GButton(
+                    icon: LineIcons.home,
+                    text: 'Home',
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                  ),
+                  GButton(
+                    icon: LineIcons.shoppingCart,
+                    text: 'Cart',
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                  ),
+                  GButton(
+                    icon: LineIcons.heart,
+                    text: 'Favorite',
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                  ),
+                  GButton(
+                    icon: LineIcons.user,
+                    text: 'Profile',
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                  )
+                ]),
+          ),
         ),
       ),
     );

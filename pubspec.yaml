@@ -59,6 +59,7 @@ dependencies:
   overlay_support: ^2.0.1
   page_transition: ^2.0.9
   search_page: ^2.0.0+1
+  double_back_to_close_app: ^2.1.0
 
 dev_dependencies:
   flutter_test:
