@@ -1,8 +1,9 @@
-// ignore_for_file: unnecessary_const, prefer_const_constructors
+// ignore_for_file: unnecessary_const, prefer_const_constructors, avoid_print
 
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,10 @@ class _AddProductsState extends State<AddProducts> {
     quantityController.clear();
   }
 
-  final Stream<QuerySnapshot> _stream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+  final Stream<QuerySnapshot> _stream = FirebaseFirestore.instance
+      .collection('products')
+      .orderBy('product-name', descending: false)
+      .snapshots();
 
   delete(productId) {
     FirebaseFirestore.instance
@@ -196,9 +199,9 @@ class _AddProductsState extends State<AddProducts> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Products',
+              SizedBox(height: 20),
+              Text(
+                'Product List',
                 textScaleFactor: 1.6,
               ),
               StreamBuilder(
@@ -210,33 +213,44 @@ class _AddProductsState extends State<AddProducts> {
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return const Center(
-                        child: const Text(
-                      "Loading",
-                      textScaleFactor: 1.4,
-                    ));
+                      child: const Text(
+                        "Loading",
+                        textScaleFactor: 1.4,
+                      ),
+                    );
                   }
                   return Column(
                     children: snapshot.data!.docs.map((data) {
-                      // var data = documentSnapshot.data() as Map<String, dynamic>;
                       return Card(
-                        elevation: 3,
-                        child: ListTile(
-                          title: Text(data['product-name']),
-                          leading: Image.network(
-                            data['product-img'][0],
-                            fit: BoxFit.cover,
-                            width: 90,
-                          ),
-                          subtitle: Text(data['product-price'].toString()),
-                          trailing: IconButton(
-                            onPressed: () {
-                              delete(data.id);
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              color: Theme.of(context).hintColor,
+                        elevation: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FancyShimmerImage(
+                              height: 90,
+                              width: 100,
+                              boxFit: BoxFit.cover,
+                              errorWidget:
+                                  Center(child: Text('Image not Found')),
+                              imageUrl: data['product-img'][0],
                             ),
-                          ),
+                            Text(
+                              data['product-name'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text('TK ${data['product-price'].toString()}'),
+                            IconButton(
+                              onPressed: () {
+                                delete(data.id);
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Theme.of(context).hintColor,
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     }).toList(),

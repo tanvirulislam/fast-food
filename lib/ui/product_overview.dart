@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
+import 'package:animated_switcher_plus/animated_switcher_plus.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -48,19 +49,21 @@ class _ProductOverviewState extends State<ProductOverview> {
         .collection("item")
         .doc(widget.productId)
         .get()
-        .then((value) => {
-              // print(value.data()),
-              if (mounted)
-                {
-                  if (value.exists)
-                    {
-                      setState(() {
-                        isBoolCart = value.get("isAdd");
-                        count = value.get('cartQty');
-                      })
-                    }
-                }
-            });
+        .then(
+          (value) => {
+            // print(value.data()),
+            if (mounted)
+              {
+                if (value.exists)
+                  {
+                    setState(() {
+                      isBoolCart = value.get("isAdd");
+                      count = value.get('cartQty');
+                    })
+                  }
+              }
+          },
+        );
   }
 
   getWishlistIsAddAndQty() {
@@ -94,12 +97,12 @@ class _ProductOverviewState extends State<ProductOverview> {
     getWishlistIsAddAndQty();
   }
 
+  bool _showFirstChild = true;
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of<CartProvider>(context);
     wishlistProvider = Provider.of<WishListProvider>(context);
 
-    // Size screenSize = MediaQuery.of(context).size;
     return RefreshIndicator(
       onRefresh: () async {
         getCartIsAddAndQty();
@@ -214,7 +217,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                           textScaleFactor: 1.5,
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            // color: Colors.lightBlue,
                             shadows: [
                               Shadow(
                                 color: Colors.grey,
@@ -224,7 +226,18 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ],
                           ),
                         ),
-                        Text('TK ${widget.price * count}'),
+                        AnimatedSwitcherTranslation.left(
+                          duration: const Duration(milliseconds: 500),
+                          child: Container(
+                            key: ValueKey(_showFirstChild),
+                            padding: const EdgeInsets.all(5),
+                            child: Text(
+                              _showFirstChild
+                                  ? 'TK ${widget.price * count}'
+                                  : 'TK ${widget.price * count}',
+                            ),
+                          ),
+                        ),
                         ElevatedButton.icon(
                           onPressed: () {
                             setState(() {
@@ -260,6 +273,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                                       if (count > 1) {
                                         setState(() {
                                           count--;
+                                          _showFirstChild = !_showFirstChild;
                                         });
                                         cartProvider!.updateCart(
                                           cartId: widget.productId,
@@ -280,6 +294,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                                       if (count < 10) {
                                         setState(() {
                                           count++;
+                                          _showFirstChild = !_showFirstChild;
                                         });
                                         cartProvider!.updateCart(
                                           cartId: widget.productId,
