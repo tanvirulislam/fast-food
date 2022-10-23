@@ -200,19 +200,24 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 3, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
                       'Food Category',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_right),
-                      label: Text('View all'),
-                      style: TextButton.styleFrom(primary: Colors.black),
-                    ),
+                    // TextButton.icon(
+                    //   onPressed: () {},
+                    //   icon: Icon(Icons.arrow_right),
+                    //   label: Text('View all'),
+                    //   style: TextButton.styleFrom(primary: Colors.black),
+                    // ),
                   ],
                 ),
               ),
@@ -283,19 +288,24 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 3, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      'Top sells food',
+                      'Top Selling Food',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_right),
-                      label: Text('View all'),
-                      style: TextButton.styleFrom(primary: Colors.black),
-                    ),
+                    // TextButton.icon(
+                    //   onPressed: () {},
+                    //   icon: Icon(Icons.arrow_right),
+                    //   label: Text('View all'),
+                    //   style: TextButton.styleFrom(primary: Colors.black),
+                    // ),
                   ],
                 ),
               ),
