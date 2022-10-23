@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -87,17 +88,13 @@ class _CartScreenState extends State<CartScreen> {
                                         ),
                                       );
                                     },
-                                    child: CachedNetworkImage(
-                                      imageUrl: data.cartImage[0],
+                                    child: FancyShimmerImage(
                                       height: 100,
                                       width: 100,
-                                      fit: BoxFit.cover,
-                                      progressIndicatorBuilder: (context, url,
-                                              downloadProgress) =>
-                                          CircularProgressIndicator(
-                                              value: downloadProgress.progress),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                      boxFit: BoxFit.cover,
+                                      errorWidget: Center(
+                                          child: Text('Image not Found')),
+                                      imageUrl: data.cartImage[0],
                                     ),
                                   ),
                                   Text(

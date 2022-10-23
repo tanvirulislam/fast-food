@@ -24,7 +24,6 @@ class _BottomNavControllerState extends State<BottomNavController> {
     WishList(),
     NewProfile(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

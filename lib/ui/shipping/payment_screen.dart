@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -102,17 +103,12 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                     'Total order items  ${cartProviders.getCartDataList.length}'),
                 children: cartProviders.getCartDataList
                     .map((e) => ListTile(
-                          leading: CachedNetworkImage(
-                            imageUrl: e.cartImage[0],
-                            width: 70,
+                          leading: FancyShimmerImage(
                             height: 70,
-                            fit: BoxFit.cover,
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                            width: 70,
+                            boxFit: BoxFit.cover,
+                            errorWidget: Center(child: Text('Image not Found')),
+                            imageUrl: e.cartImage[0],
                           ),
                           title: Text(e.cartName),
                           subtitle: Text('Quantity ${e.cartQty}'),
@@ -155,12 +151,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                   ),
                   (Route<dynamic> route) => false,
                 );
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => BottomNavController()),
-                //   (Route<dynamic> route) => false,
-                // );
+
                 cartProviders.deleteAllCart();
                 showDialog<String>(
                   context: context,
