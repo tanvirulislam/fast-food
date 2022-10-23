@@ -19,6 +19,9 @@ class Mythemes {
       showSelectedLabels: false,
       showUnselectedLabels: false,
     ),
+    appBarTheme: AppBarTheme(
+      color: Color.fromARGB(255, 49, 49, 49),
+    ),
   );
 
   static final lightTheme = ThemeData(
@@ -37,9 +40,10 @@ class Mythemes {
     brightness: Brightness.light,
     highlightColor: Colors.white,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.blue,
-        focusColor: Colors.blueAccent,
-        splashColor: Colors.lightBlue),
+      backgroundColor: Colors.blue,
+      focusColor: Colors.blueAccent,
+      splashColor: Colors.lightBlue,
+    ),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan)
         .copyWith(secondary: Colors.white),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/checkout_provider.dart';
 import 'package:taza_khabar/ui/shipping/payment_screen.dart';
@@ -114,16 +115,18 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentScreeen(
-                      fName: checkoutProvider.firstName.text,
-                      lName: checkoutProvider.lastName.text,
-                      mobile: checkoutProvider.mobile.text,
-                      city: checkoutProvider.city.text,
-                      area: checkoutProvider.area.text,
-                    ),
-                  ));
+                context,
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  child: PaymentScreeen(
+                    fName: checkoutProvider.firstName.text,
+                    lName: checkoutProvider.lastName.text,
+                    mobile: checkoutProvider.mobile.text,
+                    city: checkoutProvider.city.text,
+                    area: checkoutProvider.area.text,
+                  ),
+                ),
+              );
             },
             child: Text(
               'Continue',

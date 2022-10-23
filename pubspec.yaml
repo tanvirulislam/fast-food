@@ -55,6 +55,10 @@ dependencies:
   fancy_shimmer_image: ^2.0.2
   flutter_iconly: ^1.0.2
   shimmer: ^2.0.0
+  internet_connection_checker: ^0.0.1+4
+  overlay_support: ^2.0.1
+  page_transition: ^2.0.9
+  search_page: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

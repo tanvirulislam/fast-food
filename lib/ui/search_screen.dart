@@ -2,7 +2,9 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taza_khabar/models/product_model.dart';
+import 'package:taza_khabar/provider/product_provider.dart';
 import 'package:taza_khabar/ui/count.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
 
@@ -19,7 +21,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String? search;
+  // String? search;
   String query = '';
   searchItem(String query) {
     List<ProductModel> searchFood = widget.search.where((element) {

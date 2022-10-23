@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
@@ -41,14 +42,24 @@ class AuthClass {
           UserCredential userCredential =
               await auth.signInWithCredential(credential);
           storeToken(userCredential);
-          print(userCredential);
+          // print(userCredential);
+
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => BottomNavController(),
+            PageTransition(
+              type: PageTransitionType.fade,
+              child: BottomNavController(),
             ),
             (Route<dynamic> route) => false,
           );
+
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => BottomNavController(),
+          //   ),
+          //   (Route<dynamic> route) => false,
+          // );
         } catch (e) {
           print(e);
         }

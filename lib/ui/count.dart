@@ -64,41 +64,43 @@ class _CountState extends State<Count> {
   @override
   Widget build(BuildContext context) {
     _cartProvider = Provider.of<CartProvider>(context);
-    return SizedBox(
-      child: isBool == true
-          ? Icon(Icons.shopping_cart)
-          : InkWell(
-              child: Icon(Icons.shopping_cart_outlined),
-              onTap: () {
-                setState(
-                  () {
-                    isBool = true;
-                    // print(isBool);
-                    if (isBool = true) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: Duration(milliseconds: 500),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          content: Text(
-                            'Item added',
-                            style:
-                                TextStyle(color: Theme.of(context).hintColor),
+    return SafeArea(
+      child: SizedBox(
+        child: isBool == true
+            ? Icon(Icons.shopping_cart)
+            : InkWell(
+                child: Icon(Icons.shopping_cart_outlined),
+                onTap: () {
+                  setState(
+                    () {
+                      isBool = true;
+                      // print(isBool);
+                      if (isBool = true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: Duration(milliseconds: 500),
+                            backgroundColor: Theme.of(context).primaryColor,
+                            content: Text(
+                              'Item added',
+                              style:
+                                  TextStyle(color: Theme.of(context).hintColor),
+                            ),
                           ),
-                        ),
+                        );
+                      }
+                      _cartProvider!.addToCart(
+                        cartId: widget.cartId,
+                        cartImage: widget.cartImage,
+                        cartName: widget.cartName,
+                        cartPrice: widget.cartPrice,
+                        cartQty: widget.cartQty,
                       );
-                    }
-                    _cartProvider!.addToCart(
-                      cartId: widget.cartId,
-                      cartImage: widget.cartImage,
-                      cartName: widget.cartName,
-                      cartPrice: widget.cartPrice,
-                      cartQty: widget.cartQty,
-                    );
-                    _cartProvider!.getCartItem();
-                  },
-                );
-              },
-            ),
+                      _cartProvider!.getCartItem();
+                    },
+                  );
+                },
+              ),
+      ),
     );
   }
 }

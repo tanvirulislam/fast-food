@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/ui/bottomNavController.dart';
@@ -148,10 +149,18 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => BottomNavController()),
+                  PageTransition(
+                    type: PageTransitionType.fade,
+                    child: BottomNavController(),
+                  ),
                   (Route<dynamic> route) => false,
                 );
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => BottomNavController()),
+                //   (Route<dynamic> route) => false,
+                // );
                 cartProviders.deleteAllCart();
                 showDialog<String>(
                   context: context,

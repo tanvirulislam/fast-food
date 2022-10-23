@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/checkout_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
@@ -18,7 +19,6 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   UserProvider? userProvider;
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     checkoutProvider!.firstName.clear();
     checkoutProvider!.lastName.clear();
@@ -113,8 +113,9 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 checkoutProvider!.addDeliveryAddress();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => DeliveryDetails(),
+                  PageTransition(
+                    type: PageTransitionType.fade,
+                    child: DeliveryDetails(),
                   ),
                 );
               }

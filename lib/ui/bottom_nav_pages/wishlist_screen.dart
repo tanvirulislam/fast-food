@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
@@ -27,11 +28,11 @@ class _WishList extends State<WishList> {
   Widget build(BuildContext context) {
     wishlistProvider = Provider.of<WishListProvider>(context);
     cartProvider = Provider.of<CartProvider>(context);
-    return SafeArea(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          wishlistProvider!.showWishlist();
-        },
+    return RefreshIndicator(
+      onRefresh: () async {
+        wishlistProvider!.showWishlist();
+      },
+      child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text('Your wishlist items'),
@@ -65,24 +66,14 @@ class _WishList extends State<WishList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CachedNetworkImage(
-                                      imageUrl: data.wishListImage[0],
+                                    FancyShimmerImage(
                                       height: 100,
                                       width: 100,
-                                      fit: BoxFit.cover,
-                                      progressIndicatorBuilder: (context, url,
-                                              downloadProgress) =>
-                                          CircularProgressIndicator(
-                                              value: downloadProgress.progress),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                      boxFit: BoxFit.cover,
+                                      errorWidget: Center(
+                                          child: Text('Image not Found')),
+                                      imageUrl: data.wishListImage[0],
                                     ),
-                                    // Image.network(
-                                    //   data.wishListImage[0],
-                                    //   height: 100,
-                                    //   width: 100,
-                                    //   fit: BoxFit.cover,
-                                    // ),
                                     Text(
                                       data.wishListName,
                                       style: TextStyle(

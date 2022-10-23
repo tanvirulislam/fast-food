@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'dart:math' as math;
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -62,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   final AuthClass _authClass = AuthClass();
   bool isVisible = false;
+  bool hasInternet = false;
 
   @override
   Widget build(BuildContext context) {
@@ -174,17 +177,25 @@ class _LoginScreenState extends State<LoginScreen>
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
 
-            // FancyShimmerImage(
-            //   width: double.infinity,
-            //   errorWidget: Center(child: Text('Image not Found')),
-            //   imageUrl:
-            //       "https://firebasestorage.googleapis.com/v0/b/taza-khabar-8666d.appspot.com/o/icon.png?alt=media&token=bc34adeb-fac0-462a-af03-282d66a69c69",
-            //   boxFit: BoxFit.fill,
-            // ),
-
             InkWell(
-              onTap: () {
-                _authClass.handleSignIn(context);
+              onTap: () async {
+                final bool hasInternet =
+                    await InternetConnectionChecker().hasConnection;
+                if (hasInternet == true) {
+                  _authClass.handleSignIn(context);
+                } else {
+                  final text =
+                      hasInternet ? null.toString() : 'No Internet Connection';
+                  showSimpleNotification(
+                    Center(
+                      child: Text(
+                        text,
+                      ),
+                    ),
+                    position: NotificationPosition.bottom,
+                    background: Theme.of(context).primaryColor,
+                  );
+                }
               },
               child: SizedBox(
                 height: 65,

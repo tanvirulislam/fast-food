@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
@@ -99,46 +100,82 @@ class _ProductOverviewState extends State<ProductOverview> {
     wishlistProvider = Provider.of<WishListProvider>(context);
 
     // Size screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          getCartIsAddAndQty();
-        },
+    return RefreshIndicator(
+      onRefresh: () async {
+        getCartIsAddAndQty();
+      },
+      child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: Text('Product Details'),
             actions: [
-              Badge(
-                position: BadgePosition(top: 1, end: 1),
-                animationType: BadgeAnimationType.scale,
-                badgeContent: Text(
-                  cartProvider!.getCartDataList.length.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => CartScreen()));
-                  },
-                  icon: Icon(Icons.shopping_cart),
-                ),
-              ),
-              Badge(
-                position: BadgePosition(top: 1, end: 1),
-                animationType: BadgeAnimationType.scale,
-                badgeContent: Text(
-                  wishlistProvider!.getWishlistData.length.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => WishList()));
-                  },
-                  icon: Icon(Icons.favorite),
-                ),
-              ),
-              SizedBox(width: 8)
+              cartProvider!.getCartDataList.isNotEmpty
+                  ? Badge(
+                      position: BadgePosition(top: 1, end: 1),
+                      animationType: BadgeAnimationType.fade,
+                      badgeContent: Text(
+                        cartProvider!.getCartDataList.length.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: CartScreen(),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.shopping_cart),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: CartScreen(),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.shopping_cart),
+                    ),
+              wishlistProvider!.getWishlistData.isNotEmpty
+                  ? Badge(
+                      position: BadgePosition(top: 1, end: 1),
+                      animationType: BadgeAnimationType.scale,
+                      badgeContent: Text(
+                        wishlistProvider!.getWishlistData.length.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: WishList(),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.favorite),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: WishList(),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.favorite),
+                    ),
+              SizedBox(width: 8),
             ],
           ),
           body: ListView(

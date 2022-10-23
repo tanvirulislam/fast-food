@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
@@ -18,19 +19,19 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  // if (kIsWeb) {
-  //   await Firebase.initializeApp(
-  //     options: FirebaseOptions(
-  //       apiKey: "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38",
-  //       projectId: "taza-khabar-8666d",
-  //       messagingSenderId: "711924074598",
-  //       appId: "1:711924074598:android:676b2cd4f6a0f8338685a7",
-  //     ),
-  //   );
-  // } else {
-  //   await Firebase.initializeApp();
-  // }
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyDfubViNbn6hkRxHiETd3-5SS3e4E06B38",
+        projectId: "taza-khabar-8666d",
+        messagingSenderId: "711924074598",
+        appId: "1:711924074598:android:676b2cd4f6a0f8338685a7",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+  // await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -83,14 +84,16 @@ class _MyAppState extends State<MyApp> {
           create: (context) => CategoryProvider(),
         )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Fast Food',
-        themeMode: ThemeMode.system,
-        theme: Mythemes.lightTheme,
-        darkTheme: Mythemes.darkTheme,
-        home: currentPage,
-        // home: TestScreen(),
+      child: OverlaySupport.global(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Fast Food',
+          themeMode: ThemeMode.system,
+          theme: Mythemes.lightTheme,
+          darkTheme: Mythemes.darkTheme,
+          home: currentPage,
+          // home: TestScreen(),
+        ),
       ),
     );
   }

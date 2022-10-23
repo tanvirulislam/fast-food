@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/ui/product_overview.dart';
@@ -29,7 +30,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     cartProvider = Provider.of(context);
-    // int cartQty = cartProvider!.getCartDataList.length;
 
     return SafeArea(
       child: Scaffold(
@@ -75,8 +75,9 @@ class _CartScreenState extends State<CartScreen> {
                                     onTap: () {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProductOverview(
+                                        PageTransition(
+                                          type: PageTransitionType.fade,
+                                          child: ProductOverview(
                                             name: data.cartName,
                                             price: data.cartPrice,
                                             image: data.cartImage,
@@ -145,8 +146,9 @@ class _CartScreenState extends State<CartScreen> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => AddDeliveryAddress(),
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: AddDeliveryAddress(),
                               ),
                             );
                           },

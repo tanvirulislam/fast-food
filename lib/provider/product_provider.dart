@@ -16,7 +16,8 @@ class ProdcutProvider with ChangeNotifier {
         .get();
 
     for (var element in querySnapshot.docs) {
-      print(element.data());
+      print(
+          'All Products---------------------------------------- ${element.data()}');
       ProductModel productModel = ProductModel(
         productName: element.get('product-name'),
         productImage: element.get('product-img'),

@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/category_provider.dart';
@@ -75,16 +76,26 @@ class _HomeState extends State<Home> {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => CartScreen()));
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: CartScreen(),
+                            ),
+                          );
                         },
                         icon: Icon(Icons.shopping_cart),
                       ),
                     )
                   : IconButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => CartScreen()));
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: CartScreen(),
+                          ),
+                        );
                       },
                       icon: Icon(Icons.shopping_cart),
                     ),
@@ -98,16 +109,26 @@ class _HomeState extends State<Home> {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => WishList()));
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: WishList(),
+                            ),
+                          );
                         },
                         icon: Icon(Icons.favorite),
                       ),
                     )
                   : IconButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => WishList()));
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: WishList(),
+                          ),
+                        );
                       },
                       icon: Icon(Icons.favorite),
                     ),
@@ -119,13 +140,17 @@ class _HomeState extends State<Home> {
             children: [
               SizedBox(height: 3),
               InkWell(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SearchScreen(
-                        search: prodcutProvider!.getSearchProductList),
-                  ),
-                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      child: SearchScreen(
+                        search: prodcutProvider!.getSearchProductList,
+                      ),
+                    ),
+                  );
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(3),
                   child: Container(
@@ -137,7 +162,8 @@ class _HomeState extends State<Home> {
                       child: Text('Search...'),
                     ),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.lightBlue)),
+                      border: Border.all(color: Colors.lightBlue),
+                    ),
                   ),
                 ),
               ),
@@ -212,17 +238,6 @@ class _HomeState extends State<Home> {
                               imageUrl: categoryProvider!
                                   .getCategoryList[index].categoryImage,
                             ),
-                            // CachedNetworkImage(
-                            //   imageUrl: categoryProvider!
-                            //       .getCategoryList[index].categoryImage,
-                            //   height: 130,
-                            //   width: 160,
-                            //   fit: BoxFit.cover,
-                            //   placeholder: (context, url) =>
-                            //       Center(child: CircularProgressIndicator()),
-                            //   errorWidget: (context, url, error) =>
-                            //       Icon(Icons.error),
-                            // ),
                             SizedBox(
                               width: 160,
                               child: Padding(
@@ -301,8 +316,9 @@ class _HomeState extends State<Home> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductOverview(
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: ProductOverview(
                                   name: prodcutProvider!
                                       .getProductList[index].productName,
                                   price: prodcutProvider!
