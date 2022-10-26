@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:taza_khabar/const/app_colors.dart';
-import 'package:taza_khabar/ui/login_screen.dart';
+import 'package:taza_khabar/view/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-    @override
+  @override
   void initState() {
     Timer(
       Duration(
@@ -33,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

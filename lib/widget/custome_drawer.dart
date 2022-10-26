@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
-import 'package:taza_khabar/ui/add_products.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
+import 'package:taza_khabar/view/add_products.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/profile.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
 
 Widget drawerCustom(context) {
   UserProvider userProvider = Provider.of(context, listen: false);

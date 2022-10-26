@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/checkout_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
-import 'package:taza_khabar/ui/shipping/delivery_details.dart';
+import 'package:taza_khabar/view/shipping/delivery_details.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
   const AddDeliveryAddress({Key? key}) : super(key: key);

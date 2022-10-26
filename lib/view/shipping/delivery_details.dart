@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/checkout_provider.dart';
-import 'package:taza_khabar/ui/shipping/payment_screen.dart';
+import 'package:taza_khabar/view/shipping/payment_screen.dart';
 
 class DeliveryDetails extends StatefulWidget {
   const DeliveryDetails({Key? key}) : super(key: key);

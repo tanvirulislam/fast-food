@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -11,11 +9,12 @@ import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/product_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
-import 'package:taza_khabar/ui/count.dart';
-import 'package:taza_khabar/ui/product_overview.dart';
-import 'package:taza_khabar/ui/search_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
+import 'package:taza_khabar/view/count.dart';
+import 'package:taza_khabar/view/new_search.dart';
+import 'package:taza_khabar/view/product_overview.dart';
+import 'package:taza_khabar/view/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
 import 'package:badges/badges.dart';
 
@@ -26,11 +25,13 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   ProdcutProvider? prodcutProvider;
   CategoryProvider? categoryProvider;
-
   bool isBoolCart = false;
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +51,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     prodcutProvider = Provider.of(context);
     categoryProvider = Provider.of(context);
     Size screenSize = MediaQuery.of(context).size;
@@ -66,6 +68,20 @@ class _HomeState extends State<Home> {
           appBar: AppBar(
             title: Text('Fast Food'),
             actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      child: SearchScreen(
+                        search: prodcutProvider!.getSearchProductList,
+                      ),
+                      type: PageTransitionType.fade,
+                    ),
+                  );
+                },
+                icon: Icon(Icons.search),
+              ),
               _cartProvider.getCartDataList.isNotEmpty
                   ? Badge(
                       position: BadgePosition(top: 1, end: 1),
@@ -97,7 +113,7 @@ class _HomeState extends State<Home> {
                           ),
                         );
                       },
-                      icon: Icon(Icons.shopping_cart),
+                      icon: Icon(Icons.shopping_cart_outlined),
                     ),
               _wishList.getWishlistData.isNotEmpty
                   ? Badge(
@@ -130,7 +146,7 @@ class _HomeState extends State<Home> {
                           ),
                         );
                       },
-                      icon: Icon(Icons.favorite),
+                      icon: Icon(Icons.favorite_outline),
                     ),
               SizedBox(width: 8),
             ],
@@ -138,38 +154,36 @@ class _HomeState extends State<Home> {
           drawer: drawerCustom(context),
           body: ListView(
             children: [
+              // SizedBox(height: 3),
+              // InkWell(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       PageTransition(
+              //         type: PageTransitionType.fade,
+              //         child: SearchScreen(
+              //           search: prodcutProvider!.getSearchProductList,
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(3),
+              //     child: Container(
+              //       height: 60,
+              //       width: double.infinity,
+              //       alignment: Alignment.centerLeft,
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(8.0),
+              //         child: Text('Search your Food here...'),
+              //       ),
+              //       decoration: BoxDecoration(
+              //         border: Border.all(color: Colors.lightBlue),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 3),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: SearchScreen(
-                        search: prodcutProvider!.getSearchProductList,
-                      ),
-                    ),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(3),
-                  child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Search...'),
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.lightBlue),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
               AspectRatio(
                 aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
                 child: Padding(

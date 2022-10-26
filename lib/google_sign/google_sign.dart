@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
-import 'package:taza_khabar/ui/bottomNavController.dart';
+import 'package:taza_khabar/view/bottomNavController.dart';
 
 class AuthClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn(

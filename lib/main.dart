@@ -13,8 +13,8 @@ import 'package:taza_khabar/provider/theme_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/test.dart';
-import 'package:taza_khabar/ui/bottomNavController.dart';
-import 'package:taza_khabar/ui/login_screen.dart';
+import 'package:taza_khabar/view/bottomNavController.dart';
+import 'package:taza_khabar/view/login_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {

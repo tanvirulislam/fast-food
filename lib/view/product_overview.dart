@@ -12,8 +12,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
 
 // ignore: must_be_immutable
 class ProductOverview extends StatefulWidget {
@@ -226,7 +226,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ],
                           ),
                         ),
-                        AnimatedSwitcherTranslation.left(
+                        AnimatedSwitcherFlip.flipY(
                           duration: const Duration(milliseconds: 500),
                           child: Container(
                             key: ValueKey(_showFirstChild),

@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/profile.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/cart_screen.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/home.dart';
-import 'package:taza_khabar/ui/bottom_nav_pages/wishlist_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/profile.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/home.dart';
+import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
@@ -17,18 +17,49 @@ class BottomNavController extends StatefulWidget {
 }
 
 class _BottomNavControllerState extends State<BottomNavController> {
+  PageController? _pageController;
   int _selectedIndex = 0;
-  static final List _widgetOptions = [
+  final List<Widget> _pages = [
     Home(),
     CartScreen(),
     WishList(),
     NewProfile(),
   ];
   @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController!.dispose();
+  }
+
+  _onTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _pageController!.jumpToPage(index);
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: _widgetOptions.elementAt(_selectedIndex),
+        body: PageView(
+          children: _pages,
+          controller: _pageController,
+          onPageChanged: onPageChanged,
+        ),
+        // _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: DoubleBackToCloseApp(
           snackBar: SnackBar(
             backgroundColor: Theme.of(context).primaryColor,
@@ -38,11 +69,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: GNav(
                 selectedIndex: _selectedIndex,
-                onTabChange: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
+                onTabChange: _onTapped,
                 rippleColor: Colors.cyan,
                 curve: Curves.easeOutExpo,
                 duration: Duration(milliseconds: 500),

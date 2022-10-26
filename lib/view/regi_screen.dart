@@ -3,8 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:taza_khabar/ui/bottomNavController.dart';
-import 'package:taza_khabar/ui/user_form.dart';
+import 'package:taza_khabar/view/bottomNavController.dart';
+import 'package:taza_khabar/view/user_form.dart';
 
 class RegiScreen extends StatefulWidget {
   const RegiScreen({Key? key}) : super(key: key);

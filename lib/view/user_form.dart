@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:taza_khabar/ui/bottomNavController.dart';
+import 'package:taza_khabar/view/bottomNavController.dart';
 import 'package:taza_khabar/widget/custom_button.dart';
 import 'package:taza_khabar/widget/custom_text_filed.dart';
 
