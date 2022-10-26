@@ -100,7 +100,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                             ),
                           );
                         },
-                        icon: Icon(Icons.shopping_cart),
+                        icon: Icon(Icons.shopping_cart_outlined),
                       ),
                     )
                   : IconButton(
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                             ),
                           );
                         },
-                        icon: Icon(Icons.favorite),
+                        icon: Icon(Icons.favorite_outline),
                       ),
                     )
                   : IconButton(
@@ -154,35 +154,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           drawer: drawerCustom(context),
           body: ListView(
             children: [
-              // SizedBox(height: 3),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       PageTransition(
-              //         type: PageTransitionType.fade,
-              //         child: SearchScreen(
-              //           search: prodcutProvider!.getSearchProductList,
-              //         ),
-              //       ),
-              //     );
-              //   },
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(3),
-              //     child: Container(
-              //       height: 60,
-              //       width: double.infinity,
-              //       alignment: Alignment.centerLeft,
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: Text('Search your Food here...'),
-              //       ),
-              //       decoration: BoxDecoration(
-              //         border: Border.all(color: Colors.lightBlue),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               SizedBox(height: 3),
               AspectRatio(
                 aspectRatio: screenSize.width < 400 ? 2.5 : 4.5,
@@ -198,16 +169,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                       );
                     }).toList(),
                     options: CarouselOptions(
-                      // height: 400,
-                      aspectRatio: 16 / 9,
                       viewportFraction: 1,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
                       autoPlay: true,
                       autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                     ),
                   ),
@@ -245,17 +209,18 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                     return InkWell(
                       onTap: () {},
                       child: Card(
-                        elevation: 3,
+                        elevation: 2,
                         child: Column(
                           children: [
-                            FancyShimmerImage(
-                              height: 130,
-                              width: 160,
-                              boxFit: BoxFit.fill,
-                              errorWidget:
-                                  Center(child: Text('Image not Found')),
-                              imageUrl: categoryProvider!
-                                  .getCategoryList[index].categoryImage,
+                            Expanded(
+                              child: FancyShimmerImage(
+                                width: 160,
+                                boxFit: BoxFit.fill,
+                                errorWidget:
+                                    Center(child: Text('Image not Found')),
+                                imageUrl: categoryProvider!
+                                    .getCategoryList[index].categoryImage,
+                              ),
                             ),
                             SizedBox(
                               width: 160,
@@ -269,6 +234,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                                       categoryProvider!
                                           .getCategoryList[index].categoryName,
                                     ),
+                                    // Spacer(),
                                     InkWell(
                                       onTap: () {
                                         // Navigator.push(
@@ -332,38 +298,42 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 itemCount: prodcutProvider!.getProductList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    elevation: 5,
+                    elevation: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                child: ProductOverview(
-                                  name: prodcutProvider!
-                                      .getProductList[index].productName,
-                                  price: prodcutProvider!
-                                      .getProductList[index].productPrice,
-                                  image: prodcutProvider!
-                                      .getProductList[index].productImage,
-                                  productDescription: prodcutProvider!
-                                      .getProductList[index].productDescription,
-                                  productId: prodcutProvider!
-                                      .getProductList[index].productId,
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: ProductOverview(
+                                    name: prodcutProvider!
+                                        .getProductList[index].productName,
+                                    price: prodcutProvider!
+                                        .getProductList[index].productPrice,
+                                    image: prodcutProvider!
+                                        .getProductList[index].productImage,
+                                    productDescription: prodcutProvider!
+                                        .getProductList[index]
+                                        .productDescription,
+                                    productId: prodcutProvider!
+                                        .getProductList[index].productId,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          child: FancyShimmerImage(
-                            width: screenSize.width,
-                            height: 140,
-                            errorWidget: Center(child: Text('Image not Found')),
-                            imageUrl: prodcutProvider!
-                                .getProductList[index].productImage[0],
-                            boxFit: BoxFit.fill,
+                              );
+                            },
+                            child: FancyShimmerImage(
+                              width: screenSize.width,
+                              // height: 150,
+                              errorWidget:
+                                  Center(child: Text('Image not Found')),
+                              imageUrl: prodcutProvider!
+                                  .getProductList[index].productImage[0],
+                              boxFit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         SizedBox(height: 5),
@@ -394,6 +364,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                             ],
                           ),
                         ),
+                        SizedBox(height: 5),
                       ],
                     ),
                   );

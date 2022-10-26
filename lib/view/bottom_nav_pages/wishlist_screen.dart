@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +34,7 @@ class _WishList extends State<WishList> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Your wishlist items'),
+            title: Text('Wishlist items'),
             actions: [
               Center(child: Text('Pull down to refrash')),
               SizedBox(width: 4)
@@ -61,7 +60,7 @@ class _WishList extends State<WishList> {
                       .map((data) => Column(
                             children: [
                               Card(
-                                elevation: 3,
+                                elevation: 2,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

@@ -102,6 +102,7 @@ class _ProductOverviewState extends State<ProductOverview> {
   Widget build(BuildContext context) {
     cartProvider = Provider.of<CartProvider>(context);
     wishlistProvider = Provider.of<WishListProvider>(context);
+    Size size = MediaQuery.of(context).size;
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -130,7 +131,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ),
                           );
                         },
-                        icon: Icon(Icons.shopping_cart),
+                        icon: Icon(Icons.shopping_cart_outlined),
                       ),
                     )
                   : IconButton(
@@ -143,7 +144,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                           ),
                         );
                       },
-                      icon: Icon(Icons.shopping_cart),
+                      icon: Icon(Icons.shopping_cart_outlined),
                     ),
               wishlistProvider!.getWishlistData.isNotEmpty
                   ? Badge(
@@ -163,7 +164,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ),
                           );
                         },
-                        icon: Icon(Icons.favorite),
+                        icon: Icon(Icons.favorite_outline),
                       ),
                     )
                   : IconButton(
@@ -176,7 +177,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                           ),
                         );
                       },
-                      icon: Icon(Icons.favorite),
+                      icon: Icon(Icons.favorite_outline),
                     ),
               SizedBox(width: 8),
             ],
@@ -187,7 +188,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 items: widget.image
                     .map(
                       (e) => FancyShimmerImage(
-                        height: 200,
+                        // height: 600,
                         width: double.infinity,
                         errorWidget: Center(child: Text('Image not Found')),
                         imageUrl: e,
@@ -197,11 +198,11 @@ class _ProductOverviewState extends State<ProductOverview> {
                     .toList(),
                 options: CarouselOptions(
                   viewportFraction: 1,
-                  height: 200,
+                  height: size.width < 400 ? 400 : 200,
                   autoPlay: true,
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 4),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

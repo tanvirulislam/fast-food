@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
@@ -58,7 +59,7 @@ class _NewProfileState extends State<NewProfile> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 160,
+              height: 155,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
@@ -81,25 +82,22 @@ class _NewProfileState extends State<NewProfile> {
                     width: 91,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(),
+                      border: Border.all(color: Theme.of(context).primaryColor),
                     ),
-                    child: Container(
+                    child: FancyShimmerImage(
                       height: 90,
                       width: 90,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
+                      boxDecoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(
-                                userData.first.userImage)),
                       ),
+                      boxFit: BoxFit.cover,
+                      errorWidget: Center(child: Text('Image not Found')),
+                      imageUrl: userData.first.userImage,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 4),
                   Text(
-                    userData.first.userEmail,
+                    userData.first.userName,
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(
@@ -109,9 +107,8 @@ class _NewProfileState extends State<NewProfile> {
                       )
                     ]),
                   ),
-                  SizedBox(height: 4),
                   Text(
-                    userData.first.userName,
+                    userData.first.userEmail,
                     textScaleFactor: 1.2,
                     style: TextStyle(shadows: [
                       Shadow(

@@ -26,16 +26,23 @@ Widget drawerCustom(context) {
                     .map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FancyShimmerImage(
-                              height: 100,
-                              width: 100,
-                              boxDecoration: BoxDecoration(
-                                shape: BoxShape.circle,
+                            Container(
+                              height: 91,
+                              width: 91,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                // shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor),
                               ),
-                              boxFit: BoxFit.cover,
-                              errorWidget:
-                                  Center(child: Text('Image not Found')),
-                              imageUrl: e.userImage,
+                              child: FancyShimmerImage(
+                                height: 90,
+                                width: 90,
+                                boxFit: BoxFit.cover,
+                                errorWidget:
+                                    Center(child: Text('Image not Found')),
+                                imageUrl: e.userImage,
+                              ),
                             ),
                             SizedBox(height: 4),
                             Text(e.userName)
@@ -88,21 +95,21 @@ Widget drawerCustom(context) {
               leading:
                   Icon(Icons.star_outlined, color: Theme.of(context).hintColor),
               title: Text('Rating')),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.fade,
-                  child: AddProducts(),
-                ),
-              );
-            },
-            child: ListTile(
-                leading:
-                    Icon(Icons.food_bank, color: Theme.of(context).hintColor),
-                title: Text('Add Products')),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       PageTransition(
+          //         type: PageTransitionType.fade,
+          //         child: AddProducts(),
+          //       ),
+          //     );
+          //   },
+          //   child: ListTile(
+          //       leading:
+          //           Icon(Icons.food_bank, color: Theme.of(context).hintColor),
+          //       title: Text('Add Products')),
+          // ),
           SizedBox(
             height: 12,
           ),

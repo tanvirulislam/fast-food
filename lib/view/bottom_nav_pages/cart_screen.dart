@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Your cart items'),
+          title: Text('Cart Items'),
           actions: [
             Center(child: Text('Pull down to refrash')),
             SizedBox(width: 4)

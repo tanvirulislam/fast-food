@@ -42,6 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.all(3.0),
             child: Column(
               children: [
+                SizedBox(height: 4),
                 SizedBox(
                   height: 60,
                   child: TextFormField(
@@ -61,12 +62,12 @@ class _SearchScreenState extends State<SearchScreen> {
                         borderSide: BorderSide(color: Colors.lightBlue),
                       ),
                       suffixIcon: Icon(Icons.search),
-                      filled: true,
+                      // filled: true,
                       // fillColor: Colors.white,
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 4),
                 searchItems.isNotEmpty
                     ? Expanded(
                         child: GridView.builder(
@@ -96,6 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 );
                               },
                               child: Card(
+                                elevation: 2,
                                 child: Column(
                                   children: [
                                     Expanded(
