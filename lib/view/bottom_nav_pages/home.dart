@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
 import 'package:taza_khabar/view/count.dart';
-import 'package:taza_khabar/view/new_search.dart';
 import 'package:taza_khabar/view/product_overview.dart';
 import 'package:taza_khabar/view/search_screen.dart';
 import 'package:taza_khabar/widget/custome_drawer.dart';
@@ -182,7 +179,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                     const EdgeInsets.symmetric(horizontal: 3, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
                       'Food Category',
@@ -360,6 +356,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                                 cartPrice: prodcutProvider!
                                     .getProductList[index].productPrice,
                                 cartQty: 1,
+                                cartDescription: prodcutProvider!
+                                    .getProductList[index].productDescription,
                               ),
                             ],
                           ),

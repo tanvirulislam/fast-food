@@ -331,6 +331,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                                 cartName: widget.name,
                                 cartPrice: widget.price,
                                 cartQty: count,
+                                cartDescription: widget.productDescription,
                               );
                             }
                           },

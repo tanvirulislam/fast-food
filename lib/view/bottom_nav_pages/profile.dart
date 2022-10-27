@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/google_sign/google_sign.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
@@ -43,10 +44,12 @@ class _NewProfileState extends State<NewProfile> {
                 onPressed: () {
                   _authClass.logout();
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ));
+                    context,
+                    PageTransition(
+                      child: LoginScreen(),
+                      type: PageTransitionType.fade,
+                    ),
+                  );
                 },
                 icon: Icon(
                   Icons.logout,

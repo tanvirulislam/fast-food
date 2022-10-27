@@ -12,6 +12,7 @@ class Count extends StatefulWidget {
   List cartImage;
   int cartPrice;
   int cartQty;
+  String cartDescription;
 
   Count({
     Key? key,
@@ -20,6 +21,7 @@ class Count extends StatefulWidget {
     required this.cartImage,
     required this.cartPrice,
     required this.cartQty,
+    required this.cartDescription,
   }) : super(key: key);
 
   @override
@@ -94,6 +96,7 @@ class _CountState extends State<Count> {
                         cartName: widget.cartName,
                         cartPrice: widget.cartPrice,
                         cartQty: widget.cartQty,
+                        cartDescription: widget.cartDescription,
                       );
                       _cartProvider!.getCartItem();
                     },

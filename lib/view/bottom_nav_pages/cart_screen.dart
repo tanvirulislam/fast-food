@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Cart Items'),
+          title: Text('Cart items'),
           actions: [
             Center(child: Text('Pull down to refrash')),
             SizedBox(width: 4)
@@ -82,7 +82,8 @@ class _CartScreenState extends State<CartScreen> {
                                             name: data.cartName,
                                             price: data.cartPrice,
                                             image: data.cartImage,
-                                            productDescription: '',
+                                            productDescription:
+                                                data.cartDecription,
                                             productId: data.cartId,
                                           ),
                                         ),
@@ -125,21 +126,22 @@ class _CartScreenState extends State<CartScreen> {
                       .toList(),
                 ),
               ),
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-          height: 55,
-          width: double.infinity,
-          child: Card(
-            elevation: 2,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Total Amount: TK ' +
-                      cartProvider!.getTotalPrice().toString()),
-                  cartProvider!.getCartDataList.isNotEmpty
-                      ? ElevatedButton(
+        bottomNavigationBar: cartProvider!.getCartDataList.isEmpty
+            ? SizedBox()
+            : Container(
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                height: 55,
+                width: double.infinity,
+                child: Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Total Amount: TK ' +
+                            cartProvider!.getTotalPrice().toString()),
+                        ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -151,12 +153,11 @@ class _CartScreenState extends State<CartScreen> {
                           },
                           child: Text('Checkout'),
                         )
-                      : Container()
-                ],
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

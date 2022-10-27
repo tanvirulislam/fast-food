@@ -106,6 +106,8 @@ class _WishList extends State<WishList> {
                                               cartName: data.wishListName,
                                               cartPrice: data.wishListPrice,
                                               cartQty: data.wishListQty,
+                                              cartDescription:
+                                                  data.wishListDecription,
                                             );
                                             wishlistProvider!
                                                 .deleteItem(data.wishListId);

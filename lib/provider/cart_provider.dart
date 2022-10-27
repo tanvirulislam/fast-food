@@ -11,6 +11,7 @@ class CartProvider with ChangeNotifier {
     required String cartName,
     required int cartPrice,
     required int cartQty,
+    required String cartDescription,
   }) {
     FirebaseFirestore.instance
         .collection('reviewCart')
@@ -24,6 +25,7 @@ class CartProvider with ChangeNotifier {
       'price': cartPrice,
       'cartQty': cartQty,
       'isAdd': true,
+      'cartDescription': cartDescription,
     });
   }
 
@@ -92,6 +94,7 @@ class CartProvider with ChangeNotifier {
         cartName: element.get('name'),
         cartPrice: element.get('price'),
         cartQty: element.get('cartQty'),
+        cartDecription: element.get('cartDescription'),
       );
       newList.add(cartModel);
     }
