@@ -2,28 +2,52 @@
 
 import 'package:flutter/material.dart';
 
-Widget customButton(buttonText, onPressed) {
-  return InkWell(
-    onTap: onPressed,
-    child: Container(
-      width: 120,
-      height: 45,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        gradient: LinearGradient(
-          // ignore: prefer_const_literals_to_create_immutables
-          colors: [Colors.purple, Colors.pink, Colors.blue],
+class CustomeButton extends StatefulWidget {
+  const CustomeButton({Key? key}) : super(key: key);
+
+  @override
+  State<CustomeButton> createState() => _CustomeButtonState();
+}
+
+class _CustomeButtonState extends State<CustomeButton> {
+  int quantity = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      child: Container(
+        width: 100,
+        height: 36,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(4),
         ),
-      ),
-      child: Center(
-        child: Text(
-         buttonText,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                  onTap: () {
+                    if (quantity > 0) {
+                      setState(() {
+                        quantity--;
+                      });
+                    }
+                  },
+                  child: Icon(Icons.remove)),
+              Text(quantity.toString()),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      quantity++;
+                    });
+                  },
+                  child: Icon(Icons.add)),
+            ],
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

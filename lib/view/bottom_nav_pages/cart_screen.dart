@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -83,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
                                             price: data.cartPrice,
                                             image: data.cartImage,
                                             productDescription:
-                                                data.cartDecription,
+                                                data.cartDescription,
                                             productId: data.cartId,
                                           ),
                                         ),
@@ -98,24 +95,117 @@ class _CartScreenState extends State<CartScreen> {
                                       imageUrl: data.cartImage[0],
                                     ),
                                   ),
-                                  Text(
-                                    data.cartName,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                  Container(
+                                    height: 100,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 9,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            data.cartName,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            'TK ${data.cartPrice * data.cartQty}',
+                                          ),
+                                          Text(
+                                            'Quantity ' +
+                                                data.cartQty.toString(),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    'Quantity ' + data.cartQty.toString(),
-                                  ),
-                                  Text('TK ${data.cartPrice * data.cartQty}'),
-                                  IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () async {
-                                      cartProvider!.deleteCart(data.cartId);
-                                      setState(() {
-                                        cartProvider!.getCartItem();
-                                      });
-                                    },
+                                  Column(
+                                    children: [
+                                      Card(
+                                        elevation: 2,
+                                        child: Container(
+                                          width: 100,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 4),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    if (data.cartQty > 1) {
+                                                      setState(() {
+                                                        data.cartQty--;
+                                                      });
+                                                      cartProvider!.updateCart(
+                                                        cartId: data.cartId,
+                                                        cartImage:
+                                                            data.cartImage,
+                                                        cartName: data.cartName,
+                                                        cartPrice:
+                                                            data.cartPrice,
+                                                        cartQty: data.cartQty,
+                                                      );
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.remove,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  data.cartQty.toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                                InkWell(
+                                                  onTap: () async {
+                                                    if (data.cartQty < 10) {
+                                                      setState(() {
+                                                        data.cartQty++;
+                                                      });
+                                                    }
+                                                    cartProvider!.updateCart(
+                                                      cartId: data.cartId,
+                                                      cartImage: data.cartImage,
+                                                      cartName: data.cartName,
+                                                      cartPrice: data.cartPrice,
+                                                      cartQty: data.cartQty,
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      ElevatedButton.icon(
+                                        onPressed: () async {
+                                          cartProvider!.deleteCart(data.cartId);
+                                          setState(() {
+                                            cartProvider!.getCartItem();
+                                          });
+                                        },
+                                        icon: Icon(Icons.delete),
+                                        label: Text('Delete'),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),

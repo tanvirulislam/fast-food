@@ -34,6 +34,7 @@ class CartProvider with ChangeNotifier {
     required String cartId,
     required List cartImage,
     required String cartName,
+    // required String cartDescription,
     required int cartPrice,
     required int cartQty,
   }) {
@@ -49,6 +50,7 @@ class CartProvider with ChangeNotifier {
       'price': cartPrice,
       'cartQty': cartQty,
       'isAdd': true,
+      // 'cartDescription': cartDescription,
     });
   }
 
@@ -94,7 +96,7 @@ class CartProvider with ChangeNotifier {
         cartName: element.get('name'),
         cartPrice: element.get('price'),
         cartQty: element.get('cartQty'),
-        cartDecription: element.get('cartDescription'),
+        cartDescription: element.get('cartDescription'),
       );
       newList.add(cartModel);
     }
@@ -115,5 +117,15 @@ class CartProvider with ChangeNotifier {
       // print('total price ------ ${total}');
     }
     return total;
+  }
+
+  int counter = 0;
+  getCounter() {
+    return counter;
+  }
+
+  void incrementCounter() {
+    counter++;
+    notifyListeners();
   }
 }
