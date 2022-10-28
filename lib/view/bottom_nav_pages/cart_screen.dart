@@ -1,3 +1,4 @@
+import 'package:animated_switcher_plus/animated_switcher_plus.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -24,6 +25,8 @@ class _CartScreenState extends State<CartScreen> {
     cartProvider.getCartItem();
     cartProvider.getTotalPrice();
   }
+
+  bool _showFirstChild = true;
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +100,14 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                   Container(
                                     height: 100,
+                                    width: 100,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 9,
                                       ),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
@@ -148,6 +154,8 @@ class _CartScreenState extends State<CartScreen> {
                                                     if (data.cartQty > 1) {
                                                       setState(() {
                                                         data.cartQty--;
+                                                        _showFirstChild =
+                                                            !_showFirstChild;
                                                       });
                                                       cartProvider!.updateCart(
                                                         cartId: data.cartId,
@@ -175,6 +183,8 @@ class _CartScreenState extends State<CartScreen> {
                                                     if (data.cartQty < 10) {
                                                       setState(() {
                                                         data.cartQty++;
+                                                        _showFirstChild =
+                                                            !_showFirstChild;
                                                       });
                                                     }
                                                     cartProvider!.updateCart(
@@ -229,8 +239,18 @@ class _CartScreenState extends State<CartScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Total Amount: TK ' +
-                            cartProvider!.getTotalPrice().toString()),
+                        AnimatedSwitcherTranslation.top(
+                          duration: const Duration(milliseconds: 500),
+                          child: Container(
+                            key: ValueKey(_showFirstChild),
+                            padding: const EdgeInsets.all(5),
+                            child: Text(_showFirstChild
+                                ? 'Total Amount: TK ' +
+                                    cartProvider!.getTotalPrice().toString()
+                                : 'Total Amount: TK ' +
+                                    cartProvider!.getTotalPrice().toString()),
+                          ),
+                        ),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(

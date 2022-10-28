@@ -227,7 +227,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ],
                           ),
                         ),
-                        AnimatedSwitcherFlip.flipY(
+                        AnimatedSwitcherTranslation.top(
                           duration: const Duration(milliseconds: 500),
                           child: Container(
                             key: ValueKey(_showFirstChild),

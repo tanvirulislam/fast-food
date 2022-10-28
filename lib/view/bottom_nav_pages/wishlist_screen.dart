@@ -73,47 +73,78 @@ class _WishList extends State<WishList> {
                                           child: Text('Image not Found')),
                                       imageUrl: data.wishListImage[0],
                                     ),
-                                    Text(
-                                      data.wishListName,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                    SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 9),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              data.wishListName,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text('Quantity ' +
+                                                data.wishListQty.toString()),
+                                            Text('TK ' +
+                                                data.wishListPrice.toString()),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Text('Quantity ' +
-                                        data.wishListQty.toString()),
-                                    Text('TK ' + data.wishListPrice.toString()),
-                                    Column(
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () async {
-                                            wishlistProvider!
-                                                .deleteItem(data.wishListId);
-                                            setState(() {
-                                              wishlistProvider!.showWishlist();
-                                            });
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.shopping_cart),
-                                          onPressed: () async {
-                                            setState(() {
-                                              wishlistProvider!.showWishlist();
-                                            });
-                                            cartProvider!.addToCart(
-                                              cartId: data.wishListId,
-                                              cartImage: data.wishListImage,
-                                              cartName: data.wishListName,
-                                              cartPrice: data.wishListPrice,
-                                              cartQty: data.wishListQty,
-                                              cartDescription:
-                                                  data.wishListDecription,
-                                            );
-                                            wishlistProvider!
-                                                .deleteItem(data.wishListId);
-                                          },
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4),
+                                      child: Column(
+                                        children: [
+                                          ElevatedButton.icon(
+                                            onPressed: () {
+                                              setState(() {
+                                                wishlistProvider!
+                                                    .showWishlist();
+                                              });
+                                              cartProvider!.addToCart(
+                                                cartId: data.wishListId,
+                                                cartImage: data.wishListImage,
+                                                cartName: data.wishListName,
+                                                cartPrice: data.wishListPrice,
+                                                cartQty: data.wishListQty,
+                                                cartDescription:
+                                                    data.wishListDecription,
+                                              );
+                                              wishlistProvider!
+                                                  .deleteItem(data.wishListId);
+                                            },
+                                            icon: Icon(
+                                                Icons.shopping_cart_outlined),
+                                            label: Text('Cart'),
+                                            style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton.icon(
+                                            onPressed: () {
+                                              wishlistProvider!
+                                                  .deleteItem(data.wishListId);
+                                              setState(() {
+                                                wishlistProvider!
+                                                    .showWishlist();
+                                              });
+                                            },
+                                            icon: Icon(Icons.delete_outline),
+                                            label: Text('Detele'),
+                                          ),
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
