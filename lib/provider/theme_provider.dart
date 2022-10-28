@@ -40,7 +40,7 @@ class Mythemes {
     brightness: Brightness.light,
     highlightColor: Colors.white,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightBlue,
       focusColor: Colors.blueAccent,
       splashColor: Colors.lightBlue,
     ),
@@ -52,6 +52,11 @@ class Mythemes {
       unselectedItemColor: Colors.black.withOpacity(0.6),
       showSelectedLabels: false,
       showUnselectedLabels: false,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey.shade100,
+      ),
     ),
   );
 }

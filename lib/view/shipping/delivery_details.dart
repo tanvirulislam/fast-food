@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -39,40 +40,45 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
           padding: const EdgeInsets.all(8.0),
           child: ListView(
             children: [
+              Text('Deliver To'),
               Row(
                 children: [
-                  Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/fresh-vegetable-1918b.appspot.com/o/location.png?alt=media&token=cf38c87b-9c17-49d4-9041-4a1014210646',
-                    height: 100,
-                    width: 100,
+                  Card(
+                    elevation: 2,
+                    child: FancyShimmerImage(
+                      height: 95,
+                      width: 95,
+                      boxFit: BoxFit.cover,
+                      errorWidget: Center(child: Text('Image not Found')),
+                      imageUrl:
+                          'https://firebasestorage.googleapis.com/v0/b/fresh-vegetable-1918b.appspot.com/o/location.png?alt=media&token=cf38c87b-9c17-49d4-9041-4a1014210646',
+                    ),
                   ),
-                  SizedBox(width: 22),
-                  Text('Deliver to', textScaleFactor: 1.2),
+                  SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: checkoutProvider.getDeliveryAddressData
+                        .map((data) => Card(
+                              elevation: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('First name: ${data.firstName}'),
+                                    Text('Last name: ${data.lastName}'),
+                                    Text('Mobile No: ${data.mobile}'),
+                                    Text('City: ${data.city}'),
+                                    Text('Area: ${data.area}'),
+                                  ],
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
                 ],
               ),
-              Divider(color: Colors.grey),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: checkoutProvider.getDeliveryAddressData
-                    .map((data) => Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('First name: ${data.firstName}'),
-                                Text('Last name: ${data.lastName}'),
-                                Text('Mobile No: ${data.mobile}'),
-                                Text('City: ${data.city}'),
-                                Text('Area: ${data.area}'),
-                              ],
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              ),
-              Divider(color: Colors.grey),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Text('Payment By'),
               ListTile(
                 title: Text('Cash on delivery'),
@@ -141,7 +147,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             Navigator.pop(context);
           },
           icon: Icon(Icons.edit),
-          label: Text('Edit address'),
+          label: Text('Edit Address'),
         ),
       ),
     );

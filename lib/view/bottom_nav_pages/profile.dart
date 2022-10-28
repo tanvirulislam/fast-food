@@ -40,20 +40,21 @@ class _NewProfileState extends State<NewProfile> {
           ),
           actions: [
             IconButton(
-                onPressed: () {
-                  _authClass.logout();
-                  Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                      child: LoginScreen(),
-                      type: PageTransitionType.fade,
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.cyan,
-                ))
+              onPressed: () {
+                _authClass.logout();
+                Navigator.pushReplacement(
+                  context,
+                  PageTransition(
+                    child: LoginScreen(),
+                    type: PageTransitionType.fade,
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.logout,
+                color: Colors.cyan,
+              ),
+            ),
           ],
           elevation: 0,
         ),
@@ -82,10 +83,6 @@ class _NewProfileState extends State<NewProfile> {
                   Container(
                     height: 91,
                     width: 91,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).primaryColor),
-                    ),
                     child: FancyShimmerImage(
                       height: 90,
                       width: 90,
@@ -93,7 +90,10 @@ class _NewProfileState extends State<NewProfile> {
                         shape: BoxShape.circle,
                       ),
                       boxFit: BoxFit.cover,
-                      errorWidget: Center(child: Text('Image not Found')),
+                      errorWidget: Center(
+                        child: Image.network(
+                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                      ),
                       imageUrl: userData.first.userImage,
                     ),
                   ),

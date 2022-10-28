@@ -128,22 +128,22 @@ class _CartScreenState extends State<CartScreen> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Card(
-                                        elevation: 2,
-                                        child: Container(
-                                          width: 100,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 4),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    child: Column(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.all(0)),
+                                          child: Container(
+                                            width: 100,
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -204,18 +204,93 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      ElevatedButton.icon(
-                                        onPressed: () async {
-                                          cartProvider!.deleteCart(data.cartId);
-                                          setState(() {
-                                            cartProvider!.getCartItem();
-                                          });
-                                        },
-                                        icon: Icon(Icons.delete),
-                                        label: Text('Delete'),
-                                      ),
-                                    ],
+                                        // Card(
+                                        //   color: Theme.of(context).primaryColor,
+                                        //   elevation: 2,
+                                        //   child: Container(
+                                        //     width: 100,
+                                        //     height: 36,
+                                        //     decoration: BoxDecoration(
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(4),
+                                        //     ),
+                                        //     child: Padding(
+                                        //       padding: const EdgeInsets.symmetric(
+                                        //           horizontal: 4),
+                                        //       child: Row(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment
+                                        //                 .spaceBetween,
+                                        //         children: [
+                                        //           InkWell(
+                                        //             onTap: () {
+                                        //               if (data.cartQty > 1) {
+                                        //                 setState(() {
+                                        //                   data.cartQty--;
+                                        //                   _showFirstChild =
+                                        //                       !_showFirstChild;
+                                        //                 });
+                                        //                 cartProvider!.updateCart(
+                                        //                   cartId: data.cartId,
+                                        //                   cartImage:
+                                        //                       data.cartImage,
+                                        //                   cartName: data.cartName,
+                                        //                   cartPrice:
+                                        //                       data.cartPrice,
+                                        //                   cartQty: data.cartQty,
+                                        //                 );
+                                        //               }
+                                        //             },
+                                        //             child: Icon(
+                                        //               Icons.remove,
+                                        //               color: Colors.black,
+                                        //             ),
+                                        //           ),
+                                        //           Text(
+                                        //             data.cartQty.toString(),
+                                        //             style: TextStyle(
+                                        //                 color: Colors.black),
+                                        //           ),
+                                        //           InkWell(
+                                        //             onTap: () async {
+                                        //               if (data.cartQty < 10) {
+                                        //                 setState(() {
+                                        //                   data.cartQty++;
+                                        //                   _showFirstChild =
+                                        //                       !_showFirstChild;
+                                        //                 });
+                                        //               }
+                                        //               cartProvider!.updateCart(
+                                        //                 cartId: data.cartId,
+                                        //                 cartImage: data.cartImage,
+                                        //                 cartName: data.cartName,
+                                        //                 cartPrice: data.cartPrice,
+                                        //                 cartQty: data.cartQty,
+                                        //               );
+                                        //             },
+                                        //             child: Icon(
+                                        //               Icons.add,
+                                        //               color: Colors.black,
+                                        //             ),
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        ElevatedButton.icon(
+                                          onPressed: () async {
+                                            cartProvider!
+                                                .deleteCart(data.cartId);
+                                            setState(() {
+                                              cartProvider!.getCartItem();
+                                            });
+                                          },
+                                          icon: Icon(Icons.delete),
+                                          label: Text('Delete'),
+                                        ),
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),

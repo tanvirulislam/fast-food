@@ -8,7 +8,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/view/bottomNavController.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class PaymentScreeen extends StatefulWidget {
   String fName;
@@ -135,7 +134,6 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
           ),
         ),
         bottomNavigationBar: Card(
-          // color: Colors.grey[200],
           elevation: 7,
           child: ListTile(
             title: Text('Total Amount'),
