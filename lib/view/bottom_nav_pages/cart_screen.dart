@@ -168,9 +168,17 @@ class _CartScreenState extends State<CartScreen> {
                                                       );
                                                     }
                                                   },
-                                                  child: Icon(
-                                                    Icons.remove,
-                                                    color: Colors.black,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      right: 15,
+                                                      top: 6,
+                                                      bottom: 6,
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      color: Colors.black,
+                                                    ),
                                                   ),
                                                 ),
                                                 Text(
@@ -180,12 +188,28 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                                 InkWell(
                                                   onTap: () async {
-                                                    if (data.cartQty < 10) {
+                                                    if (data.cartQty <= 9) {
                                                       setState(() {
                                                         data.cartQty++;
                                                         _showFirstChild =
                                                             !_showFirstChild;
                                                       });
+                                                    }
+                                                    if (data.cartQty == 10) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  1000),
+                                                          backgroundColor:
+                                                              Colors.cyan,
+                                                          content: Text(
+                                                            'You have reached maximum number',
+                                                          ),
+                                                        ),
+                                                      );
                                                     }
                                                     cartProvider!.updateCart(
                                                       cartId: data.cartId,
@@ -195,89 +219,23 @@ class _CartScreenState extends State<CartScreen> {
                                                       cartQty: data.cartQty,
                                                     );
                                                   },
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    color: Colors.black,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 15,
+                                                      top: 6,
+                                                      bottom: 6,
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: Colors.black,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ),
-                                        // Card(
-                                        //   color: Theme.of(context).primaryColor,
-                                        //   elevation: 2,
-                                        //   child: Container(
-                                        //     width: 100,
-                                        //     height: 36,
-                                        //     decoration: BoxDecoration(
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(4),
-                                        //     ),
-                                        //     child: Padding(
-                                        //       padding: const EdgeInsets.symmetric(
-                                        //           horizontal: 4),
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment
-                                        //                 .spaceBetween,
-                                        //         children: [
-                                        //           InkWell(
-                                        //             onTap: () {
-                                        //               if (data.cartQty > 1) {
-                                        //                 setState(() {
-                                        //                   data.cartQty--;
-                                        //                   _showFirstChild =
-                                        //                       !_showFirstChild;
-                                        //                 });
-                                        //                 cartProvider!.updateCart(
-                                        //                   cartId: data.cartId,
-                                        //                   cartImage:
-                                        //                       data.cartImage,
-                                        //                   cartName: data.cartName,
-                                        //                   cartPrice:
-                                        //                       data.cartPrice,
-                                        //                   cartQty: data.cartQty,
-                                        //                 );
-                                        //               }
-                                        //             },
-                                        //             child: Icon(
-                                        //               Icons.remove,
-                                        //               color: Colors.black,
-                                        //             ),
-                                        //           ),
-                                        //           Text(
-                                        //             data.cartQty.toString(),
-                                        //             style: TextStyle(
-                                        //                 color: Colors.black),
-                                        //           ),
-                                        //           InkWell(
-                                        //             onTap: () async {
-                                        //               if (data.cartQty < 10) {
-                                        //                 setState(() {
-                                        //                   data.cartQty++;
-                                        //                   _showFirstChild =
-                                        //                       !_showFirstChild;
-                                        //                 });
-                                        //               }
-                                        //               cartProvider!.updateCart(
-                                        //                 cartId: data.cartId,
-                                        //                 cartImage: data.cartImage,
-                                        //                 cartName: data.cartName,
-                                        //                 cartPrice: data.cartPrice,
-                                        //                 cartQty: data.cartQty,
-                                        //               );
-                                        //             },
-                                        //             child: Icon(
-                                        //               Icons.add,
-                                        //               color: Colors.black,
-                                        //             ),
-                                        //           ),
-                                        //         ],
-                                        //       ),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         ElevatedButton.icon(
                                           onPressed: () async {
                                             cartProvider!
@@ -286,7 +244,7 @@ class _CartScreenState extends State<CartScreen> {
                                               cartProvider!.getCartItem();
                                             });
                                           },
-                                          icon: Icon(Icons.delete),
+                                          icon: Icon(Icons.delete_outline),
                                           label: Text('Delete'),
                                         ),
                                       ],

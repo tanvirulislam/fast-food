@@ -22,6 +22,12 @@ class Mythemes {
     appBarTheme: AppBarTheme(
       color: Color.fromARGB(255, 49, 49, 49),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey,
+        // textStyle: TextStyle(color: Colors.white),
+      ),
+    ),
   );
 
   static final lightTheme = ThemeData(

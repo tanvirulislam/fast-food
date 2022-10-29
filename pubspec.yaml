@@ -61,6 +61,8 @@ dependencies:
   search_page: ^2.0.0+1
   double_back_to_close_app: ^2.1.0
   animated_switcher_plus: ^1.0.2
+  flutter_custom_clippers: ^2.0.0
+  flutter_native_splash: ^2.2.9
 
 dev_dependencies:
   flutter_test:

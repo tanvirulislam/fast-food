@@ -32,14 +32,149 @@ class _NewProfileState extends State<NewProfile> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: Text(
-            'Profile ',
-            style: TextStyle(color: Colors.cyan),
-          ),
-          actions: [
-            IconButton(
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   backgroundColor: Colors.black,
+        //   title: Text(
+        //     'Profile ',
+        //     style: TextStyle(color: Colors.white),
+        //     // textScaleFactor: 1.2,
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () => _dialogBuilder(context),
+        //       icon: Icon(
+        //         Icons.logout,
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        body: ListView(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black,
+                    Colors.cyan,
+                  ],
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(35),
+                  bottomRight: Radius.circular(35),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Profile ',
+                          style: TextStyle(color: Colors.white),
+                          textScaleFactor: 1.2,
+                        ),
+                        IconButton(
+                          onPressed: () => _dialogBuilder(context),
+                          icon: Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(45),
+                      child: FancyShimmerImage(
+                        height: 90,
+                        width: 90,
+                        boxFit: BoxFit.cover,
+                        errorWidget: Center(
+                          child: Image.network(
+                              'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                        ),
+                        imageUrl: userData.first.userImage,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      userData.first.userName,
+                      // textScaleFactor: 1.2,
+                      style: TextStyle(
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: Colors.grey,
+                            blurRadius: 3,
+                            offset: Offset(1, 1),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+              subtitle: Text(
+                userData.first.userEmail,
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_bag),
+              title: Text('My Order'),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_forward),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: Text('Are you sure want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Yes'),
               onPressed: () {
                 _authClass.logout();
                 Navigator.pushReplacement(
@@ -50,83 +185,10 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.logout,
-                color: Colors.cyan,
-              ),
             ),
           ],
-          elevation: 0,
-        ),
-        body: ListView(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 155,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(52),
-                  bottomRight: Radius.circular(52),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.cyan,
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 91,
-                    width: 91,
-                    child: FancyShimmerImage(
-                      height: 90,
-                      width: 90,
-                      boxDecoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      boxFit: BoxFit.cover,
-                      errorWidget: Center(
-                        child: Image.network(
-                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                      ),
-                      imageUrl: userData.first.userImage,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    userData.first.userName,
-                    textScaleFactor: 1.2,
-                    style: TextStyle(shadows: [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 3,
-                        offset: Offset(1, 1),
-                      )
-                    ]),
-                  ),
-                  Text(
-                    userData.first.userEmail,
-                    textScaleFactor: 1.2,
-                    style: TextStyle(shadows: [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 3,
-                        offset: Offset(1, 1),
-                      )
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

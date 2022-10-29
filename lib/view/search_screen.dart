@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     List<ProductModel> searchItems = searchItem(query);
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -47,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 60,
                   child: TextFormField(
-                    // autofocus: true,
+                    autofocus: true,
                     onChanged: (value) {
                       setState(() {
                         query = value;

@@ -292,17 +292,31 @@ class _ProductOverviewState extends State<ProductOverview> {
                             isBoolCart == true
                                 ? TextButton(
                                     onPressed: () {
-                                      if (count < 10) {
+                                      if (count <= 9) {
                                         setState(() {
                                           count++;
                                           _showFirstChild = !_showFirstChild;
                                         });
+
                                         cartProvider!.updateCart(
                                           cartId: widget.productId,
                                           cartImage: widget.image,
                                           cartName: widget.name,
                                           cartPrice: widget.price,
                                           cartQty: count,
+                                        );
+                                      }
+                                      if (count == 10) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.cyan,
+                                            content: Text(
+                                              'You have reached maximum number',
+                                            ),
+                                          ),
                                         );
                                       }
                                     },

@@ -52,14 +52,6 @@ class AuthClass {
             ),
             (Route<dynamic> route) => false,
           );
-
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => BottomNavController(),
-          //   ),
-          //   (Route<dynamic> route) => false,
-          // );
         } catch (e) {
           print(e);
         }

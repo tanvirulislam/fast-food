@@ -169,12 +169,18 @@ class _LoginScreenState extends State<LoginScreen>
                 ],
               ),
             ),
-            CachedNetworkImage(
-              imageUrl:
-                  "https://firebasestorage.googleapis.com/v0/b/taza-khabar-8666d.appspot.com/o/icon.png?alt=media&token=bc34adeb-fac0-462a-af03-282d66a69c69",
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(value: downloadProgress.progress),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+
+            // CachedNetworkImage(
+            //   imageUrl:
+            //       "https://firebasestorage.googleapis.com/v0/b/taza-khabar-8666d.appspot.com/o/icon.png?alt=media&token=bc34adeb-fac0-462a-af03-282d66a69c69",
+            //   progressIndicatorBuilder: (context, url, downloadProgress) =>
+            //       CircularProgressIndicator(value: downloadProgress.progress),
+            //   errorWidget: (context, url, error) => Icon(Icons.error),
+            // ),
+            SizedBox(
+              height: 250,
+              // width: 350,
+              child: Image.asset("assets/icon.png"),
             ),
 
             InkWell(
@@ -188,9 +194,7 @@ class _LoginScreenState extends State<LoginScreen>
                       hasInternet ? null.toString() : 'No Internet Connection';
                   showSimpleNotification(
                     Center(
-                      child: Text(
-                        text,
-                      ),
+                      child: Text(text),
                     ),
                     position: NotificationPosition.bottom,
                     background: Theme.of(context).primaryColor,

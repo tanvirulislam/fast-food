@@ -20,21 +20,24 @@ Widget drawerCustom(context) {
       child: ListView(
         children: [
           DrawerHeader(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black,
+                  Colors.cyan,
+                ],
+              ),
+            ),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: userProvider.currentUserData
                     .map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              height: 91,
-                              width: 91,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                // shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Theme.of(context).primaryColor),
-                              ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(45),
                               child: FancyShimmerImage(
                                 height: 90,
                                 width: 90,
@@ -44,8 +47,11 @@ Widget drawerCustom(context) {
                                 imageUrl: e.userImage,
                               ),
                             ),
-                            SizedBox(height: 4),
-                            Text(e.userName)
+                            SizedBox(height: 10),
+                            Text(
+                              e.userName,
+                              style: TextStyle(color: Colors.white),
+                            )
                           ],
                         ))
                     .toList()),
