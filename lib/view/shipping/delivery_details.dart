@@ -33,7 +33,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Delivery Details'),
         ),
         body: Padding(
@@ -134,12 +133,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                 ),
               );
             },
-            child: Text(
-              'Continue',
-              style: TextStyle(color: Theme.of(context).hintColor),
-            ),
-            style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).primaryColor),
+            child: Text('Continue'),
           ),
         ),
         floatingActionButton: TextButton.icon(

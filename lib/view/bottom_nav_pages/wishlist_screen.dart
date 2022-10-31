@@ -34,7 +34,10 @@ class _WishList extends State<WishList> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Wishlist items'),
+            title: Text(
+              'Favorite items',
+              style: TextStyle(fontFamily: 'Lato'),
+            ),
             actions: [
               Center(child: Text('Pull down to refrash')),
               SizedBox(width: 4)
@@ -43,18 +46,20 @@ class _WishList extends State<WishList> {
           body: wishlistProvider!.getWishlistData.isEmpty
               ? Center(
                   child: Text(
-                  'NO ITEM',
-                  textScaleFactor: 2,
-                  style: TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 4,
-                        offset: Offset(2, 2),
-                      )
-                    ],
+                    'NO ITEM',
+                    textScaleFactor: 2,
+                    style: TextStyle(
+                      fontFamily: 'Lato',
+                      shadows: [
+                        Shadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: Offset(2, 2),
+                        )
+                      ],
+                    ),
                   ),
-                ))
+                )
               : ListView(
                   children: wishlistProvider!.getWishlistData
                       .map((data) => Column(

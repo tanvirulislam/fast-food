@@ -4,11 +4,13 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:taza_khabar/provider/theme_provider.dart';
 import 'package:taza_khabar/provider/user_provider.dart';
-import 'package:taza_khabar/view/add_products.dart';
+// import 'package:taza_khabar/view/add_products.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/profile.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 Widget drawerCustom(context) {
   UserProvider userProvider = Provider.of(context, listen: false);
@@ -36,16 +38,21 @@ Widget drawerCustom(context) {
                     .map((e) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(45),
-                              child: FancyShimmerImage(
-                                height: 90,
-                                width: 90,
-                                boxFit: BoxFit.cover,
-                                errorWidget:
-                                    Center(child: Text('Image not Found')),
-                                imageUrl: e.userImage,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(45),
+                                  child: FancyShimmerImage(
+                                    height: 90,
+                                    width: 90,
+                                    boxFit: BoxFit.cover,
+                                    errorWidget:
+                                        Center(child: Text('Image not Found')),
+                                    imageUrl: e.userImage,
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(height: 10),
                             Text(

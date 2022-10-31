@@ -2,6 +2,18 @@
 
 import 'package:flutter/material.dart';
 
+class ThemeProvider with ChangeNotifier {
+  ThemeMode themeMode = ThemeMode.light;
+  bool get value {
+    return themeMode == ThemeMode.light;
+  }
+
+  void toggleTheme(bool isON) {
+    themeMode = isON ? ThemeMode.light : ThemeMode.dark;
+    notifyListeners();
+  }
+}
+
 class Mythemes {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
@@ -19,9 +31,8 @@ class Mythemes {
       showSelectedLabels: false,
       showUnselectedLabels: false,
     ),
-    appBarTheme: AppBarTheme(
-      color: Color.fromARGB(255, 49, 49, 49),
-    ),
+    appBarTheme:
+        AppBarTheme(color: Color.fromARGB(255, 49, 49, 49), elevation: 0),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         primary: Colors.grey,
@@ -34,9 +45,7 @@ class Mythemes {
     scaffoldBackgroundColor: Colors.white,
     iconTheme: IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
-      color: Colors.cyan,
-    ),
+    appBarTheme: AppBarTheme(color: Colors.grey.shade100, elevation: 0),
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: Colors.grey,
       cursorColor: Color(0xff171d49),

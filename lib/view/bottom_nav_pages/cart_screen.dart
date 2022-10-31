@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
+import 'package:taza_khabar/view/count.dart';
 import 'package:taza_khabar/view/product_overview.dart';
 import 'package:taza_khabar/view/shipping/add_delivery_address.dart';
 
@@ -35,7 +36,10 @@ class _CartScreenState extends State<CartScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Cart items'),
+          title: Text(
+            'Cart items',
+            style: TextStyle(fontFamily: 'Lato'),
+          ),
           actions: [
             Center(child: Text('Pull down to refrash')),
             SizedBox(width: 4)
@@ -47,6 +51,7 @@ class _CartScreenState extends State<CartScreen> {
                 'NO ITEM',
                 textScaleFactor: 2,
                 style: TextStyle(
+                  fontFamily: 'Lato',
                   shadows: [
                     Shadow(
                       color: Colors.grey,

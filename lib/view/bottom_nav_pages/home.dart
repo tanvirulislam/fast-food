@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:taza_khabar/provider/cart_provider.dart';
 import 'package:taza_khabar/provider/category_provider.dart';
 import 'package:taza_khabar/provider/product_provider.dart';
+import 'package:taza_khabar/provider/theme_provider.dart';
 import 'package:taza_khabar/provider/wishlist_provider.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/cart_screen.dart';
 import 'package:taza_khabar/view/bottom_nav_pages/wishlist_screen.dart';
@@ -44,8 +46,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     _wishList.showWishlist();
   }
 
-  bool isBool = false;
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -54,6 +54,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     Size screenSize = MediaQuery.of(context).size;
     CartProvider _cartProvider = Provider.of(context);
     WishListProvider _wishList = Provider.of(context);
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    // print(themeProvider.value);
 
     return SafeArea(
       child: RefreshIndicator(
@@ -62,27 +64,18 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           _wishList.showWishlist();
         },
         child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
-            title: Text('Fast Food'),
+            title: Text(
+              'Fast Food',
+              style: TextStyle(fontFamily: 'Lato'),
+            ),
             actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      child: SearchScreen(
-                        search: prodcutProvider!.getSearchProductList,
-                      ),
-                      type: PageTransitionType.fade,
-                    ),
-                  );
-                },
-                icon: Icon(Icons.search),
-              ),
               _cartProvider.getCartDataList.isNotEmpty
                   ? Badge(
+                      badgeColor: Theme.of(context).primaryColor,
                       position: BadgePosition(top: 1, end: 1),
-                      animationType: BadgeAnimationType.scale,
+                      animationType: BadgeAnimationType.fade,
                       badgeContent: Text(
                         _cartProvider.getCartDataList.length.toString(),
                         style: TextStyle(color: Colors.white),
@@ -112,40 +105,79 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                       },
                       icon: Icon(Icons.shopping_cart_outlined),
                     ),
-              _wishList.getWishlistData.isNotEmpty
-                  ? Badge(
-                      position: BadgePosition(top: 1, end: 1),
-                      animationType: BadgeAnimationType.scale,
-                      badgeContent: Text(
-                        _wishList.getWishlistData.length.toString(),
-                        style: TextStyle(color: Colors.white),
+
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      child: SearchScreen(
+                        search: prodcutProvider!.getSearchProductList,
                       ),
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              child: WishList(),
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.favorite_outline),
-                      ),
-                    )
-                  : IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.fade,
-                            child: WishList(),
-                          ),
-                        );
-                      },
-                      icon: Icon(Icons.favorite_outline),
+                      type: PageTransitionType.fade,
                     ),
-              SizedBox(width: 8),
+                  );
+                },
+                icon: Icon(Icons.search),
+                padding: EdgeInsets.only(right: 0),
+              ),
+
+              // _wishList.getWishlistData.isNotEmpty
+              //     ? Badge(
+              //         position: BadgePosition(top: 1, end: 1),
+              //         animationType: BadgeAnimationType.fade,
+              //         badgeContent: Text(
+              //           _wishList.getWishlistData.length.toString(),
+              //           style: TextStyle(color: Colors.white),
+              //         ),
+              //         child: IconButton(
+              //           onPressed: () {
+              //             Navigator.push(
+              //               context,
+              //               PageTransition(
+              //                 type: PageTransitionType.fade,
+              //                 child: WishList(),
+              //               ),
+              //             );
+              //           },
+              //           icon: Icon(Icons.favorite_outline),
+              //         ),
+              //       )
+              //     : IconButton(
+              //         onPressed: () {
+              //           Navigator.push(
+              //             context,
+              //             PageTransition(
+              //               type: PageTransitionType.fade,
+              //               child: WishList(),
+              //             ),
+              //           );
+              //         },
+              //         icon: Icon(Icons.favorite_outline),
+              //       ),
+
+              FlutterSwitch(
+                activeText: 'Dark Theme',
+                activeTextColor: Colors.black87,
+                inactiveText: 'Light Theme',
+                inactiveTextColor: Colors.white,
+                activeColor: Colors.grey.shade300,
+                height: 28,
+                width: 75,
+                activeIcon: Icon(Icons.sunny),
+                inactiveIcon: Icon(
+                  Icons.nightlight,
+                  color: Colors.black,
+                ),
+                showOnOff: true,
+                value: themeProvider.value,
+                onToggle: (value) {
+                  final provider =
+                      Provider.of<ThemeProvider>(context, listen: false);
+                  provider.toggleTheme(value);
+                },
+              ),
+              SizedBox(width: 4),
             ],
           ),
           drawer: drawerCustom(context),
@@ -181,10 +213,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Food Category',
+                      'Category',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontWeight: FontWeight.bold, fontFamily: 'Lato'),
                     ),
                     // TextButton.icon(
                     //   onPressed: () {},
@@ -271,10 +302,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      'Top Selling Food',
+                      'Fast Food',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontWeight: FontWeight.bold, fontFamily: 'Lato'),
                     ),
                     // TextButton.icon(
                     //   onPressed: () {},

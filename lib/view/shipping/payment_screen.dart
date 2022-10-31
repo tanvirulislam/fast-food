@@ -54,7 +54,6 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Payment summary'),
         ),
         body: Padding(
@@ -62,7 +61,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
           child: ListView(
             children: [
               Card(
-                elevation: 5,
+                elevation: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -99,20 +98,23 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
               ),
               ExpansionTile(
                 title: Text(
-                    'Total order items  ${cartProviders.getCartDataList.length}'),
+                  'Total order items  ${cartProviders.getCartDataList.length}',
+                ),
                 children: cartProviders.getCartDataList
-                    .map((e) => ListTile(
-                          leading: FancyShimmerImage(
-                            height: 70,
-                            width: 70,
-                            boxFit: BoxFit.cover,
-                            errorWidget: Center(child: Text('Image not Found')),
-                            imageUrl: e.cartImage[0],
-                          ),
-                          title: Text(e.cartName),
-                          subtitle: Text('Quantity ${e.cartQty}'),
-                          trailing: Text('TK ${e.cartPrice * e.cartQty}'),
-                        ))
+                    .map(
+                      (e) => ListTile(
+                        leading: FancyShimmerImage(
+                          height: 70,
+                          width: 70,
+                          boxFit: BoxFit.cover,
+                          errorWidget: Center(child: Text('Image not Found')),
+                          imageUrl: e.cartImage[0],
+                        ),
+                        title: Text(e.cartName),
+                        subtitle: Text('Quantity ${e.cartQty}'),
+                        trailing: Text('TK ${e.cartPrice * e.cartQty}'),
+                      ),
+                    )
                     .toList(),
               ),
               Divider(),
@@ -167,12 +169,7 @@ class _PaymentScreeenState extends State<PaymentScreeen> {
                   ),
                 );
               },
-              child: Text(
-                'Place order',
-                style: TextStyle(color: Theme.of(context).hintColor),
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).primaryColor),
+              child: Text('Place order'),
             ),
           ),
         ),

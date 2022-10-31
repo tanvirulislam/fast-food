@@ -111,10 +111,16 @@ class _ProductOverviewState extends State<ProductOverview> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Product Details'),
+            title: Text(
+              'Product Details',
+              style: TextStyle(
+                fontFamily: 'Lato',
+              ),
+            ),
             actions: [
               cartProvider!.getCartDataList.isNotEmpty
                   ? Badge(
+                      badgeColor: Theme.of(context).primaryColor,
                       position: BadgePosition(top: 1, end: 1),
                       animationType: BadgeAnimationType.fade,
                       badgeContent: Text(
@@ -148,6 +154,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                     ),
               wishlistProvider!.getWishlistData.isNotEmpty
                   ? Badge(
+                      badgeColor: Theme.of(context).primaryColor,
                       position: BadgePosition(top: 1, end: 1),
                       animationType: BadgeAnimationType.scale,
                       badgeContent: Text(
@@ -208,16 +215,21 @@ class _ProductOverviewState extends State<ProductOverview> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.productDescription),
+                    Text(
+                      widget.productDescription,
+                      style: TextStyle(
+                        fontFamily: 'Lato',
+                      ),
+                    ),
                     SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           widget.name,
-                          textScaleFactor: 1.5,
+                          textScaleFactor: 1.3,
                           style: TextStyle(
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Lato',
                             shadows: [
                               Shadow(
                                 color: Colors.grey,

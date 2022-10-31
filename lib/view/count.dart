@@ -58,11 +58,13 @@ class _CountState extends State<Count> {
   @override
   void initState() {
     super.initState();
-    getCartIsAddAndQty();
+    // getCartIsAddAndQty();
   }
 
   @override
   Widget build(BuildContext context) {
+    getCartIsAddAndQty();
+
     _cartProvider = Provider.of<CartProvider>(context);
     return SafeArea(
       child: SizedBox(

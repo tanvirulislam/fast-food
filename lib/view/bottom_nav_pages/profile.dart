@@ -50,105 +50,103 @@ class _NewProfileState extends State<NewProfile> {
         //     ),
         //   ],
         // ),
-        body: ListView(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black,
-                    Colors.cyan,
-                  ],
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(35),
-                  bottomRight: Radius.circular(35),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                  ),
+        body: ListView(children: [
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black,
+                  Colors.cyan,
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Profile ',
-                          style: TextStyle(color: Colors.white),
-                          textScaleFactor: 1.2,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(35),
+                bottomRight: Radius.circular(35),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Profile ',
+                        style: TextStyle(color: Colors.white),
+                        textScaleFactor: 1.2,
+                      ),
+                      IconButton(
+                        onPressed: () => _dialogBuilder(context),
+                        icon: Icon(
+                          Icons.logout,
+                          color: Colors.white,
                         ),
-                        IconButton(
-                          onPressed: () => _dialogBuilder(context),
-                          icon: Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                          ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(45),
+                    child: FancyShimmerImage(
+                      height: 90,
+                      width: 90,
+                      boxFit: BoxFit.cover,
+                      errorWidget: Center(
+                        child: Image.network(
+                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                      ),
+                      imageUrl: userData.first.userImage,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    userData.first.userName,
+                    // textScaleFactor: 1.2,
+                    style: TextStyle(
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: Colors.grey,
+                          blurRadius: 3,
+                          offset: Offset(1, 1),
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(45),
-                      child: FancyShimmerImage(
-                        height: 90,
-                        width: 90,
-                        boxFit: BoxFit.cover,
-                        errorWidget: Center(
-                          child: Image.network(
-                              'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                        ),
-                        imageUrl: userData.first.userImage,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      userData.first.userName,
-                      // textScaleFactor: 1.2,
-                      style: TextStyle(
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: Colors.grey,
-                            blurRadius: 3,
-                            offset: Offset(1, 1),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 4),
+                ],
               ),
             ),
-            SizedBox(height: 10),
-            ListTile(
-              leading: Icon(Icons.email),
-              title: Text('Email'),
-              subtitle: Text(
-                userData.first.userEmail,
-              ),
+          ),
+          SizedBox(height: 10),
+          ListTile(
+            leading: Icon(Icons.email),
+            title: Text('Email'),
+            subtitle: Text(
+              userData.first.userEmail,
             ),
-            ListTile(
-              leading: Icon(Icons.shopping_bag),
-              title: Text('My Order'),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.arrow_forward),
-              ),
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_bag),
+            title: Text('My Order'),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_forward),
             ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }
@@ -177,12 +175,13 @@ class _NewProfileState extends State<NewProfile> {
               child: const Text('Yes'),
               onPressed: () {
                 _authClass.logout();
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                   context,
                   PageTransition(
                     child: LoginScreen(),
                     type: PageTransitionType.fade,
                   ),
+                  (Route<dynamic> route) => false,
                 );
               },
             ),

@@ -37,7 +37,10 @@ class _SearchScreenState extends State<SearchScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Search your Food'),
+            title: Text(
+              'Search your Food',
+              style: TextStyle(fontFamily: 'Lato'),
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.all(3.0),
@@ -71,68 +74,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(height: 4),
                 searchItems.isNotEmpty
                     ? Expanded(
-                        child:
-
-                            //   GridView.builder(
-                            //     // physics: NeverScrollableScrollPhysics(),
-                            //     shrinkWrap: true,
-                            //     gridDelegate:
-                            //         SliverGridDelegateWithFixedCrossAxisCount(
-                            //       crossAxisCount: size.width > 400 ? 5 : 3,
-                            //     ),
-                            //     itemCount: searchItems.length,
-                            //     itemBuilder: (BuildContext context, int index) {
-                            //       return InkWell(
-                            //         onTap: () {
-                            //           Navigator.push(
-                            //             context,
-                            //             PageTransition(
-                            //               type: PageTransitionType.fade,
-                            //               child: ProductOverview(
-                            //                 name: searchItems[index].productName,
-                            //                 price: searchItems[index].productPrice,
-                            //                 image: searchItems[index].productImage,
-                            //                 productDescription:
-                            //                     searchItems[index].productDescription,
-                            //                 productId: searchItems[index].productId,
-                            //               ),
-                            //             ),
-                            //           );
-                            //         },
-                            //         child: Card(
-                            //           elevation: 2,
-                            //           child: Column(
-                            //             children: [
-                            //               Expanded(
-                            //                 child: FancyShimmerImage(
-                            //                   errorWidget: Center(
-                            //                       child: Text('Image not Found')),
-                            //                   imageUrl:
-                            //                       searchItems[index].productImage[0],
-                            //                   boxFit: BoxFit.cover,
-                            //                 ),
-                            //               ),
-                            //               Padding(
-                            //                 padding: const EdgeInsets.all(4.0),
-                            //                 child:
-                            //                     Text(searchItems[index].productName),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       );
-                            //     },
-                            //   ),
-                            // )
-
-                            ListView(
+                        child: ListView(
                           children: searchItems
                               .map(
                                 (data) => Column(
                                   children: [
                                     Card(
                                       margin: EdgeInsets.symmetric(vertical: 4),
-                                      elevation: 3,
+                                      elevation: 2,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

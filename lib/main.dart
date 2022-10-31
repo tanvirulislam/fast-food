@@ -16,9 +16,12 @@ import 'package:taza_khabar/test.dart';
 import 'package:taza_khabar/view/bottomNavController.dart';
 import 'package:taza_khabar/view/login_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -45,13 +48,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Widget currentPage = LoginScreen();
   AuthClass authClass = AuthClass();
-
-  @override
-  void initState() {
-    checkLogin();
-    super.initState();
-  }
-
   Future<void> checkLogin() async {
     String? token = await authClass.getToken();
     if (token != null) {
@@ -59,6 +55,19 @@ class _MyAppState extends State<MyApp> {
         currentPage = BottomNavController();
       });
     }
+  }
+
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 2));
+    // print('go!');
+    FlutterNativeSplash.remove();
+  }
+
+  @override
+  void initState() {
+    checkLogin();
+    super.initState();
+    initialization();
   }
 
   @override
@@ -82,18 +91,24 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<CategoryProvider>(
           create: (context) => CategoryProvider(),
-        )
+        ),
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (context) => ThemeProvider(),
+        ),
       ],
       child: OverlaySupport.global(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Fast Food',
-          themeMode: ThemeMode.system,
-          theme: Mythemes.lightTheme,
-          darkTheme: Mythemes.darkTheme,
-          home: currentPage,
-          // home: TestScreen(),
-        ),
+        child: Builder(builder: (context) {
+          ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Fast Food',
+            // themeMode: ThemeMode.system,
+            themeMode: themeProvider.themeMode,
+            theme: Mythemes.lightTheme,
+            darkTheme: Mythemes.darkTheme,
+            home: currentPage,
+          );
+        }),
       ),
     );
   }

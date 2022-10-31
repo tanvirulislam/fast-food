@@ -59,7 +59,6 @@ class _BottomNavControllerState extends State<BottomNavController> {
           controller: _pageController,
           onPageChanged: onPageChanged,
         ),
-        // _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: DoubleBackToCloseApp(
           snackBar: SnackBar(
             backgroundColor: Theme.of(context).primaryColor,
@@ -71,7 +70,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
                 selectedIndex: _selectedIndex,
                 onTabChange: _onTapped,
                 rippleColor: Colors.cyan,
-                curve: Curves.easeOutExpo,
+                curve: Curves.linear,
                 duration: Duration(milliseconds: 500),
                 gap: 8,
                 color: Colors.grey[800],

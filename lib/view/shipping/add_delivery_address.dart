@@ -32,11 +32,10 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     checkoutProvider = Provider.of(context);
-    // var userId = userProvider!.currentData.first;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
           title: Text('Add delivery address'),
         ),
         body: Padding(
@@ -120,12 +119,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                 );
               }
             },
-            child: Text(
-              'Add address',
-              style: TextStyle(color: Theme.of(context).hintColor),
-            ),
-            style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).primaryColor),
+            child: Text('Add address'),
           ),
         ),
       ),
