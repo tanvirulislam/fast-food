@@ -16,30 +16,32 @@ class ThemeProvider with ChangeNotifier {
 
 class Mythemes {
   static final darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.black,
-    colorScheme: ColorScheme.dark(primary: Colors.cyan),
-    iconTheme: IconThemeData(color: Colors.white),
-    primaryColor: Colors.cyan,
-    brightness: Brightness.dark,
-    highlightColor: Colors.white,
-    backgroundColor: Colors.black54,
-    textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.grey),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.grey,
-      selectedItemColor: Colors.cyan,
-      unselectedItemColor: Colors.white.withOpacity(0.6),
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-    ),
-    appBarTheme:
-        AppBarTheme(color: Color.fromARGB(255, 49, 49, 49), elevation: 0),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        // textStyle: TextStyle(color: Colors.white),
+      scaffoldBackgroundColor: Colors.black87,
+      colorScheme: ColorScheme.dark(primary: Colors.cyan),
+      iconTheme: IconThemeData(color: Colors.white),
+      primaryColor: Colors.cyan,
+      brightness: Brightness.dark,
+      highlightColor: Colors.white,
+      backgroundColor: Colors.black54,
+      textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.grey),
+      // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      //   backgroundColor: Colors.grey,
+      //   selectedItemColor: Colors.cyan,
+      //   unselectedItemColor: Colors.white.withOpacity(0.6),
+      //   showSelectedLabels: false,
+      //   showUnselectedLabels: false,
+      // ),
+      appBarTheme: AppBarTheme(
+        color: Color.fromARGB(255, 49, 49, 49),
+        elevation: 0,
       ),
-    ),
-  );
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey,
+          // textStyle: TextStyle(color: Colors.white),
+        ),
+      ),
+      dividerColor: Colors.grey.shade100);
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
@@ -61,13 +63,13 @@ class Mythemes {
     ),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan)
         .copyWith(secondary: Colors.white),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.grey,
-      selectedItemColor: Colors.cyan,
-      unselectedItemColor: Colors.black.withOpacity(0.6),
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-    ),
+    // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    //   backgroundColor: Colors.grey,
+    //   selectedItemColor: Colors.cyan,
+    //   unselectedItemColor: Colors.black.withOpacity(0.6),
+    //   showSelectedLabels: false,
+    //   showUnselectedLabels: false,
+    // ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         primary: Colors.grey.shade100,

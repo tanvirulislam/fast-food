@@ -195,7 +195,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                 items: widget.image
                     .map(
                       (e) => FancyShimmerImage(
-                        // height: 600,
                         width: double.infinity,
                         errorWidget: Center(child: Text('Image not Found')),
                         imageUrl: e,
@@ -335,6 +334,107 @@ class _ProductOverviewState extends State<ProductOverview> {
                                     child: Text('+', textScaleFactor: 1.5),
                                   )
                                 : Container(),
+                            // ElevatedButton(
+                            //   onPressed: () {},
+                            //   style: ElevatedButton.styleFrom(
+                            //       padding: EdgeInsets.all(0)),
+                            //   child: Container(
+                            //     width: 100,
+                            //     height: 36,
+                            //     decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(4),
+                            //     ),
+                            //     child: Row(
+                            //       mainAxisAlignment:
+                            //           MainAxisAlignment.spaceBetween,
+                            //       children: [
+                            //         isBoolCart == true
+                            //             ? InkWell(
+                            //                 onTap: () {
+                            //                   if (count > 1) {
+                            //                     setState(() {
+                            //                       count--;
+                            //                       _showFirstChild =
+                            //                           !_showFirstChild;
+                            //                     });
+                            //                     cartProvider!.updateCart(
+                            //                       cartId: widget.productId,
+                            //                       cartImage: widget.image,
+                            //                       cartName: widget.name,
+                            //                       cartPrice: widget.price,
+                            //                       cartQty: count,
+                            //                     );
+                            //                   }
+                            //                 },
+                            //                 child: Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                     right: 11,
+                            //                     top: 6,
+                            //                     bottom: 6,
+                            //                     left: 4,
+                            //                   ),
+                            //                   child: Icon(
+                            //                     Icons.remove,
+                            //                     color: Colors.black,
+                            //                   ),
+                            //                 ),
+                            //               )
+                            //             : SizedBox(),
+                            //         Text(
+                            //           count.toString(),
+                            //           style: TextStyle(color: Colors.black),
+                            //         ),
+                            //         isBoolCart == true
+                            //             ? InkWell(
+                            //                 onTap: () async {
+                            //                   if (count <= 9) {
+                            //                     setState(() {
+                            //                       count++;
+                            //                       _showFirstChild =
+                            //                           !_showFirstChild;
+                            //                     });
+
+                            //                     cartProvider!.updateCart(
+                            //                       cartId: widget.productId,
+                            //                       cartImage: widget.image,
+                            //                       cartName: widget.name,
+                            //                       cartPrice: widget.price,
+                            //                       cartQty: count,
+                            //                     );
+                            //                   }
+                            //                   if (count == 10) {
+                            //                     ScaffoldMessenger.of(context)
+                            //                         .showSnackBar(
+                            //                       SnackBar(
+                            //                         duration: Duration(
+                            //                             milliseconds: 1000),
+                            //                         backgroundColor:
+                            //                             Colors.cyan,
+                            //                         content: Text(
+                            //                           'You have reached maximum number',
+                            //                         ),
+                            //                       ),
+                            //                     );
+                            //                   }
+                            //                 },
+                            //                 child: Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                     left: 11,
+                            //                     top: 6,
+                            //                     bottom: 6,
+                            //                     right: 4,
+                            //                   ),
+                            //                   child: Icon(
+                            //                     Icons.add,
+                            //                     color: Colors.black,
+                            //                   ),
+                            //                 ),
+                            //               )
+                            //             : SizedBox(),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                         ElevatedButton.icon(
@@ -372,7 +472,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                               : Text('Add to cart'),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

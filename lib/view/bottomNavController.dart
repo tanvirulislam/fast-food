@@ -73,7 +73,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
                 curve: Curves.linear,
                 duration: Duration(milliseconds: 500),
                 gap: 8,
-                color: Colors.grey[800],
+                color: Colors.grey.shade700,
                 activeColor: Colors.cyan,
                 iconSize: 24,
                 tabBackgroundColor: Colors.grey.withOpacity(0.2),

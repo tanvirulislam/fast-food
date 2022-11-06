@@ -37,8 +37,7 @@ class _NewProfileState extends State<NewProfile> {
         //   backgroundColor: Colors.black,
         //   title: Text(
         //     'Profile ',
-        //     style: TextStyle(color: Colors.white),
-        //     // textScaleFactor: 1.2,
+        //     style: TextStyle(color: Colors.white, fontFamily: 'Lato'),
         //   ),
         //   actions: [
         //     IconButton(
@@ -50,103 +49,127 @@ class _NewProfileState extends State<NewProfile> {
         //     ),
         //   ],
         // ),
-        body: ListView(children: [
-          Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black,
-                  Colors.cyan,
-                ],
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35),
-                bottomRight: Radius.circular(35),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Profile ',
-                        style: TextStyle(color: Colors.white),
-                        textScaleFactor: 1.2,
+        body: ListView(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black,
+                        Colors.cyan,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 1,
+                        blurRadius: 1,
                       ),
-                      IconButton(
-                        onPressed: () => _dialogBuilder(context),
-                        icon: Icon(
-                          Icons.logout,
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(
+                              'Profile ',
+                              style: TextStyle(color: Colors.white),
+                              textScaleFactor: 1.2,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => _dialogBuilder(context),
+                            icon: Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 18),
+                      Text(
+                        userData.first.userName,
+                        textScaleFactor: 1.3,
+                        style: TextStyle(
                           color: Colors.white,
+                          fontFamily: 'Lato',
+                          shadows: [
+                            Shadow(
+                              color: Colors.grey,
+                              blurRadius: 3,
+                              offset: Offset(1, 1),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(45),
-                    child: FancyShimmerImage(
-                      height: 90,
-                      width: 90,
-                      boxFit: BoxFit.cover,
-                      errorWidget: Center(
-                        child: Image.network(
-                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                      ),
-                      imageUrl: userData.first.userImage,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    userData.first.userName,
-                    // textScaleFactor: 1.2,
-                    style: TextStyle(
+                ),
+                Positioned(
+                  bottom: -45,
+                  child: Container(
+                    height: 90,
+                    width: 90,
+                    decoration: BoxDecoration(
                       color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          color: Colors.grey,
-                          blurRadius: 3,
-                          offset: Offset(1, 1),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        width: 2,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(45),
+                      child: FancyShimmerImage(
+                        boxFit: BoxFit.cover,
+                        errorWidget: Center(
+                          child: Image.network(
+                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1',
+                          ),
                         ),
-                      ],
+                        imageUrl: userData.first.userImage,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 4),
-                ],
+                ),
+              ],
+            ),
+            SizedBox(height: 50),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+              subtitle: Text(
+                userData.first.userEmail,
               ),
             ),
-          ),
-          SizedBox(height: 10),
-          ListTile(
-            leading: Icon(Icons.email),
-            title: Text('Email'),
-            subtitle: Text(
-              userData.first.userEmail,
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.shopping_bag),
+              title: Text('My Order'),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.arrow_forward),
+              ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('My Order'),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_forward),
-            ),
-          ),
-        ]),
+            Divider(),
+          ],
+        ),
       ),
     );
   }
