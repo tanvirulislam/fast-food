@@ -16,32 +16,35 @@ class ThemeProvider with ChangeNotifier {
 
 class Mythemes {
   static final darkTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.black87,
-      colorScheme: ColorScheme.dark(primary: Colors.cyan),
-      iconTheme: IconThemeData(color: Colors.white),
-      primaryColor: Colors.cyan,
-      brightness: Brightness.dark,
-      highlightColor: Colors.white,
-      backgroundColor: Colors.black54,
-      textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.grey),
-      // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      //   backgroundColor: Colors.grey,
-      //   selectedItemColor: Colors.cyan,
-      //   unselectedItemColor: Colors.white.withOpacity(0.6),
-      //   showSelectedLabels: false,
-      //   showUnselectedLabels: false,
-      // ),
-      appBarTheme: AppBarTheme(
-        color: Color.fromARGB(255, 49, 49, 49),
-        elevation: 0,
+    scaffoldBackgroundColor: Color.fromARGB(255, 40, 40, 40),
+    colorScheme: ColorScheme.dark(primary: Colors.cyan),
+    iconTheme: IconThemeData(color: Colors.white),
+    primaryColor: Colors.cyan,
+    brightness: Brightness.dark,
+    highlightColor: Colors.white,
+    backgroundColor: Colors.black54,
+    textSelectionTheme: TextSelectionThemeData(selectionColor: Colors.grey),
+    // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    //   backgroundColor: Colors.grey,
+    //   selectedItemColor: Colors.cyan,
+    //   unselectedItemColor: Colors.white.withOpacity(0.6),
+    //   showSelectedLabels: false,
+    //   showUnselectedLabels: false,
+    // ),
+    appBarTheme: AppBarTheme(
+      color: Color.fromARGB(255, 49, 49, 49),
+      elevation: 0,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey,
+        // textStyle: TextStyle(color: Colors.white),
       ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey,
-          // textStyle: TextStyle(color: Colors.white),
-        ),
-      ),
-      dividerColor: Colors.grey.shade100);
+    ),
+    dividerColor: Colors.grey.shade100,
+    // textTheme: TextTheme(bodyText1: TextStyle(), bodyText2: TextStyle())
+    //     .apply(bodyColor: Colors.white.withOpacity(0.8)),
+  );
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
